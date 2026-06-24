@@ -1,16 +1,9 @@
 *, *::before, *::after {
     box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
     margin: 0;
     padding: 0;
 }
-
-.section {
-    display: none;
-}
-
-    .section.active {
-        display: block;
-    }
 
 :root {
     --green: #BDFABB;
@@ -26,18 +19,13 @@
 }
 @font-face {
     font-family: 'Outfit';
-    src: url('../assets/fonts/Outfit/static/Outfit-Regular.ttf') format('ttf');
+    src: url('../assets/fonts/Outfit/static/Outfit-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
-body {
-    font-family: 'Outfit', Inter;
-}
-
 html, body {
     height: 100%;
-    font-family: 'Inter', sans-serif;
     overflow: hidden;
 }
 
@@ -233,7 +221,7 @@ body {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    padding: 28px 36px 0;
+    padding: 28px 56px 0;
     flex-shrink: 0;
 }
 
@@ -251,10 +239,13 @@ body {
 
 .header-icon {
     color: rgba(255,255,255,0.5);
-    font-size: 22px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
 }
-
+#audio {
+    transition: opacity 0.15s ease;
+}
 .section {
     display: none;
     flex: 1;
@@ -270,22 +261,23 @@ body {
 
 /* ===== HOME ===== */
 #home .content {
-    padding: 20px 36px 24px;
+    padding: 50px 56px 24px;
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 25px;
     flex: 1;
 }
 
 .hero-card {
     background: var(--glass-card);
     border: 1px solid var(--glass-border);
-    border-radius: 18px;
-    padding: 28px 32px;
+    border-radius: 60px;
+    padding: 28px 52px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
+    position:relative;
 }
 
 .hero-text h1 {
@@ -297,7 +289,7 @@ body {
 
 .hero-text p {
     font-size: 14px;
-    color: var(--text-secondary);
+    color: #fff;
     margin-top: 8px;
 }
 
@@ -314,20 +306,19 @@ body {
     width: 9px;
     height: 9px;
     border-radius: 50%;
-    background: var(--green);
+    background: #CEEDB4;
     flex-shrink: 0;
 }
 
 .hero-avatar {
-    width: 170px;
-    height: 170px;
-    border-radius: 16px;
-    background: linear-gradient(135deg, #8090a0, #506060);
     display: flex;
     align-items: center;
+    position:absolute;
+    bottom:0px;
     justify-content: center;
     font-size: 60px;
     flex-shrink: 0;
+    right:52px;
 }
 
 .home-row {
@@ -339,9 +330,9 @@ body {
     flex: 2;
     background: var(--glass-card);
     border: 1px solid var(--glass-border);
-    border-radius: 18px;
+    border-radius: 35px;
     padding: 20px 24px;
-    color: var(--text-secondary);
+    color: #fff;
     font-size: 14px;
     line-height: 1.6;
     display: flex;
@@ -350,7 +341,6 @@ body {
 
 .cta-group {
     display: flex;
-    flex-direction: column;
     gap: 10px;
     flex: 0 0 auto;
 }
@@ -359,10 +349,10 @@ body {
     background: var(--green);
     color: #1a2a1a;
     border: none;
-    border-radius: 14px;
+    border-radius: 35px;
     padding: 16px 32px;
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 30px;
+    font-weight: bold;
     cursor: pointer;
     transition: background 0.2s, transform 0.15s;
 }
@@ -376,9 +366,9 @@ body {
     background: var(--glass-card);
     color: #fff;
     border: 1px solid var(--glass-border);
-    border-radius: 14px;
+    border-radius: 35px;
     padding: 16px 32px;
-    font-size: 16px;
+    font-size: 30px;
     font-weight: 700;
     cursor: pointer;
     transition: background 0.2s;
@@ -390,19 +380,16 @@ body {
 
 .home-bottom {
     display: flex;
-    gap: 16px;
+    gap: 30px;
 }
 
 .skills-card {
     flex: 1;
-    background: var(--glass-card);
-    border: 1px solid var(--glass-border);
     border-radius: 18px;
-    padding: 20px 24px;
 }
 
     .skills-card h3 {
-        font-size: 15px;
+        font-size: 20px;
         font-weight: 600;
         color: #fff;
         margin-bottom: 14px;
@@ -412,12 +399,14 @@ body {
     display: flex;
     align-items: center;
     background: rgba(255,255,255,0.07);
-    border-radius: 12px;
-    padding: 10px 14px;
-    margin-bottom: 10px;
-    gap: 12px;
+    border-radius: 50px;
+    padding: 13px 25px;
+    margin-bottom: 15px;
+    gap: 18px;
     position: relative;
     overflow: hidden;
+
+
 }
 
 .skill-fill {
@@ -425,9 +414,9 @@ body {
     left: 0;
     top: 0;
     bottom: 0;
-    background: rgba(127,232,127,0.18);
-    border-radius: 12px;
     transition: width 1s ease;
+    background: linear-gradient( 90deg, #B4BBC5 3%, #BDFCBB 100% );
+
 }
 
 .skill-icon {
@@ -437,27 +426,27 @@ body {
 }
 
 .skill-name {
-    font-size: 14px;
-    font-weight: 600;
-    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    color: #313F28;
     flex: 1;
     position: relative;
     z-index: 1;
 }
 
 .skill-pct {
-    font-size: 13px;
-    color: var(--green);
+    font-size: 16px;
+    color: #313F28;
     font-weight: 600;
     position: relative;
     z-index: 1;
 }
 
 .latest-project {
-    flex: 1;
+    flex: 2;
     background: var(--glass-card);
     border: 1px solid var(--glass-border);
-    border-radius: 18px;
+    border-radius: 55px;
     overflow: hidden;
     position: relative;
     cursor: pointer;
@@ -469,15 +458,15 @@ body {
     .latest-project .proj-bg {
         position: absolute;
         inset: 0;
-        background: linear-gradient(135deg, #6a4fd6, #c47edf, #7ecdf5);
         opacity: 0.85;
+        width:100%;
     }
 
     .latest-project .proj-label {
         position: relative;
         z-index: 1;
-        padding: 18px 20px;
-        font-size: 18px;
+        padding: 18px 30px;
+        font-size: 25px;
         font-weight: 700;
         color: #fff;
         text-shadow: 0 2px 8px rgba(0,0,0,0.3);
@@ -486,13 +475,15 @@ body {
 .socials-col {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 20px;
     justify-content: center;
+    align-items:center;
+    min-width:125px;
 }
 
 .social-btn {
-    width: 46px;
-    height: 46px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     background: var(--glass-card);
     border: 1px solid var(--glass-border);
@@ -1143,12 +1134,12 @@ body {
     }
 
     #home .content {
-        padding: 16px 20px 16px;
+        padding: 86px 20px 16px;
         gap: 14px;
     }
 
     .hero-card {
-        padding: 20px;
+        padding: 28px 40px;
     }
 
     .hero-text h1 {
@@ -1156,9 +1147,8 @@ body {
     }
 
     .hero-avatar {
-        width: 110px;
-        height: 110px;
         font-size: 40px;
+        right:40px;
     }
 
     .home-row {

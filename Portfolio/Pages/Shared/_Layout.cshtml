@@ -7,23 +7,15 @@
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-
-    @*     <div class="bg-overlay"></div>
- *@
     <div class="app">
 
-        <partial name="_Sidebar"/>
-
-        <!-- MAIN -->
+        <partial name="_Sidebar" />
 
         <main class="main">
 
-            <partial name="_MobileNav"/>
-
-            <div class="page-header">
-                <div class="page-title" id="pageTitle">Home</div>
-                <div class="header-icon">📢</div>
-            </div>
+            <partial name="_MobileNav" />
+            
+            <partial name="_PageHeader" />
 
             @RenderBody()
 

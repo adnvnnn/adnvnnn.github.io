@@ -39,3 +39,43 @@ document.querySelectorAll('.contact-copy').forEach(btn => {
         });
     });
 });
+
+
+
+//document.addEventListener("DOMContentLoaded", () => {
+//    const audioIcon = document.getElementById("audio");
+
+//    let isMuted = false;
+
+//    audioIcon.addEventListener("click", () => {
+//        isMuted = !isMuted;
+
+//        audioIcon.src =
+//            isMuted
+//            ? "assets/icons/Audio-off.png"
+//            : "assets/icons/Audio.png";
+//    });
+
+//});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const audioIcon = document.getElementById("audio");
+    let isMuted = false;
+
+    audioIcon.addEventListener("click", () => {
+
+        // fade out
+        audioIcon.style.opacity = "0";
+
+        setTimeout(() => {
+            isMuted = !isMuted;
+
+            audioIcon.src = isMuted
+                ? "assets/icons/Audio-off.png"
+                : "assets/icons/Audio.png";
+
+            // fade in
+            audioIcon.style.opacity = "1";
+        }, 150);
+    });
+});
