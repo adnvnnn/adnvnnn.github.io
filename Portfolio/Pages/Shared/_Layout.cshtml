@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adnan Abdollahzadeh – Portfolio</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+    @*     <div class="bg-overlay"></div>
+ *@
+    <div class="app">
+
+        <partial name="_Sidebar"/>
+
+        <!-- MAIN -->
+
+        <main class="main">
+
+            <partial name="_MobileNav"/>
+
+            <div class="page-header">
+                <div class="page-title" id="pageTitle">Home</div>
+                <div class="header-icon">📢</div>
+            </div>
+
+            @RenderBody()
+
+        </main>
+
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

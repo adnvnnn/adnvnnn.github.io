@@ -1,0 +1,8 @@
+/* variables.css */
+:root {
+  --bg: #121622;
+  --text: #eef2ff;
+  --muted: rgba(255,255,255,0.72);
+  --accent: #b4ffb7;
+  --accent-strong: #9afc8f;
+}

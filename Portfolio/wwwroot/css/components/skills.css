@@ -1,0 +1,22 @@
+/* skills.css */
+.profile-skills {
+  display: grid;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.skill-pill {
+  display: grid;
+  gap: 0.65rem;
+  padding: 1.25rem 1.3rem;
+  border-radius: 1.75rem;
+  background: rgba(180,255,183,0.12);
+}
+
+.skill-pill strong {
+  font-size: 1.05rem;
+}
+
+.skill-pill span {
+  color: rgba(255,255,255,0.78);
+}

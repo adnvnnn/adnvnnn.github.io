@@ -1,0 +1,176 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+
+<!-- HOME -->
+<section id="home" class="section active" data-title="Home">
+    <div class="content">
+        <div class="hero-card">
+            <div class="hero-text">
+                <h1>Adnan</h1>
+                <p>Full-Stack Developer crafting digital experiences</p>
+                <div class="hero-status"><div class="dot-green"></div> Ready for freelancing</div>
+            </div>
+            <div class="hero-avatar">👨‍💻</div>
+        </div>
+
+        <div class="home-row">
+            <div class="bio-card">I turn ideas into digital products through thoughtful design and clean, efficient code.</div>
+            <div class="cta-group">
+                <button class="btn-primary" onclick="navigate('contact')">Hire Me</button>
+                <button class="btn-outline" onclick="navigate('projects')">Projects</button>
+            </div>
+        </div>
+
+        <div class="home-bottom">
+            <div class="skills-card">
+                <h3>Skills</h3>
+                <div class="skill-row">
+                    <div class="skill-fill" style="width:70%"></div>
+                    <span class="skill-icon">🐍</span><span class="skill-name">Python</span><span class="skill-pct">70%</span>
+                </div>
+                <div class="skill-row">
+                    <div class="skill-fill" style="width:85%"></div>
+                    <span class="skill-icon">🎨</span><span class="skill-name">CSS3</span><span class="skill-pct">85%</span>
+                </div>
+                <div class="skill-row">
+                    <div class="skill-fill" style="width:45%"></div>
+                    <span class="skill-icon">☕</span><span class="skill-name">Java</span><span class="skill-pct">45%</span>
+                </div>
+            </div>
+            <div class="latest-project" onclick="navigate('projects')">
+                <div class="proj-bg"></div>
+                <div class="proj-label">My Latest Project 🔥</div>
+            </div>
+            <div class="socials-col">
+                <a class="social-btn" href="#" title="GitHub">⌨</a>
+                <a class="social-btn" href="#" title="LinkedIn">in</a>
+                <a class="social-btn" href="#" title="Telegram">✈</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROFILE -->
+<section id="profile" class="section" data-title="Profile">
+
+    <div class="content">
+        <div class="profile-hero">
+            <div class="profile-hero-text">
+                <h2>Adnan <span>Abdollahzadeh</span></h2>
+                <div class="subtitle">Full-Stack Developer crafting digital experiences</div>
+                <p>I turn ideas into digital products through thoughtful design and clean, efficient code. Currently focused on web development, software architecture, and creating great user experiences.</p>
+                <button class="btn-resume">⬇ Download Resume</button>
+            </div>
+            <div class="profile-avatar">👨‍💻</div>
+        </div>
+        <div class="skills-h3">Skills</div>
+        <div class="skill-bubbles">
+            <div class="skill-bubble"><div class="bubble-fill" style="height:85%"></div><div class="bubble-name">Python</div><div class="bubble-pct">85%</div></div>
+            <div class="skill-bubble"><div class="bubble-fill" style="height:70%"></div><div class="bubble-name">CSS3</div><div class="bubble-pct">70%</div></div>
+            <div class="skill-bubble"><div class="bubble-fill" style="height:35%"></div><div class="bubble-name">Java</div><div class="bubble-pct">35%</div></div>
+            <div class="skill-bubble"><div class="bubble-fill" style="height:90%"></div><div class="bubble-name">Python</div><div class="bubble-pct">90%</div></div>
+            <div class="skill-bubble"><div class="bubble-fill" style="height:30%"></div><div class="bubble-name">CSS3</div><div class="bubble-pct">30%</div></div>
+            <div class="skill-bubble"><div class="bubble-fill" style="height:97%"></div><div class="bubble-name">Java</div><div class="bubble-pct">97%</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="section" data-title="Projects" data-subtitle="selected work that solve problems and deliver impact">
+    <div class="content">
+        <div class="featured-section">
+            <h3>Featured Project</h3>
+            <div class="featured-card">
+                <div class="featured-info">
+                    <h2>Plantiful</h2>
+                    <p>Modern website for the users to have a way of sharing the nurturing journey of their plants</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Typescript</span>
+                        <span class="tech-tag">tailwind css</span>
+                        <span class="tech-tag">next.js</span>
+                    </div>
+                    <div class="featured-actions">
+                        <button class="btn-demo">Live Demo</button>
+                        <button class="btn-source">source code ⌨</button>
+                    </div>
+                </div>
+                <div class="featured-img">🌿</div>
+            </div>
+        </div>
+
+        <div class="all-projects-header">
+            <h3>All Projects</h3>
+            <div class="filter-tabs">
+                <button class="filter-tab active">All</button>
+                <button class="filter-tab">Web</button>
+                <button class="filter-tab">Mobile</button>
+                <button class="filter-tab">Fullstack</button>
+            </div>
+        </div>
+
+        <div class="project-grid-wrapper">
+            <div class="proj-arrow">‹</div>
+            <div class="project-grid">
+                <div class="project-card"><div class="card-bg" style="background:linear-gradient(135deg,#6a4fd6,#c47edf)"></div><div class="card-overlay"></div><div class="card-label">Roomer</div><div class="card-arrow">↗</div></div>
+                <div class="project-card"><div class="card-bg" style="background:linear-gradient(135deg,#2d6a4f,#52b788)"></div><div class="card-overlay"></div><div class="card-label">Anbaran</div><div class="card-arrow">↗</div></div>
+                <div class="project-card"><div class="card-bg" style="background:linear-gradient(135deg,#6b8f71,#aad4ae)"></div><div class="card-overlay"></div><div class="card-label">Namin</div><div class="card-arrow">↗</div></div>
+                <div class="project-card"><div class="card-bg" style="background:linear-gradient(135deg,#8b3a3a,#c96464)"></div><div class="card-overlay"></div><div class="card-label">Village</div><div class="card-arrow">↗</div></div>
+            </div>
+            <div class="proj-arrow">›</div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section" data-title="Contact" data-subtitle="work with me to reach beyond a solution for your problem">
+    <div class="content">
+        <div class="connect-card">
+            <h2>Let's Connect</h2>
+            <p>Have a project in mind? I'd love to hear from you.</p>
+            <div class="contact-item">
+                <div class="contact-icon-wrap">✉</div>
+                <div class="contact-info"><div class="ci-label">E-Mail</div><div class="ci-val">Adnan.abdollahzadeh@gmail.com</div></div>
+                <span class="contact-copy" title="Copy">⧉</span>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon-wrap">📞</div>
+                <div class="contact-info"><div class="ci-label">Phone</div><div class="ci-val">09141234567</div></div>
+                <span class="contact-copy" title="Copy">⧉</span>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon-wrap">📍</div>
+                <div class="contact-info"><div class="ci-label">Location</div><div class="ci-val"></div></div>
+                <span class="contact-copy" title="Copy">⧉</span>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon-wrap">🕐</div>
+                <div class="contact-info"><div class="ci-label">Availability</div><div class="ci-val">Ready for freelancing</div></div>
+                <div class="availability-badge"><span class="badge-green">● Available</span></div>
+            </div>
+            <div class="socials-section">
+                <h4>Follow Me On Socials</h4>
+                <div class="socials-row">
+                    <a class="social-btn" href="#">⌨</a>
+                    <a class="social-btn" href="#">in</a>
+                    <a class="social-btn" href="#">✈</a>
+                    <a class="social-btn" href="#">📷</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="message-card">
+            <h2>Send a Message</h2>
+            <div class="form-group"><label>Your Name</label><input type="text" placeholder="Write Your Name" /></div>
+            <div class="form-group"><label>Your E-Mail</label><input type="email" placeholder="Write Your E-Mail" /></div>
+            <div class="form-group"><label>Subject</label><input type="text" placeholder="What's This About" /></div>
+            <div class="form-group"><label>Message</label><textarea rows="4" placeholder="Tell Me About Your Project"></textarea></div>
+            <button class="btn-send">Send Message</button>
+        </div>
+    </div>
+</section>
+

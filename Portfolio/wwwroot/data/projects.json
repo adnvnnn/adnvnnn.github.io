@@ -1,0 +1,6 @@
+[
+  {"id": 1, "title": "Plantiful", "category": "Fullstack", "description": "A modern plant care experience built with Next.js and TypeScript."},
+  {"id": 2, "title": "Roomer", "category": "Web", "description": "A polished booking interface for modern living spaces."},
+  {"id": 3, "title": "Anbaran", "category": "Mobile", "description": "A mobile-first interface that presents curated content with style."},
+  {"id": 4, "title": "Village", "category": "Fullstack", "description": "A community dashboard that blends data and design."}
+]
