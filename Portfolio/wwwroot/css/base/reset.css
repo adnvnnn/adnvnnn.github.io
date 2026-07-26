@@ -1,2 +1,19 @@
-/* reset.css - minimal reset */
-* { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background: #6b7c7c url('../../assets/images/background.png') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}

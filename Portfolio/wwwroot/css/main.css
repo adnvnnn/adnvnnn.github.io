@@ -1,0 +1,129 @@
+.bg-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(50,60,60,0.45);
+    z-index: 0;
+}
+
+.app {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    width: min(1350px, 97vw);
+    height: min(720px, 90vh);
+    border-radius: 60px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+}
+
+.main {
+    flex: 1;
+    background: var(--glass-bg);
+    display: flex;
+    backdrop-filter: blur(30px);
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    border: solid 1px rgba(255,255,255,0.2);
+
+    /*box-shadow: inset 1px 1px 0 rgba(255,255,255,0.4),*/ /* نور بالا */
+    /*inset -10px -10px 0 rgba(255,255,255,0.05),*/ /* سایه داخل */
+    /*0 8px 20px rgba(0,0,0,0.15);*/
+}
+
+.page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 28px 56px 0;
+    flex-shrink: 0;
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.page-subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+.header-icon {
+    color: rgba(255,255,255,0.5);
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+#audio {
+    transition: opacity 0.15s ease;
+}
+.section {
+    display: none;
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-direction: column;
+}
+
+    .section.active {
+        display: flex;
+        animation: fadeIn 0.3s ease;
+    }
+
+
+
+.section::-webkit-scrollbar {
+    width: 4px;
+}
+
+.section::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.section::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.2);
+    border-radius: 2px;
+}
+
+
+
+
+@media (max-width: 900px) {
+    html, body {
+        overflow: auto;
+    }
+
+    .app {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+        flex-direction: column;
+    }
+
+    .main {
+        padding-bottom: var(--bottom-nav-h);
+    }
+
+    .page-header {
+        padding: 20px 20px 0;
+    }
+
+    .page-title {
+        font-size: 22px;
+    }
+}
+
+
+@media (max-width: 540px) {
+
+    .page-header {
+        padding: 16px 16px 0;
+    }
+
+    .page-title {
+        font-size: 20px;
+    }
+}
