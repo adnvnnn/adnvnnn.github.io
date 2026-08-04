@@ -1,4 +1,7 @@
 ﻿@using Portfolio.ConfigModels
+@{
+    var lastProject = ProjectsConfigModel.Items!.Last();
+}
 <section id="home" class="section active" data-title="Home">
     <div class="content">
         <div class="hero-card">
@@ -36,7 +39,7 @@
                 </div>
             </div>
             <div class="latest-project" onclick="navigate('projects')">
-                <img class="proj-bg" src="data/tsma.png" />
+                <img class="proj-bg" src="@lastProject.Image" />
                 <div class="proj-label">My Latest Project 🔥</div>
             </div>
             <div class="socials-col">

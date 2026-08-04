@@ -1,4 +1,8 @@
-﻿<section id="projects" class="section" data-title="Projects" data-subtitle="selected work that solve problems and deliver impact">
+﻿@using Portfolio.ConfigModels
+@{
+    var projects = ProjectsConfigModel.Items ?? new List<ProjectItem>();
+}
+<section id="projects" class="section" data-title="Projects" data-subtitle="selected work that solve problems and deliver impact">
     <div class="content">
         <div class="featured-section">
             <h3>Featured Project</h3>
@@ -33,10 +37,17 @@
         <div class="project-grid-wrapper">
             <div class="proj-arrow">‹</div>
             <div class="project-grid">
-                <div class="project-card"><div class="card-bg" style="background:linear-gradient(135deg,#6a4fd6,#c47edf)"></div><div class="card-overlay"></div><div class="card-label">Roomer</div><div class="card-arrow">↗</div></div>
-                <div class="project-card"><div class="card-bg" style="background:linear-gradient(135deg,#2d6a4f,#52b788)"></div><div class="card-overlay"></div><div class="card-label">Anbaran</div><div class="card-arrow">↗</div></div>
-                <div class="project-card"><div class="card-bg" style="background:linear-gradient(135deg,#6b8f71,#aad4ae)"></div><div class="card-overlay"></div><div class="card-label">Namin</div><div class="card-arrow">↗</div></div>
-                <div class="project-card"><div class="card-bg" style="background:linear-gradient(135deg,#8b3a3a,#c96464)"></div><div class="card-overlay"></div><div class="card-label">Village</div><div class="card-arrow">↗</div></div>
+                @for (var i = 0; i < projects.Count; i++)
+                {
+                    var project = projects[i];
+                    var href = string.IsNullOrEmpty(project.Link) ? "#" : project.Link;
+                    <a class="project-card" href="@href" title="@project.Description" data-category="@project.Category">
+                        <div class="card-bg" style="background:url(@project.Image)"></div>
+                        <div class="card-overlay"></div>
+                        <div class="card-label">@project.Title</div>
+                        <div class="card-arrow">↗</div>
+                    </a>
+                }
             </div>
             <div class="proj-arrow">›</div>
         </div>
