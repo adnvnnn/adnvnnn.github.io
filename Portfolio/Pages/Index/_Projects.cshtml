@@ -42,7 +42,7 @@
                     var project = projects[i];
                     var href = string.IsNullOrEmpty(project.Link) ? "#" : project.Link;
                     <a class="project-card" href="@href" title="@project.Description" data-category="@project.Category">
-                        <div class="card-bg" style="background:url(@project.Image)"></div>
+                        <div class="card-bg" style="background-image:url(@project.Image)"></div>
                         <div class="card-overlay"></div>
                         <div class="card-label">@project.Title</div>
                         <div class="card-arrow">↗</div>
