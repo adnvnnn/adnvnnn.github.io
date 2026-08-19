@@ -138,19 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let isMuted = false;
 
     audioIcon.addEventListener("click", () => {
-
-        // fade out
-        audioIcon.style.opacity = "0";
-
-        setTimeout(() => {
-            isMuted = !isMuted;
-
-            audioIcon.src = isMuted
-                ? "assets/icons/Audio-off.png"
-                : "assets/icons/Audio.png";
-
-            // fade in
-            audioIcon.style.opacity = "1";
-        }, 150);
+        isMuted = !isMuted;
+        audioIcon.classList.toggle("muted", isMuted);
     });
 });

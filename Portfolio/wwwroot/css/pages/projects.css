@@ -188,6 +188,11 @@
         pointer-events: none;
     }
 
+    .proj-arrow svg {
+        width: 18px;
+        height: 18px;
+    }
+
 .project-grid {
     display: flex;
     gap: 14px;
@@ -215,6 +220,7 @@
 
 .project-card {
     flex: 0 0 calc((100% - 28px) / 3);
+    box-sizing: border-box;
     scroll-snap-align: start;
     border-radius: 16px;
     overflow: hidden;
@@ -277,6 +283,13 @@
     }
 
 
+@media (min-width: 1400px) {
+    .project-card {
+        flex: 0 0 calc((100% - 42px) / 4);
+    }
+}
+
+
 @media (max-width: 900px){
 
 
@@ -325,7 +338,7 @@
         }
 
     .project-card {
-        flex: 0 0 82%;
+        flex: 0 0 100%;
         min-height: 120px;
     }
 

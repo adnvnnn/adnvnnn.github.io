@@ -37,7 +37,11 @@
         </div>
 
         <div class="project-grid-wrapper">
-            <button type="button" class="proj-arrow prev" aria-label="Previous projects">‹</button>
+            <button type="button" class="proj-arrow prev" aria-label="Previous projects">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
             <div class="project-grid">
                 @for (var i = 0; i < projects.Count; i++)
                 {
@@ -52,7 +56,11 @@
                     </a>
                 }
             </div>
-            <button type="button" class="proj-arrow next" aria-label="Next projects">›</button>
+            <button type="button" class="proj-arrow next" aria-label="Next projects">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
         </div>
     </div>
 </section>
