@@ -83,21 +83,51 @@
     flex: 0 0 auto;
 }
 
+@property --btn-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
+@keyframes btn-spin-slow {
+    to {
+        --btn-angle: 360deg;
+    }
+}
+
+@keyframes btn-spin-burst {
+    0% {
+        --btn-angle: 0deg;
+    }
+
+    15% {
+        --btn-angle: 180deg;
+    }
+
+    100% {
+        --btn-angle: 540deg;
+    }
+}
+
 .btn-primary {
-    background: var(--green);
+    --btn-angle: 0deg;
+    background: conic-gradient(from var(--btn-angle), #BDFCBB, #B4BBC5, #BDFCBB);
     color: #1a2a1a;
     border: none;
-    border-radius: 35px;
+    border-radius: 999px;
     padding: 16px 32px;
     font-size: 35px;
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    transition: box-shadow 0.35s ease, transform 0.15s ease;
+    animation: btn-spin-slow 6s linear infinite;
 }
 
     .btn-primary:hover {
-        background: var(--green-dark);
+        box-shadow: 0 0 40px 10px rgba(189,252,187,0.55), 0 8px 24px rgba(0,0,0,0.2);
         transform: scale(1.03);
+        animation: btn-spin-burst 5s linear infinite;
     }
 
 .btn-outline {
