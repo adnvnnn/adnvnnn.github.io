@@ -4,7 +4,7 @@
 
 .connect-card {
     flex: 1;
-    background: var(--glass-card);
+    background: rgba(75, 80, 89, 0.43);
     border: 1px solid var(--glass-border);
     border-radius: 60px;
     padding: 28px 24px;
@@ -149,7 +149,7 @@
 
 .message-card {
     flex: 1.2;
-    background: var(--glass-card);
+    background: rgba(75, 80, 89, 0.43);
     border: 1px solid var(--glass-border);
     border-radius: 60px;
     padding: 28px 26px;
