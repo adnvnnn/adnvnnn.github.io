@@ -19,7 +19,9 @@
             title = p.Title,
             description = p.Description,
             tags = p.Tags ?? new List<string>(),
-            images = BuildImages(p)
+            images = BuildImages(p),
+            link = p.Link,
+            sourceLink = p.SourceLink
         });
     }
 
@@ -42,8 +44,8 @@
                         }
                     </div>
                     <div class="featured-actions">
-                        <button class="btn-demo">Live Demo</button>
-                        <button class="btn-source">source code ⌨</button>
+                        <button class="btn-demo" id="featuredDemoBtn" data-link="@featuredProject?.Link" style="@(string.IsNullOrEmpty(featuredProject?.Link) ? "display:none" : "")">Live Demo</button>
+                        <button class="btn-source" id="featuredSourceBtn" data-link="@featuredProject?.SourceLink" style="@(string.IsNullOrEmpty(featuredProject?.SourceLink) ? "display:none" : "")">source code ⌨</button>
                     </div>
                 </div>
                 <div class="featured-img" id="featuredSlider">

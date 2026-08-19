@@ -8,6 +8,7 @@ public class ProjectItem
     public string? Description { get; set; }
     public string? Image { get; set; }
     public string? Link { get; set; }
+    public string? SourceLink { get; set; }
     public List<string>? OtherImages { get; set; }
     public List<string>? Tags { get; set; }
 }

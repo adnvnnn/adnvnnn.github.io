@@ -8,6 +8,7 @@ function initCarousel(wrapper) {
     let dragged = false;
     let startX = 0;
     let startScroll = 0;
+    let pressedCard = null;
 
     const maxScroll = () => track.scrollWidth - track.clientWidth;
 
@@ -35,6 +36,7 @@ function initCarousel(wrapper) {
         dragged = false;
         startX = e.clientX;
         startScroll = track.scrollLeft;
+        pressedCard = e.target.closest('.project-card');
         track.classList.add('dragging');
         track.setPointerCapture(e.pointerId);
     });
@@ -60,10 +62,20 @@ function initCarousel(wrapper) {
     track.addEventListener('pointercancel', endDrag);
 
     track.addEventListener('click', (e) => {
+        const card = pressedCard;
+        pressedCard = null;
+
         if (dragged) {
             e.preventDefault();
             e.stopPropagation();
             dragged = false;
+            return;
+        }
+
+        if (card) {
+            e.preventDefault();
+            e.stopPropagation();
+            selectProjectCard(card);
         }
     }, true);
 
@@ -143,7 +155,7 @@ function renderFeaturedSlider(container, images, title) {
     if (images.length > 0) {
         html += images.map((src, i) => `<img class="featured-slide${i === 0 ? ' active' : ''}" src="${escapeHtml(src)}" alt="${safeTitle}" />`).join('');
     } else {
-        html += '<span class="featured-img-fallback">🌿</span>';
+        html += '<span class="featured-img-fallback"></span>';
     }
     html += '</div>';
 
@@ -165,11 +177,16 @@ document.querySelectorAll('#featuredSlider').forEach(el => {
     featuredSliderCtl = initFeaturedSlider(el);
 });
 
+let featuredLink = document.getElementById('featuredDemoBtn')?.dataset.link || '';
+let featuredSourceLink = document.getElementById('featuredSourceBtn')?.dataset.link || '';
+
 function setFeaturedProject(data) {
     const titleEl = document.getElementById('featuredTitle');
     const descEl = document.getElementById('featuredDesc');
     const tagsEl = document.getElementById('featuredTags');
     const sliderEl = document.getElementById('featuredSlider');
+    const demoBtn = document.getElementById('featuredDemoBtn');
+    const sourceBtn = document.getElementById('featuredSourceBtn');
     if (!titleEl || !descEl || !tagsEl || !sliderEl) return;
 
     titleEl.textContent = data.title || '';
@@ -179,27 +196,46 @@ function setFeaturedProject(data) {
     tagsEl.innerHTML = tags.map(t => `<span class="tech-tag">${escapeHtml(t)}</span>`).join('');
     tagsEl.style.display = tags.length ? '' : 'none';
 
+    featuredLink = data.link || '';
+    if (demoBtn) demoBtn.style.display = featuredLink ? '' : 'none';
+
+    featuredSourceLink = data.sourceLink || '';
+    if (sourceBtn) sourceBtn.style.display = featuredSourceLink ? '' : 'none';
+
     featuredSliderCtl?.stop();
     renderFeaturedSlider(sliderEl, data.images || [], data.title);
     featuredSliderCtl = initFeaturedSlider(sliderEl);
 }
 
+document.getElementById('featuredDemoBtn')?.addEventListener('click', () => {
+    if (featuredLink) window.open(featuredLink, '_blank', 'noopener');
+});
+
+document.getElementById('featuredSourceBtn')?.addEventListener('click', () => {
+    if (featuredSourceLink) window.open(featuredSourceLink, '_blank', 'noopener');
+});
+
+function selectProjectCard(card) {
+    if (!card) return;
+    const raw = card.dataset.project;
+    if (!raw) return;
+
+    let data;
+    try {
+        data = JSON.parse(raw);
+    } catch (err) {
+        return;
+    }
+
+    setFeaturedProject(data);
+    document.querySelectorAll('.project-card').forEach(c => c.classList.remove('active-featured'));
+    card.classList.add('active-featured');
+}
+
 document.querySelectorAll('.project-card').forEach(card => {
     card.addEventListener('click', (e) => {
         e.preventDefault();
-        const raw = card.dataset.project;
-        if (!raw) return;
-
-        let data;
-        try {
-            data = JSON.parse(raw);
-        } catch (err) {
-            return;
-        }
-
-        setFeaturedProject(data);
-        document.querySelectorAll('.project-card').forEach(c => c.classList.remove('active-featured'));
-        card.classList.add('active-featured');
+        selectProjectCard(card);
     });
 });
 
