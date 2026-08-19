@@ -113,7 +113,7 @@
     flex-shrink: 0;
     scroll-snap-align: start;
     border-radius: 50px;
-    background: var(--glass-card);
+    background: rgba(255, 255, 255, 0.3);
     border: 1px solid var(--glass-border);
     display: flex;
     flex-direction: column;

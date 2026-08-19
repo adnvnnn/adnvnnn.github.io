@@ -100,7 +100,7 @@
         --btn-angle: 0deg;
     }
 
-    15% {
+    5% {
         --btn-angle: 180deg;
     }
 
@@ -119,14 +119,13 @@
     font-size: 35px;
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
     transition: box-shadow 0.35s ease;
     animation: btn-spin-slow 6s linear infinite;
 }
 
     .btn-primary:hover {
-        box-shadow: 0 0 40px 10px rgba(189,252,187,0.55), 0 8px 24px rgba(0,0,0,0.2);
-        animation: btn-spin-burst 5s linear infinite;
+        box-shadow: 0 0 10px 10px rgba(189,252,187,0.55), 0 8px 24px rgba(0,0,0,0.2);
+        animation: btn-spin-burst 5s linear;
     }
 
 .btn-outline {

@@ -333,7 +333,6 @@
 }
 
     .project-card:hover {
-        transform: scale(1.02);
     }
 
     .project-card.active-featured {
