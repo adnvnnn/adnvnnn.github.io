@@ -1,6 +1,7 @@
 ﻿@using Portfolio.ConfigModels
 @{
     var projects = ProjectsConfigModel.Items ?? new List<ProjectItem>();
+    var categories = CategoriesConfigModel.Items ?? new List<CategoryItem>();
 }
 <section id="projects" class="section" data-title="Projects" data-subtitle="selected work that solve problems and deliver impact">
     <div class="content">
@@ -27,21 +28,23 @@
         <div class="all-projects-header">
             <h3>All Projects</h3>
             <div class="filter-tabs">
-                <button class="filter-tab active">All</button>
-                <button class="filter-tab">Web</button>
-                <button class="filter-tab">Mobile</button>
-                <button class="filter-tab">Fullstack</button>
+                <button class="filter-tab active" data-filter="All">All</button>
+                @foreach (var category in categories)
+                {
+                    <button class="filter-tab" data-filter="@category.Id">@category.Name</button>
+                }
             </div>
         </div>
 
         <div class="project-grid-wrapper">
-            <div class="proj-arrow">‹</div>
+            <button type="button" class="proj-arrow prev" aria-label="Previous projects">‹</button>
             <div class="project-grid">
                 @for (var i = 0; i < projects.Count; i++)
                 {
                     var project = projects[i];
                     var href = string.IsNullOrEmpty(project.Link) ? "#" : project.Link;
-                    <a class="project-card" href="@href" title="@project.Description" data-category="@project.Category">
+                    var categoryIds = string.Join(",", project.CategoryIds ?? new List<int>());
+                    <a class="project-card" href="@href" title="@project.Description" data-category="@categoryIds" draggable="false">
                         <div class="card-bg" style="background-image:url(@project.Image)"></div>
                         <div class="card-overlay"></div>
                         <div class="card-label">@project.Title</div>
@@ -49,7 +52,7 @@
                     </a>
                 }
             </div>
-            <div class="proj-arrow">›</div>
+            <button type="button" class="proj-arrow next" aria-label="Next projects">›</button>
         </div>
     </div>
 </section>

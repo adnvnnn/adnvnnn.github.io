@@ -173,22 +173,49 @@
     cursor: pointer;
     font-size: 16px;
     color: #fff;
-    transition: background 0.2s;
+    font-family: inherit;
+    padding: 0;
+    transition: background 0.2s, opacity 0.2s;
 }
 
     .proj-arrow:hover {
         background: rgba(255,255,255,0.12);
     }
 
+    .proj-arrow.disabled {
+        opacity: 0.3;
+        cursor: default;
+        pointer-events: none;
+    }
+
 .project-grid {
     display: flex;
     gap: 14px;
     flex: 1;
-    overflow: hidden;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    cursor: grab;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    touch-action: pan-y;
+    user-select: none;
 }
 
+    .project-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .project-grid.dragging {
+        scroll-behavior: auto;
+        scroll-snap-type: none;
+        cursor: grabbing;
+    }
+
 .project-card {
-    flex: 1;
+    flex: 0 0 calc((100% - 28px) / 3);
+    scroll-snap-align: start;
     border-radius: 16px;
     overflow: hidden;
     position: relative;
@@ -199,6 +226,15 @@
 
     .project-card:hover {
         transform: scale(1.02);
+    }
+
+    .project-card.hidden {
+        display: none;
+    }
+
+    .project-card img,
+    .project-card .card-bg {
+        pointer-events: none;
     }
 
     .project-card .card-bg {
@@ -265,6 +301,10 @@
         gap: 10px;
     }
 
+    .project-card {
+        flex: 0 0 calc((100% - 10px) / 2);
+    }
+
     .project-card .card-label {
         font-size: 14px;
     }
@@ -284,13 +324,8 @@
             font-size: 22px;
         }
 
-    .project-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-    }
-
     .project-card {
+        flex: 0 0 82%;
         min-height: 120px;
     }
 
