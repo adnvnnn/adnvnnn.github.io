@@ -184,10 +184,16 @@
 }
 
 .skill-icon {
-    font-size: 20px;
+    display: inline-flex;
+    color: #313F28;
     position: relative;
     z-index: 1;
 }
+
+    .skill-icon svg {
+        width: 20px;
+        height: 20px;
+    }
 
 .skill-name {
     font-size: 16px;
@@ -233,12 +239,21 @@
     .latest-project .proj-label {
         position: relative;
         z-index: 1;
+        display: flex;
+        align-items: center;
+        gap: 10px;
         padding: 18px 30px;
         font-size: 25px;
         font-weight: 700;
         color: #fff;
         text-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
+
+        .latest-project .proj-label svg {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
 
 .socials-col {
     display: flex;

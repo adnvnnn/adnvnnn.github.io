@@ -97,6 +97,19 @@
         color: #fff;
     }
 
+    .contact-copy .icon-check {
+        display: none;
+    }
+
+    .contact-copy.copied .icon-copy {
+        display: none;
+    }
+
+    .contact-copy.copied .icon-check {
+        display: block;
+        color: var(--green);
+    }
+
 .socials-section {
     margin-top: auto;
 }

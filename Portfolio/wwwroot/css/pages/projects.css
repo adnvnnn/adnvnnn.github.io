@@ -101,6 +101,12 @@
         background: rgba(255,255,255,0.08);
     }
 
+    .btn-source svg {
+        width: 15px;
+        height: 15px;
+        flex-shrink: 0;
+    }
+
 .featured-img {
     width: 340px;
     flex-shrink: 0;
@@ -115,7 +121,14 @@
 
 .featured-img-fallback {
     position: relative;
+    color: #fff;
 }
+
+    .featured-img-fallback svg {
+        width: 48px;
+        height: 48px;
+        opacity: 0.85;
+    }
 
 .featured-slides {
     position: absolute;
@@ -372,9 +385,13 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 13px;
         color: #fff;
     }
+
+        .project-card .card-arrow svg {
+            width: 14px;
+            height: 14px;
+        }
 
 
 @media (min-width: 1400px) {

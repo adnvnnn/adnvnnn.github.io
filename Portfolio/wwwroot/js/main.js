@@ -155,7 +155,9 @@ function renderFeaturedSlider(container, images, title) {
     if (images.length > 0) {
         html += images.map((src, i) => `<img class="featured-slide${i === 0 ? ' active' : ''}" src="${escapeHtml(src)}" alt="${safeTitle}" />`).join('');
     } else {
-        html += '<span class="featured-img-fallback"></span>';
+        html += '<span class="featured-img-fallback">'
+            + '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="10" r="1.6" stroke="currentColor" stroke-width="1.6"/><path d="M4 17l5-5 3 3 3-3 5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+            + '</span>';
     }
     html += '</div>';
 
@@ -299,8 +301,8 @@ document.querySelectorAll('.contact-copy').forEach(btn => {
     btn.addEventListener('click', () => {
         const val = btn.previousElementSibling.querySelector('.ci-val').textContent;
         navigator.clipboard.writeText(val).then(() => {
-            btn.textContent = '✓';
-            setTimeout(() => btn.textContent = '⧉', 1200);
+            btn.classList.add('copied');
+            setTimeout(() => btn.classList.remove('copied'), 1200);
         });
     });
 });

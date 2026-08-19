@@ -1,32 +1,37 @@
 ﻿@using Portfolio.ConfigModels
-<section id="profile" class="section" data-title="Profile">
+<section id="profile" class="section" data-title="@Localizer["Nav_Profile"]">
 
     <div class="content">
         <div class="profile-hero">
             <div class="profile-hero-text">
                 <h2>
-                    @InfoConfigModel.FirstName 
+                    @InfoConfigModel.FirstName
 
                     <span>
                         @InfoConfigModel.LastName
                     </span>
                 </h2>
-                <div class="subtitle">Full-Stack Developer crafting digital experiences</div>
+                <div class="subtitle">@Localizer["Common_FullStackTagline"]</div>
                 <p>
-                    I turn ideas into digital products through thoughtful design and clean, efficient code.Currently focused on web development, software architecture, and creating great user experiences.I turn ideas into digital products through thoughtful design and clean, efficient code.Currently focused on web development, software architecture, and creating great user experiences.
+                    @Localizer["Profile_Bio"]
                 </p>
-                <button class="btn-resume">⬇ Download Resume</button>
+                <button class="btn-resume">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    @Localizer["Profile_DownloadResume"]
+                </button>
             </div>
             <img class="profile-avatar" src="assets/images/front.png" />
         </div>
-        <div class="skills-h3">Skills</div>
+        <div class="skills-h3">@Localizer["Common_SkillsTitle"]</div>
         <div class="skill-bubbles">
-            <div class="skill-bubble"><div class="bubble-fill" style="height:85%"></div><div class="bubble-name">Python</div><div class="bubble-pct">85%</div></div>
-            <div class="skill-bubble"><div class="bubble-fill" style="height:70%"></div><div class="bubble-name">CSS3</div><div class="bubble-pct">70%</div></div>
-            <div class="skill-bubble"><div class="bubble-fill" style="height:35%"></div><div class="bubble-name">Java</div><div class="bubble-pct">35%</div></div>
-            <div class="skill-bubble"><div class="bubble-fill" style="height:90%"></div><div class="bubble-name">Python</div><div class="bubble-pct">90%</div></div>
-            <div class="skill-bubble"><div class="bubble-fill" style="height:30%"></div><div class="bubble-name">CSS3</div><div class="bubble-pct">30%</div></div>
-            <div class="skill-bubble"><div class="bubble-fill" style="height:97%"></div><div class="bubble-name">Java</div><div class="bubble-pct">97%</div></div>
+            <div class="skill-bubble"><div class="bubble-fill" style="height:85%"></div><div class="bubble-name">@Localizer["Common_SkillPython"]</div><div class="bubble-pct">85%</div></div>
+            <div class="skill-bubble"><div class="bubble-fill" style="height:70%"></div><div class="bubble-name">@Localizer["Common_SkillCss"]</div><div class="bubble-pct">70%</div></div>
+            <div class="skill-bubble"><div class="bubble-fill" style="height:35%"></div><div class="bubble-name">@Localizer["Common_SkillJava"]</div><div class="bubble-pct">35%</div></div>
+            <div class="skill-bubble"><div class="bubble-fill" style="height:90%"></div><div class="bubble-name">@Localizer["Common_SkillPython"]</div><div class="bubble-pct">90%</div></div>
+            <div class="skill-bubble"><div class="bubble-fill" style="height:30%"></div><div class="bubble-name">@Localizer["Common_SkillCss"]</div><div class="bubble-pct">30%</div></div>
+            <div class="skill-bubble"><div class="bubble-fill" style="height:97%"></div><div class="bubble-name">@Localizer["Common_SkillJava"]</div><div class="bubble-pct">97%</div></div>
         </div>
     </div>
 </section>
