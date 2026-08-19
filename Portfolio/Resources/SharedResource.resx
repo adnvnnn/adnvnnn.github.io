@@ -98,15 +98,6 @@
   <data name="Common_SkillsTitle" xml:space="preserve">
     <value>Skills</value>
   </data>
-  <data name="Common_SkillPython" xml:space="preserve">
-    <value>Python</value>
-  </data>
-  <data name="Common_SkillCss" xml:space="preserve">
-    <value>CSS3</value>
-  </data>
-  <data name="Common_SkillJava" xml:space="preserve">
-    <value>Java</value>
-  </data>
   <data name="Common_GitHub" xml:space="preserve">
     <value>GitHub</value>
   </data>
@@ -125,6 +116,9 @@
   </data>
   <data name="Home_ProjectsButton" xml:space="preserve">
     <value>Projects</value>
+  </data>
+  <data name="Home_TopSkillsTitle" xml:space="preserve">
+    <value>Top Skills</value>
   </data>
   <data name="Home_LatestProject" xml:space="preserve">
     <value>My Latest Project</value>

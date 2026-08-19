@@ -1,4 +1,7 @@
 ﻿@using Portfolio.ConfigModels
+@{
+    var skills = SkillsConfigModel.Items ?? new List<SkillItem>();
+}
 <section id="profile" class="section" data-title="@Localizer["Nav_Profile"]">
 
     <div class="content">
@@ -26,12 +29,10 @@
         </div>
         <div class="skills-h3">@Localizer["Common_SkillsTitle"]</div>
         <div class="skill-bubbles">
-            <div class="skill-bubble"><div class="bubble-fill" style="height:85%"></div><div class="bubble-name">@Localizer["Common_SkillPython"]</div><div class="bubble-pct">85%</div></div>
-            <div class="skill-bubble"><div class="bubble-fill" style="height:70%"></div><div class="bubble-name">@Localizer["Common_SkillCss"]</div><div class="bubble-pct">70%</div></div>
-            <div class="skill-bubble"><div class="bubble-fill" style="height:35%"></div><div class="bubble-name">@Localizer["Common_SkillJava"]</div><div class="bubble-pct">35%</div></div>
-            <div class="skill-bubble"><div class="bubble-fill" style="height:90%"></div><div class="bubble-name">@Localizer["Common_SkillPython"]</div><div class="bubble-pct">90%</div></div>
-            <div class="skill-bubble"><div class="bubble-fill" style="height:30%"></div><div class="bubble-name">@Localizer["Common_SkillCss"]</div><div class="bubble-pct">30%</div></div>
-            <div class="skill-bubble"><div class="bubble-fill" style="height:97%"></div><div class="bubble-name">@Localizer["Common_SkillJava"]</div><div class="bubble-pct">97%</div></div>
+            @foreach (var skill in skills)
+            {
+                <div class="skill-bubble"><div class="bubble-fill" style="height:@(skill.Percent)%"><div class="bubble-wave"></div><div class="bubble-wave bubble-wave-2"></div></div><div class="bubble-name">@skill.Name</div><div class="bubble-pct">@(skill.Percent)%</div></div>
+            }
         </div>
     </div>
 </section>

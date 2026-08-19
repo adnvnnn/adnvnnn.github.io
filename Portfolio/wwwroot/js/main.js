@@ -96,6 +96,41 @@ const carousels = [...document.querySelectorAll('.project-grid-wrapper')]
     .map(initCarousel)
     .filter(Boolean);
 
+function initDragScroll(track) {
+    if (!track) return;
+
+    let isDown = false;
+    let startX = 0;
+    let startScroll = 0;
+
+    track.addEventListener('pointerdown', (e) => {
+        isDown = true;
+        startX = e.clientX;
+        startScroll = track.scrollLeft;
+        track.classList.add('dragging');
+        track.setPointerCapture(e.pointerId);
+    });
+
+    track.addEventListener('pointermove', (e) => {
+        if (!isDown) return;
+        track.scrollLeft = startScroll - (e.clientX - startX);
+    });
+
+    const endDrag = (e) => {
+        if (!isDown) return;
+        isDown = false;
+        track.classList.remove('dragging');
+        if (e && track.hasPointerCapture(e.pointerId)) {
+            track.releasePointerCapture(e.pointerId);
+        }
+    };
+
+    track.addEventListener('pointerup', endDrag);
+    track.addEventListener('pointercancel', endDrag);
+}
+
+document.querySelectorAll('.skill-bubbles').forEach(initDragScroll);
+
 function initFeaturedSlider(wrapper) {
     const slides = [...wrapper.querySelectorAll('.featured-slide')];
     const dots = [...wrapper.querySelectorAll('.featured-dot')];

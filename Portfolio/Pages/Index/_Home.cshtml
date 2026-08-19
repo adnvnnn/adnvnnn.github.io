@@ -1,6 +1,16 @@
 ﻿@using Portfolio.ConfigModels
+@using Microsoft.AspNetCore.Html
 @{
     var lastProject = ProjectsConfigModel.Items!.Last();
+    var skills = SkillsConfigModel.Items ?? new List<SkillItem>();
+
+    IHtmlContent SkillIcon(string? name) => (name ?? "").Trim().ToLowerInvariant() switch
+    {
+        "python" => Html.Raw("<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"16\" rx=\"2\" stroke=\"currentColor\" stroke-width=\"1.6\"/><path d=\"M7 9l3 3-3 3\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"13\" y1=\"15\" x2=\"17\" y2=\"15\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\"/></svg>"),
+        "css3" or "css" => Html.Raw("<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 3a9 9 0 100 18c1.5 0 2-1 2-2s-.5-1.5-.5-2.5S14.5 15 16 15h1a4 4 0 004-4c0-4.4-4-8-9-8z\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linejoin=\"round\"/><circle cx=\"7.5\" cy=\"10.5\" r=\"1.2\" fill=\"currentColor\"/><circle cx=\"11\" cy=\"7.5\" r=\"1.2\" fill=\"currentColor\"/><circle cx=\"15.5\" cy=\"8.5\" r=\"1.2\" fill=\"currentColor\"/></svg>"),
+        "java" => Html.Raw("<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4 8h13v6a5 5 0 01-5 5H9a5 5 0 01-5-5V8z\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linejoin=\"round\"/><path d=\"M17 10h1.5a2.5 2.5 0 010 5H17\" stroke=\"currentColor\" stroke-width=\"1.6\"/><path d=\"M8 4c-.5.8-.5 1.2 0 2M12 4c-.5.8-.5 1.2 0 2\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\"/></svg>"),
+        _ => Html.Raw("<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 6L2 12l6 6M16 6l6 6-6 6\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>")
+    };
 }
 <section id="home" class="section active" data-title="@Localizer["Nav_Home"]">
     <div class="content">
@@ -24,38 +34,14 @@
 
         <div class="home-bottom">
             <div class="skills-card">
-                <h3>@Localizer["Common_SkillsTitle"]</h3>
-                <div class="skill-row">
-                    <div class="skill-fill" style="width:70%"></div>
-                    <span class="skill-icon">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.6" />
-                            <path d="M7 9l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                            <line x1="13" y1="15" x2="17" y2="15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-                        </svg>
-                    </span><span class="skill-name">@Localizer["Common_SkillPython"]</span><span class="skill-pct">70%</span>
-                </div>
-                <div class="skill-row">
-                    <div class="skill-fill" style="width:85%"></div>
-                    <span class="skill-icon">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 3a9 9 0 100 18c1.5 0 2-1 2-2s-.5-1.5-.5-2.5S14.5 15 16 15h1a4 4 0 004-4c0-4.4-4-8-9-8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
-                            <circle cx="7.5" cy="10.5" r="1.2" fill="currentColor" />
-                            <circle cx="11" cy="7.5" r="1.2" fill="currentColor" />
-                            <circle cx="15.5" cy="8.5" r="1.2" fill="currentColor" />
-                        </svg>
-                    </span><span class="skill-name">@Localizer["Common_SkillCss"]</span><span class="skill-pct">85%</span>
-                </div>
-                <div class="skill-row">
-                    <div class="skill-fill" style="width:45%"></div>
-                    <span class="skill-icon">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 8h13v6a5 5 0 01-5 5H9a5 5 0 01-5-5V8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
-                            <path d="M17 10h1.5a2.5 2.5 0 010 5H17" stroke="currentColor" stroke-width="1.6" />
-                            <path d="M8 4c-.5.8-.5 1.2 0 2M12 4c-.5.8-.5 1.2 0 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-                        </svg>
-                    </span><span class="skill-name">@Localizer["Common_SkillJava"]</span><span class="skill-pct">45%</span>
-                </div>
+                <h3>@Localizer["Home_TopSkillsTitle"]</h3>
+                @foreach (var skill in skills.OrderByDescending(s => s.Percent).Take(3))
+                {
+                    <div class="skill-row">
+                        <div class="skill-fill" style="width:@(skill.Percent)%"></div>
+                        <span class="skill-icon">@SkillIcon(skill.Name)</span><span class="skill-name">@skill.Name</span><span class="skill-pct">@(skill.Percent)%</span>
+                    </div>
+                }
             </div>
             <div class="latest-project" onclick="navigate('projects')">
                 <img class="proj-bg" src="@lastProject.Image" />

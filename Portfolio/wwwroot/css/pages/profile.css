@@ -85,13 +85,33 @@
     gap: 16px;
     border-radius: 60px;
     padding: 10px 20px;
-    flex-wrap: wrap;
     background: var(--glass-card);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    cursor: grab;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    touch-action: pan-y;
+    user-select: none;
 }
+
+    .skill-bubbles::-webkit-scrollbar {
+        display: none;
+    }
+
+    .skill-bubbles.dragging {
+        scroll-behavior: auto;
+        scroll-snap-type: none;
+        cursor: grabbing;
+    }
 
 .skill-bubble {
     width: 130px;
     height: 130px;
+    flex-shrink: 0;
+    scroll-snap-align: start;
     border-radius: 50px;
     background: var(--glass-card);
     border: 1px solid var(--glass-border);
@@ -109,9 +129,88 @@
         bottom: 0;
         left: 0;
         right: 0;
-        background: #BDFCBB;
+        background: linear-gradient(90deg, #D6FCBB 3%, #BDFCBB 100%);
         border-radius: 0 0 20px 20px;
         transition: height 1.2s ease;
+        overflow: visible;
+    }
+
+    .bubble-wave {
+        position: absolute;
+        top: -9px;
+        left: 0;
+        width: 200%;
+        height: 18px;
+        background-repeat: repeat-x;
+        animation: bubble-wave-flow linear infinite;
+        --wave-shift: -100px;
+    }
+
+    .bubble-wave-2 {
+        opacity: 0.6;
+        animation-direction: reverse;
+    }
+
+@keyframes bubble-wave-flow {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(var(--wave-shift));
+    }
+}
+
+    .skill-bubble:nth-child(4n+1) .bubble-wave {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3E%3Cstop offset='3%25' stop-color='%23D6FCBB'/%3E%3Cstop offset='100%25' stop-color='%23BDFCBB'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0 10 Q 18 2 38 11 T 78 13 T 122 7 T 158 12 T 200 9 V20 H0 Z' fill='url(%23g)'/%3E%3C/svg%3E");
+        background-size: 100px 18px;
+        animation-duration: 3s;
+        --wave-shift: -100px;
+    }
+
+    .skill-bubble:nth-child(4n+1) .bubble-wave-2 {
+        top: -6px;
+        animation-duration: 4.5s;
+    }
+
+    .skill-bubble:nth-child(4n+2) .bubble-wave {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3E%3Cstop offset='3%25' stop-color='%23D6FCBB'/%3E%3Cstop offset='100%25' stop-color='%23BDFCBB'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0 11 Q 24 15 44 8 T 85 12 T 118 6 T 165 13 T 200 10 V20 H0 Z' fill='url(%23g)'/%3E%3C/svg%3E");
+        background-size: 130px 16px;
+        animation-duration: 3.8s;
+        animation-direction: reverse;
+        --wave-shift: -130px;
+    }
+
+    .skill-bubble:nth-child(4n+2) .bubble-wave-2 {
+        top: -5px;
+        animation-duration: 5.2s;
+        animation-direction: normal;
+    }
+
+    .skill-bubble:nth-child(4n+3) .bubble-wave {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3E%3Cstop offset='3%25' stop-color='%23D6FCBB'/%3E%3Cstop offset='100%25' stop-color='%23BDFCBB'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0 9 Q 14 3 33 12 T 70 9 T 105 14 T 145 8 T 200 11 V20 H0 Z' fill='url(%23g)'/%3E%3C/svg%3E");
+        background-size: 85px 20px;
+        animation-duration: 2.6s;
+        --wave-shift: -85px;
+    }
+
+    .skill-bubble:nth-child(4n+3) .bubble-wave-2 {
+        top: -7px;
+        animation-duration: 4s;
+    }
+
+    .skill-bubble:nth-child(4n) .bubble-wave {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3E%3Cstop offset='3%25' stop-color='%23D6FCBB'/%3E%3Cstop offset='100%25' stop-color='%23BDFCBB'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0 12 Q 28 6 52 13 T 95 8 T 135 15 T 175 9 T 200 12 V20 H0 Z' fill='url(%23g)'/%3E%3C/svg%3E");
+        background-size: 150px 17px;
+        animation-duration: 4.2s;
+        animation-direction: reverse;
+        --wave-shift: -150px;
+    }
+
+    .skill-bubble:nth-child(4n) .bubble-wave-2 {
+        top: -8px;
+        animation-duration: 3.3s;
+        animation-direction: normal;
     }
 
     .skill-bubble .bubble-name {
@@ -157,9 +256,6 @@
         max-width: 100%;
     }
 
-    .skill-bubbles {
-        justify-content: center;
-    }
 }
 
 @media (max-width: 540px) {
