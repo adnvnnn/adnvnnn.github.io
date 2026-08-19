@@ -9,6 +9,7 @@ public class ProjectItem
     public string? Image { get; set; }
     public string? Link { get; set; }
     public List<string>? OtherImages { get; set; }
+    public List<string>? Tags { get; set; }
 }
 
 public class ProjectsConfigModel

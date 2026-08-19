@@ -1,7 +1,31 @@
 ﻿@using Portfolio.ConfigModels
+@using System.Text.Json
 @{
     var projects = ProjectsConfigModel.Items ?? new List<ProjectItem>();
     var categories = CategoriesConfigModel.Items ?? new List<CategoryItem>();
+
+    List<string> BuildImages(ProjectItem p)
+    {
+        var images = new List<string>();
+        if (!string.IsNullOrEmpty(p.Image)) images.Add(p.Image!);
+        if (p.OtherImages != null) images.AddRange(p.OtherImages.Where(i => !string.IsNullOrEmpty(i))!);
+        return images;
+    }
+
+    string BuildPayload(ProjectItem p)
+    {
+        return JsonSerializer.Serialize(new
+        {
+            title = p.Title,
+            description = p.Description,
+            tags = p.Tags ?? new List<string>(),
+            images = BuildImages(p)
+        });
+    }
+
+    var featuredProject = projects.FirstOrDefault();
+    var featuredImages = featuredProject != null ? BuildImages(featuredProject) : new List<string>();
+    var featuredTags = featuredProject?.Tags ?? new List<string>();
 }
 <section id="projects" class="section" data-title="Projects" data-subtitle="selected work that solve problems and deliver impact">
     <div class="content">
@@ -9,19 +33,56 @@
             <h3>Featured Project</h3>
             <div class="featured-card">
                 <div class="featured-info">
-                    <h2>Plantiful</h2>
-                    <p>Modern website for the users to have a way of sharing the nurturing journey of their plants</p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Typescript</span>
-                        <span class="tech-tag">tailwind css</span>
-                        <span class="tech-tag">next.js</span>
+                    <h2 id="featuredTitle">@featuredProject?.Title</h2>
+                    <p id="featuredDesc">@featuredProject?.Description</p>
+                    <div class="tech-tags" id="featuredTags" style="@(featuredTags.Count == 0 ? "display:none" : "")">
+                        @foreach (var tag in featuredTags)
+                        {
+                            <span class="tech-tag">@tag</span>
+                        }
                     </div>
                     <div class="featured-actions">
                         <button class="btn-demo">Live Demo</button>
                         <button class="btn-source">source code ⌨</button>
                     </div>
                 </div>
-                <div class="featured-img">🌿</div>
+                <div class="featured-img" id="featuredSlider">
+                    @if (featuredImages.Count > 1)
+                    {
+                        <button type="button" class="featured-arrow prev" aria-label="Previous image">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    }
+                    <div class="featured-slides">
+                        @if (featuredImages.Count > 0)
+                        {
+                            for (var i = 0; i < featuredImages.Count; i++)
+                            {
+                                <img class="featured-slide @(i == 0 ? "active" : "")" src="@featuredImages[i]" alt="@featuredProject!.Title" />
+                            }
+                        }
+                        else
+                        {
+                            <span class="featured-img-fallback">🌿</span>
+                        }
+                    </div>
+                    @if (featuredImages.Count > 1)
+                    {
+                        <button type="button" class="featured-arrow next" aria-label="Next image">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <div class="featured-slider-dots">
+                            @for (var i = 0; i < featuredImages.Count; i++)
+                            {
+                                <button type="button" class="featured-dot @(i == 0 ? "active" : "")" data-index="@i" aria-label="Show image @(i + 1)"></button>
+                            }
+                        </div>
+                    }
+                </div>
             </div>
         </div>
 
@@ -46,9 +107,8 @@
                 @for (var i = 0; i < projects.Count; i++)
                 {
                     var project = projects[i];
-                    var href = string.IsNullOrEmpty(project.Link) ? "#" : project.Link;
                     var categoryIds = string.Join(",", project.CategoryIds ?? new List<int>());
-                    <a class="project-card" href="@href" title="@project.Description" data-category="@categoryIds" draggable="false">
+                    <a class="project-card @(i == 0 ? "active-featured" : "")" href="#" title="@project.Description" data-category="@categoryIds" data-project="@BuildPayload(project)" draggable="false">
                         <div class="card-bg" style="background-image:url(@project.Image)"></div>
                         <div class="card-overlay"></div>
                         <div class="card-label">@project.Title</div>
