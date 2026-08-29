@@ -9,6 +9,8 @@
     align-items: flex-start;
     gap: 20px;
     position: relative;
+    flex: 0 0 58%;
+    min-height: 0;
 }
 
 .profile-hero-text h2 {
@@ -83,6 +85,7 @@
 
 .skill-bubbles {
     display: flex;
+    align-items: center;
     gap: 16px;
     border-radius: 60px;
     padding: 10px 20px;
@@ -96,6 +99,8 @@
     -ms-overflow-style: none;
     touch-action: pan-y;
     user-select: none;
+    flex: 1 1 0%;
+    min-height: 0;
 }
 
     .skill-bubbles::-webkit-scrollbar {
@@ -159,6 +164,10 @@
     #profile .content {
         padding: 16px 20px 16px;
         gap: 16px;
+    }
+
+    .profile-hero, .skill-bubbles {
+        flex: 0 0 auto;
     }
 
     .profile-hero {
