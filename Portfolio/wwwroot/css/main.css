@@ -10,7 +10,7 @@
     z-index: 1;
     display: flex;
     width: min(1350px, 97vw);
-    height: min(720px, 90vh);
+    min-height: min(720px, 90vh);
     border-radius: 60px;
     overflow: hidden;
     box-shadow: 0 30px 80px rgba(0,0,0,0.45);
@@ -22,7 +22,6 @@
     display: flex;
     backdrop-filter: blur(30px);
     flex-direction: column;
-    overflow: hidden;
     position: relative;
     border: solid 1px rgba(255,255,255,0.2);
 
@@ -84,8 +83,7 @@
 .section {
     display: none;
     flex: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: visible;
     flex-direction: column;
 }
 
@@ -95,23 +93,6 @@
     }
 
 
-
-.section::-webkit-scrollbar {
-    width: 4px;
-}
-
-.section::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.section::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,0.2);
-    border-radius: 2px;
-}
-
-
-
-
 @media (max-width: 900px) {
     html, body {
         overflow: auto;
@@ -119,7 +100,7 @@
 
     .app {
         width: 100vw;
-        height: 100vh;
+        min-height: 100vh;
         border-radius: 0;
         flex-direction: column;
     }

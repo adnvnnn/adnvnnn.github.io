@@ -6,14 +6,16 @@
 }
 
 html, body {
-    height: 100%;
-    overflow: hidden;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 body {
     background: #6b7c7c url('../../assets/images/background.png') center/cover no-repeat;
     display: flex;
     align-items: center;
+    align-items: safe center;
     justify-content: center;
     min-height: 100vh;
 }
