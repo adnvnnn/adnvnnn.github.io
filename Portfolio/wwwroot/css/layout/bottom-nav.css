@@ -1,11 +1,11 @@
 ﻿
 .bottom-nav {
     display: none;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 10;
+    z-index: 100;
     padding: 10px 16px 14px;
     background: rgba(74, 76, 85, 0.4);
     backdrop-filter: var(--blur);
