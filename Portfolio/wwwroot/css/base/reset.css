@@ -12,7 +12,7 @@ html, body {
 }
 
 body {
-    background: #6b7c7c url('../../assets/images/background.png') center/cover no-repeat;
+    background: #6b7c7c url('../../assets/images/background.jpg') center/cover no-repeat fixed;
     display: flex;
     align-items: center;
     align-items: safe center;

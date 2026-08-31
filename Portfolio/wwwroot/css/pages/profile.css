@@ -1,6 +1,10 @@
 ﻿
 .profile-hero {
-    background: var(--glass-card);
+    background-image: linear-gradient(var(--glass-card), var(--glass-card)), url('../../assets/images/background.jpg');
+    background-size: cover, cover;
+    background-position: center, center;
+    background-attachment: fixed, fixed;
+    background-repeat: no-repeat, no-repeat;
     border: 1px solid var(--glass-border);
     border-radius: 60px;
     padding: 28px 52px;
@@ -91,7 +95,11 @@
     align-items: center;
     border-radius: 60px;
     padding: 10px 0;
-    background: var(--glass-card);
+    background-image: linear-gradient(var(--glass-card), var(--glass-card)), url('../../assets/images/background.jpg');
+    background-size: cover, cover;
+    background-position: center, center;
+    background-attachment: fixed, fixed;
+    background-repeat: no-repeat, no-repeat;
     overflow-x: auto;
     scroll-behavior: smooth;
     cursor: grab;

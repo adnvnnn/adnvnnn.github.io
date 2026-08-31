@@ -4,7 +4,11 @@
 
 .connect-card {
     flex: 1;
-    background: rgba(75, 80, 89, 0.43);
+    background-image: linear-gradient(var(--glass-card), var(--glass-card)), url('../../assets/images/background.jpg');
+    background-size: cover, cover;
+    background-position: center, center;
+    background-attachment: fixed, fixed;
+    background-repeat: no-repeat, no-repeat;
     border: 1px solid var(--glass-border);
     border-radius: 60px;
     padding: 28px 24px;
@@ -149,7 +153,11 @@
 
 .message-card {
     flex: 1.2;
-    background: rgba(75, 80, 89, 0.43);
+    background-image: linear-gradient(var(--glass-card), var(--glass-card)), url('../../assets/images/background.jpg');
+    background-size: cover, cover;
+    background-position: center, center;
+    background-attachment: fixed, fixed;
+    background-repeat: no-repeat, no-repeat;
     border: 1px solid var(--glass-border);
     border-radius: 60px;
     padding: 28px 26px;

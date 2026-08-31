@@ -21,7 +21,11 @@
     }
 
 .featured-card {
-    background: var(--glass-card);
+    background-image: linear-gradient(var(--glass-card), var(--glass-card)), url('../../assets/images/background.jpg');
+    background-size: cover, cover;
+    background-position: center, center;
+    background-attachment: fixed, fixed;
+    background-repeat: no-repeat, no-repeat;
     border: 1px solid var(--glass-border);
     border-radius: 60px;
     display: flex;
@@ -280,7 +284,11 @@
     flex-shrink: 0;
     align-self: center;
     border-radius: 50%;
-    background: var(--glass-card);
+    background-image: linear-gradient(var(--glass-card), var(--glass-card)), url('../../assets/images/background.jpg');
+    background-size: cover, cover;
+    background-position: center, center;
+    background-attachment: fixed, fixed;
+    background-repeat: no-repeat, no-repeat;
     border: 1px solid var(--glass-border);
     display: flex;
     align-items: center;
