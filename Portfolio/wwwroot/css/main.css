@@ -1,5 +1,5 @@
 .glass-card-bg {
-    background-image: linear-gradient(var(--glass-card), var(--glass-card)), url('../assets/images/background.jpg');
+    background-image: linear-gradient(var(--glass-card), var(--glass-card)), url('../assets/images/background-blurred.jpg');
     background-size: cover, cover;
     background-position: center, center;
     background-attachment: fixed, fixed;
@@ -15,7 +15,7 @@
 }
 
 .glass-pill-fill {
-    background: rgba(255,255,255,0.07);
+    background: rgba(255,255,255,0.00);
     border: 1px solid var(--glass-border);
 }
 
