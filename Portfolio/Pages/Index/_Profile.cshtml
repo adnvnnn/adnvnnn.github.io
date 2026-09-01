@@ -5,7 +5,7 @@
 <section id="profile" class="section" data-title="@Localizer["Nav_Profile"]">
 
     <div class="content">
-        <div class="profile-hero">
+        <div class="profile-hero glass-card-bg">
             <div class="profile-hero-text">
                 <h2>
                     @InfoConfigModel.FirstName
@@ -18,7 +18,7 @@
                 <p>
                     @Localizer["Profile_Bio"]
                 </p>
-                <button class="btn-resume">
+                <button class="btn-resume cta-gradient-bg">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
@@ -28,7 +28,7 @@
             <img class="profile-avatar" src="assets/images/front.png" />
         </div>
         <div class="skills-h3">@Localizer["Common_SkillsTitle"]</div>
-        <div class="skill-bubbles">
+        <div class="skill-bubbles glass-card-bg drag-scroll">
             @foreach (var skill in skills)
             {
                 <div class="skill-bubble"><div class="bubble-fill" style="height:@(skill.Percent)%"></div><div class="bubble-name">@skill.Name</div><div class="bubble-pct">@(skill.Percent)%</div></div>

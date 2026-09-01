@@ -4,12 +4,6 @@
 
 .connect-card {
     flex: 1;
-    background-image: linear-gradient(var(--glass-card), var(--glass-card)), url('../../assets/images/background.jpg');
-    background-size: cover, cover;
-    background-position: center, center;
-    background-attachment: fixed, fixed;
-    background-repeat: no-repeat, no-repeat;
-    border: 1px solid var(--glass-border);
     border-radius: 60px;
     padding: 28px 24px;
     display: flex;
@@ -33,8 +27,6 @@
     display: flex;
     align-items: center;
     gap: 14px;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid var(--glass-border);
     border-radius: 38.66px;
     padding: 10px 13px;
     margin-bottom: 10px;
@@ -49,11 +41,6 @@
 .contact-icon-wrap {
     width: 38px;
     height: 38px;
-    border-radius: 50%;
-    background: linear-gradient(to right, rgb(214, 252, 187) 3%, rgb(189, 252, 187) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     color: #1a2a1a;
     flex-shrink: 0;
 }
@@ -153,12 +140,6 @@
 
 .message-card {
     flex: 1.2;
-    background-image: linear-gradient(var(--glass-card), var(--glass-card)), url('../../assets/images/background.jpg');
-    background-size: cover, cover;
-    background-position: center, center;
-    background-attachment: fixed, fixed;
-    background-repeat: no-repeat, no-repeat;
-    border: 1px solid var(--glass-border);
     border-radius: 60px;
     padding: 28px 26px;
     display: flex;
@@ -186,8 +167,6 @@
     }
 
     .form-group input, .form-group textarea {
-        background: rgba(255,255,255,0.07);
-        border: 1px solid var(--glass-border);
         border-radius: 38.66px;
         padding: 11px 14px;
         font-size: 13px;
@@ -217,7 +196,6 @@
     font-weight: 700;
     cursor: pointer;
     margin-top: auto;
-    background: linear-gradient(to right, rgb(214, 252, 187) 3%, rgb(189, 252, 187) 100%);
 }
 
     .btn-send:hover {

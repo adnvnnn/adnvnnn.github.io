@@ -1,11 +1,5 @@
 ﻿
 .profile-hero {
-    background-image: linear-gradient(var(--glass-card), var(--glass-card)), url('../../assets/images/background.jpg');
-    background-size: cover, cover;
-    background-position: center, center;
-    background-attachment: fixed, fixed;
-    background-repeat: no-repeat, no-repeat;
-    border: 1px solid var(--glass-border);
     border-radius: 60px;
     padding: 28px 52px;
     display: flex;
@@ -62,7 +56,6 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: linear-gradient(to right, rgb(214, 252, 187) 3%, rgb(189, 252, 187) 100%);
     border: none;
     color: #313F28;
     padding: 5px 22px;
@@ -95,32 +88,10 @@
     align-items: center;
     border-radius: 60px;
     padding: 10px 0;
-    background-image: linear-gradient(var(--glass-card), var(--glass-card)), url('../../assets/images/background.jpg');
-    background-size: cover, cover;
-    background-position: center, center;
-    background-attachment: fixed, fixed;
-    background-repeat: no-repeat, no-repeat;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    cursor: grab;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    touch-action: pan-y;
-    user-select: none;
     flex: 1 1 0%;
     min-height: 0;
     min-width: 0;
 }
-
-    .skill-bubbles::-webkit-scrollbar {
-        display: none;
-    }
-
-    .skill-bubbles.dragging {
-        scroll-behavior: auto;
-        cursor: grabbing;
-    }
 
     .skill-bubbles::before,
     .skill-bubbles::after {

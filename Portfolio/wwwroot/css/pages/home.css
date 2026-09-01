@@ -9,12 +9,6 @@
 }
 
 .hero-card {
-    background-size: cover, cover;
-    background-position: center, center;
-    background-attachment: fixed, fixed;
-    background-repeat: no-repeat, no-repeat;
-    background-image: linear-gradient(var(--glass-card), var(--glass-card)), url('../../assets/images/background.jpg');
-    border: 1px solid var(--glass-border);
     border-radius: 60px;
     padding: 28px 52px;
     display: flex;
@@ -79,12 +73,6 @@
 
 .bio-card {
     flex: 2;
-    background-image: linear-gradient(var(--glass-card), var(--glass-card)), url('../../assets/images/background.jpg');
-    background-size: cover, cover;
-    background-position: center, center;
-    background-attachment: fixed, fixed;
-    background-repeat: no-repeat, no-repeat;
-    border: 1px solid var(--glass-border);
     border-radius: 35px;
     padding: 20px 24px;
     color: #fff;
@@ -146,13 +134,7 @@
     }
 
 .btn-outline {
-    background-image: linear-gradient(var(--glass-card), var(--glass-card)), url('../../assets/images/background.jpg');
-    background-size: cover, cover;
-    background-position: center, center;
-    background-attachment: fixed, fixed;
-    background-repeat: no-repeat, no-repeat;
     color: #fff;
-    border: 1px solid var(--glass-border);
     border-radius: 35px;
     padding: 16px 32px;
     font-size: 35px;
@@ -239,12 +221,6 @@
 
 .latest-project {
     flex: 2;
-    background-image: linear-gradient(var(--glass-card), var(--glass-card)), url('../../assets/images/background.jpg');
-    background-size: cover, cover;
-    background-position: center, center;
-    background-attachment: fixed, fixed;
-    background-repeat: no-repeat, no-repeat;
-    border: 1px solid var(--glass-border);
     border-radius: 55px;
     overflow: hidden;
     position: relative;
@@ -295,16 +271,6 @@
 .social-btn {
     width: 50px;
     height: 50px;
-    border-radius: 50%;
-    background-image: linear-gradient(var(--glass-card), var(--glass-card)), url('../../assets/images/background.jpg');
-    background-size: cover, cover;
-    background-position: center, center;
-    background-attachment: fixed, fixed;
-    background-repeat: no-repeat, no-repeat;
-    border: 1px solid var(--glass-border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     cursor: pointer;
     transition: background 0.2s, transform 0.15s;
     font-size: 18px;

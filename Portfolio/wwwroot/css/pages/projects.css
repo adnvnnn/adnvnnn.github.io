@@ -21,12 +21,6 @@
     }
 
 .featured-card {
-    background-image: linear-gradient(var(--glass-card), var(--glass-card)), url('../../assets/images/background.jpg');
-    background-size: cover, cover;
-    background-position: center, center;
-    background-attachment: fixed, fixed;
-    background-repeat: no-repeat, no-repeat;
-    border: 1px solid var(--glass-border);
     border-radius: 60px;
     display: flex;
     overflow: hidden;
@@ -64,12 +58,10 @@
 }
 
 .tech-tag {
-    border: 1px solid var(--glass-border);
     border-radius: 20px;
     padding: 4px 14px;
     font-size: 12px;
     color: #fff;
-    background: rgba(255,255,255,0.07);
 }
 
 .featured-actions {
@@ -155,12 +147,7 @@
     width: 32px;
     height: 32px;
     flex-shrink: 0;
-    border-radius: 50%;
     background: rgba(0,0,0,0.35);
-    border: 1px solid var(--glass-border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     cursor: pointer;
     color: #fff;
     padding: 0;
@@ -283,16 +270,6 @@
     height: 36px;
     flex-shrink: 0;
     align-self: center;
-    border-radius: 50%;
-    background-image: linear-gradient(var(--glass-card), var(--glass-card)), url('../../assets/images/background.jpg');
-    background-size: cover, cover;
-    background-position: center, center;
-    background-attachment: fixed, fixed;
-    background-repeat: no-repeat, no-repeat;
-    border: 1px solid var(--glass-border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     cursor: pointer;
     font-size: 16px;
     color: #fff;
@@ -320,25 +297,11 @@
     display: flex;
     gap: 14px;
     flex: 1;
-    overflow-x: auto;
     scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    cursor: grab;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    touch-action: pan-y;
-    user-select: none;
 }
 
-    .project-grid::-webkit-scrollbar {
-        display: none;
-    }
-
     .project-grid.dragging {
-        scroll-behavior: auto;
         scroll-snap-type: none;
-        cursor: grabbing;
     }
 
 .project-card {
@@ -401,10 +364,6 @@
         width: 28px;
         height: 28px;
         background: rgba(255,255,255,0.15);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         color: #fff;
     }
 

@@ -49,12 +49,6 @@
         color: #fff;
     }
 
-    .nav-item.active {
-        background: rgba(215, 223, 216, 0.32);
-        color: #fff;
-        position: relative;
-    }
-
         .nav-item.active::before {
             content: '';
             position: absolute;

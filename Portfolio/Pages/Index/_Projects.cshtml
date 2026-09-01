@@ -33,14 +33,14 @@
     <div class="content">
         <div class="featured-section">
             <h3>@Localizer["Projects_FeaturedTitle"]</h3>
-            <div class="featured-card">
+            <div class="featured-card glass-card-bg">
                 <div class="featured-info">
                     <h2 id="featuredTitle">@featuredProject?.Title</h2>
                     <p id="featuredDesc">@featuredProject?.Description</p>
                     <div class="tech-tags" id="featuredTags" style="@(featuredTags.Count == 0 ? "display:none" : "")">
                         @foreach (var tag in featuredTags)
                         {
-                            <span class="tech-tag">@tag</span>
+                            <span class="tech-tag glass-pill-fill">@tag</span>
                         }
                     </div>
                     <div class="featured-actions">
@@ -56,7 +56,7 @@
                 <div class="featured-img" id="featuredSlider">
                     @if (featuredImages.Count > 1)
                     {
-                        <button type="button" class="featured-arrow prev" aria-label="Previous image">
+                        <button type="button" class="featured-arrow icon-circle-btn prev" aria-label="Previous image">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
@@ -83,7 +83,7 @@
                     </div>
                     @if (featuredImages.Count > 1)
                     {
-                        <button type="button" class="featured-arrow next" aria-label="Next image">
+                        <button type="button" class="featured-arrow icon-circle-btn next" aria-label="Next image">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
@@ -111,12 +111,12 @@
         </div>
 
         <div class="project-grid-wrapper">
-            <button type="button" class="proj-arrow prev" aria-label="Previous projects">
+            <button type="button" class="proj-arrow glass-card-bg icon-circle-btn prev" aria-label="Previous projects">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
             </button>
-            <div class="project-grid">
+            <div class="project-grid drag-scroll">
                 @for (var i = 0; i < projects.Count; i++)
                 {
                     var project = projects[i];
@@ -125,7 +125,7 @@
                         <div class="card-bg" style="background-image:url(@project.Image)"></div>
                         <div class="card-overlay"></div>
                         <div class="card-label">@project.Title</div>
-                        <div class="card-arrow">
+                        <div class="card-arrow icon-circle-btn">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
@@ -133,7 +133,7 @@
                     </a>
                 }
             </div>
-            <button type="button" class="proj-arrow next" aria-label="Next projects">
+            <button type="button" class="proj-arrow glass-card-bg icon-circle-btn next" aria-label="Next projects">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
