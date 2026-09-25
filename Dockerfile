@@ -3,13 +3,13 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 
 WORKDIR /src
 
-COPY ["Portfolio.csproj", "./"]
+COPY ["Portfolio/Portfolio.csproj", "Portfolio/"]
 
-RUN dotnet restore "Portfolio.csproj"
+RUN dotnet restore "Portfolio/Portfolio.csproj"
 
 COPY . .
 
-RUN dotnet publish "Portfolio.csproj" \
+RUN dotnet publish "Portfolio/Portfolio.csproj" \
     -c Release \
     -o /app/publish \
     --no-restore
