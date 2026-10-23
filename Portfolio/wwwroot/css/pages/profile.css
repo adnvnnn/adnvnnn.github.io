@@ -91,7 +91,13 @@
     flex: 1 1 0%;
     min-height: 0;
     min-width: 0;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 20px;
 }
+
+    .skill-bubbles.dragging {
+        scroll-snap-type: none;
+    }
 
     .skill-bubbles::before,
     .skill-bubbles::after {
@@ -113,6 +119,7 @@
     padding-bottom: 18px;
     position: relative;
     overflow: hidden;
+    scroll-snap-align: start;
 }
 
     .skill-bubble:not(:last-child) {
