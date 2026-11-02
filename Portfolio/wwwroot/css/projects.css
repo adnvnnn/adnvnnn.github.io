@@ -1,0 +1,454 @@
+/* ==========================================================================
+   Projects page: featured project (info + image carousel), filters, project list
+   ========================================================================== */
+
+.page--projects {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+
+.page--projects .page__sub {
+  margin-bottom: 4px;
+}
+
+.label--featured,
+.label--all {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* ----- featured card ------------------------------------------------------------- */
+.featured {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 30px;
+  --tint: rgb(75 80 89 / 0.43);
+}
+
+.featured__media {
+  order: -1;
+  aspect-ratio: 529 / 296;
+  border-radius: 0;
+}
+
+.featured__info {
+  display: grid;
+  gap: 12px;
+  padding: 20px 20px 24px;
+}
+
+.featured__title {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  text-shadow: var(--text-shadow);
+}
+
+.featured__text {
+  max-width: 46ch;
+  color: var(--text-body);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.featured__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+/* ----- list head: label + filters ----------------------------------------------- */
+.plist-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.plist-head .label {
+  flex: none;
+}
+
+.plist-head .chips {
+  min-width: 0;
+}
+
+/* ----- project list --------------------------------------------------------------- */
+.plist {
+  position: relative;
+}
+
+.plist__track {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding: 4px 2px 10px;
+  margin: -4px -2px -10px;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 2px;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+
+.plist__track::-webkit-scrollbar {
+  display: none;
+}
+
+.plist__item {
+  flex: 0 0 min(74%, 270px);
+  scroll-snap-align: start;
+}
+
+.plist__item[hidden] {
+  display: none;
+}
+
+.plist__nav {
+  display: none;
+}
+
+.pcard {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 254.09 / 193.24;
+  overflow: hidden;
+  border-radius: 8.4% / 11%;
+  background: #5c6068;
+  color: #fff;
+  text-align: left;
+  isolation: isolate;
+  transition: box-shadow 0.35s var(--ease-out), transform 0.5s var(--spring-bouncy);
+}
+
+.pcard__img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s var(--ease-out);
+}
+
+/* Figma: a gradient-masked background blur over the lower part of the photo.
+   ::before is a blurred copy of the cover (set by projects.js), faded in toward the bottom. */
+.pcard::before {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  z-index: 1;
+  background: var(--cover) center / cover no-repeat;
+  filter: blur(5px);
+  -webkit-mask-image: linear-gradient(180deg, transparent 50%, #000 78%);
+  mask-image: linear-gradient(180deg, transparent 50%, #000 78%);
+  transition: transform 0.9s var(--ease-out);
+}
+
+.pcard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgb(0 0 0 / 0) 57.76%, rgb(0 0 0 / 0.44) 100%);
+  pointer-events: none;
+}
+
+.pcard__title {
+  position: absolute;
+  z-index: 3;
+  left: 5.3%;
+  bottom: 6.5%;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  text-shadow: var(--text-shadow);
+  transition: font-weight 0.25s;
+}
+
+.pcard__arrow {
+  position: absolute;
+  z-index: 3;
+  right: 6%;
+  bottom: 4%;
+  font-size: 26px;
+  stroke-width: 1.6;
+  transition: transform 0.5s var(--spring-bouncy);
+}
+
+.pcard:hover .pcard__img,
+.pcard:hover::before {
+  transform: scale(1.06);
+}
+
+.pcard:hover .pcard__arrow {
+  transform: translate(2px, -2px);
+}
+
+.pcard.is-selected::after {
+  box-shadow: inset 0 0 0 3px #fff;
+}
+
+.pcard.is-selected .pcard__title,
+.pcard:focus-visible .pcard__title {
+  font-weight: 900;
+}
+
+@media (min-width: 700px) {
+  .page--projects {
+    gap: 22px;
+  }
+
+  .featured {
+    flex-direction: row;
+    border-radius: 44px;
+  }
+
+  .featured__info {
+    flex: 1 1 52%;
+    align-content: center;
+    padding: 30px 28px 30px 34px;
+  }
+
+  .featured__media {
+    order: 0;
+    flex: 1 1 48%;
+    aspect-ratio: auto;
+    min-height: 260px;
+  }
+
+  .featured__title {
+    font-size: 30px;
+  }
+
+  .featured__text {
+    font-size: 16px;
+  }
+
+  .label--featured,
+  .label--all {
+    font-size: 18px;
+  }
+
+  .plist__item {
+    flex-basis: calc((100% - 2 * 18px) / 3);
+  }
+
+  .plist__track {
+    gap: 18px;
+  }
+
+  .pcard__title {
+    font-size: 24px;
+  }
+
+  .plist__nav {
+    position: absolute;
+    z-index: 3;
+    top: 50%;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 26px;
+    background: rgb(60 64 72 / 0.55);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.25);
+    transform: translateY(-50%);
+    transition: transform 0.45s var(--spring-bouncy), opacity 0.2s;
+  }
+
+  .plist__nav .icon {
+    stroke-width: 1.4;
+  }
+
+  .plist__nav--prev {
+    left: -14px;
+  }
+
+  .plist__nav--next {
+    right: -14px;
+  }
+
+  .plist__nav:hover {
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .plist__nav:disabled {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+/* ----- desktop artboard -------------------------------------------------------------- */
+@media (min-width: 1100px) {
+  .page--projects {
+    display: block;
+  }
+
+  .page--projects .page__sub {
+    top: calc(79 * var(--u));
+  }
+
+  .label--featured {
+    left: calc(104 * var(--u));
+    top: calc(146 * var(--u));
+    font-size: var(--fs-18);
+  }
+
+  .label--all {
+    left: calc(104 * var(--u));
+    top: calc(514 * var(--u));
+    font-size: var(--fs-18);
+  }
+
+  .featured {
+    position: absolute;
+    left: calc(97 * var(--u));
+    top: calc(185 * var(--u));
+    display: block;
+    width: calc(1142 * var(--u));
+    height: calc(297 * var(--u));
+    border-radius: calc(60 * var(--u));
+    overflow: visible;
+  }
+
+  .featured__info {
+    position: absolute;
+    left: calc(43 * var(--u));
+    top: calc(40 * var(--u));
+    display: block;
+    width: calc(560 * var(--u));
+    padding: 0;
+  }
+
+  .featured__title {
+    font-size: var(--fs-30);
+  }
+
+  .featured__text {
+    width: calc(231 * var(--u));
+    max-width: none;
+    margin-top: calc(17.4 * var(--u));
+    font-size: var(--fs-16);
+    line-height: 1.189;
+  }
+
+  .featured .tags {
+    margin: calc(30 * var(--u)) 0 0 calc(-5 * var(--u));
+  }
+
+  .featured__actions {
+    flex-wrap: nowrap;
+    gap: calc(13.2 * var(--u));
+    margin: calc(15 * var(--u)) 0 0 calc(-5 * var(--u));
+  }
+
+  .featured__media {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: calc(529 * var(--u));
+    height: calc(297 * var(--u));
+    min-height: 0;
+    aspect-ratio: auto;
+  }
+
+  .plist-head {
+    position: static;
+    margin: 0;
+  }
+
+  .plist-head .chips {
+    position: absolute;
+    left: calc(930 * var(--u));
+    top: calc(510 * var(--u));
+  }
+
+  .plist {
+    position: absolute;
+    left: 0;
+    top: calc(559 * var(--u));
+    width: 100%;
+    height: calc(193.24 * var(--u));
+  }
+
+  .plist__track {
+    position: absolute;
+    left: calc(104 * var(--u));
+    top: 0;
+    width: calc(1128.4 * var(--u));
+    height: 100%;
+    gap: calc(37.37 * var(--u));
+    padding: 0;
+    margin: 0;
+    scroll-padding-inline: 0;
+  }
+
+  .plist__item {
+    flex: 0 0 calc(254.09 * var(--u));
+    height: 100%;
+  }
+
+  .pcard {
+    height: 100%;
+    aspect-ratio: auto;
+    border-radius: calc(21.352 * var(--u));
+  }
+
+  .pcard::before {
+    inset: calc(-14 * var(--u));
+    filter: blur(calc(5.25 * var(--u)));
+  }
+
+  .pcard__title {
+    left: calc(13.5 * var(--u));
+    bottom: calc(12.6 * var(--u));
+    font-size: var(--fs-30);
+  }
+
+  .pcard__arrow {
+    right: calc(19 * var(--u));
+    bottom: calc(8.7 * var(--u));
+    width: calc(35 * var(--u));
+    height: calc(35 * var(--u));
+    font-size: calc(35 * var(--u));
+    stroke-width: 1.6;
+  }
+
+  .pcard.is-selected::after {
+    box-shadow: inset 0 0 0 calc(3 * var(--u)) #fff;
+  }
+
+  .plist__nav {
+    width: calc(39 * var(--u));
+    height: calc(39 * var(--u));
+    font-size: calc(47 * var(--u));
+    top: calc(77 * var(--u));
+    background: none;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .plist__nav--prev {
+    left: calc(42 * var(--u));
+  }
+
+  .plist__nav--next {
+    left: auto;
+    right: calc(1336 * var(--u) - 1293 * var(--u));
+  }
+
+  .plist__nav:hover {
+    transform: scale(1.12);
+  }
+}

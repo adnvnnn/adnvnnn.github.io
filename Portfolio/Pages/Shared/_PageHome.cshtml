@@ -1,0 +1,64 @@
+@model IndexModel
+@{
+    var site = Model.Site;
+    var owner = site.Owner;
+    var latest = site.FindProject(site.LatestProject) ?? site.Projects.FirstOrDefault();
+    var socials = site.Social.Where(s => s.ShowsOn("home")).ToList();
+    var active = Model.ActivePage == "home";
+}
+<section class="page page--home" id="page-home" data-page="home" aria-labelledby="home-title"
+         hidden="@(active ? null : "hidden")" inert="@(active ? null : "inert")">
+
+    <h1 class="page__title" id="home-title">Home</h1>
+
+    <div class="hero hero--home glass-host" data-glass="card">
+        <div class="hero__text">
+            <h2 class="hero__name">@owner.FirstName</h2>
+            <p class="hero__role">@owner.Role</p>
+            <p class="hero__status"><span class="dot" aria-hidden="true"></span>@owner.Status</p>
+        </div>
+        <img class="hero__portrait" src="~/assets/img/portrait-side.webp" asp-append-version="true"
+             alt="Portrait of @owner.FullName" width="187" height="217" decoding="async" />
+    </div>
+
+    <div class="home-row">
+        <p class="pitch glass-host" data-glass="pill"><span>@owner.Pitch</span></p>
+        <a class="btn btn--primary btn--xl" href="@Url.Content("~/contact")" data-page="contact"><span>Hire Me</span></a>
+        <a class="btn btn--glass btn--xl glass-host" data-glass="button" href="@Url.Content("~/projects")" data-page="projects"><span>Projects</span></a>
+    </div>
+
+    <div class="home-skills">
+        <h2 class="label">Skills</h2>
+        <ul class="bars">
+            @foreach (var skill in site.HomeSkills)
+            {
+                <li class="bar" style="--level:@skill.Level">
+                    <span class="bar__fill" aria-hidden="true"></span>
+                    @Html.Icon(skill.Icon, "bar__icon")
+                    <span class="bar__name">@skill.Name</span>
+                    <span class="bar__pct">@skill.Level %</span>
+                </li>
+            }
+        </ul>
+    </div>
+
+    @if (latest is not null)
+    {
+        <a class="latest" href="@Url.Content("~/projects")" data-page="projects" data-project="@latest.Id">
+            <img class="latest__img" src="@latest.Cover" asp-append-version="true"
+                 alt="" width="1406" height="889" loading="lazy" decoding="async" />
+            <span class="latest__title">My Latest Project @Html.Icon("fire", "latest__fire")</span>
+        </a>
+    }
+
+    <ul class="socials socials--column" aria-label="Social links">
+        @foreach (var link in socials)
+        {
+            <li>
+                <a class="social" href="@link.Url" target="_blank" rel="noopener noreferrer" aria-label="@link.Name">
+                    @Html.Icon(link.Icon)
+                </a>
+            </li>
+        }
+    </ul>
+</section>

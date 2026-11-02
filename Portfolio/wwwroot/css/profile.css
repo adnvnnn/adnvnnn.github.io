@@ -1,0 +1,293 @@
+/* ==========================================================================
+   Profile page: hero card with the full portrait, liquid skill tiles
+   ========================================================================== */
+
+.page--profile {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+}
+
+.page--profile .hero {
+  display: flex;
+  flex-direction: column;
+  margin-top: 78px;
+  padding: 0 20px 24px;
+  border-radius: 30px;
+}
+
+.page--profile .hero__portrait {
+  position: relative;
+  order: -1;
+  align-self: center;
+  right: auto;
+  width: min(62%, 270px);
+  margin: -78px 0 10px;
+}
+
+.hero__first {
+  color: #fff;
+}
+
+.hero__last {
+  display: inline-block;
+  color: rgb(255 255 255 / 0.58);
+  font-size: 0.6em;
+  letter-spacing: -0.015em;
+}
+
+.hero--profile .hero__role {
+  margin-top: 12px;
+}
+
+.hero__bio {
+  margin-top: 12px;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.hero--profile .btn--md {
+  align-self: flex-start;
+  margin-top: 18px;
+}
+
+.label--skills {
+  margin-top: 6px;
+}
+
+/* ----- tray + tiles ------------------------------------------------------------- */
+.tray {
+  padding: 16px;
+  border-radius: 34px;
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.tile {
+  --tile-r: 32%;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 156 / 154;
+  border-radius: var(--tile-r);
+  box-shadow: var(--soft-shadow);
+  color: var(--ink);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-align: center;
+  transition: transform 0.6s var(--spring-bouncy);
+}
+
+.tile:hover {
+  transform: translateY(-3px) scale(1.03);
+}
+
+.tile__name,
+.tile__pct {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  font-size: 17px;
+  line-height: 0.92;
+  text-shadow: calc(-4.82066 * var(--u)) calc(2.41033 * var(--u)) calc(10.1234 * var(--u)) rgb(0 0 0 / 0.05);
+}
+
+.tile__name {
+  top: 12%;
+}
+
+.tile__pct {
+  top: 57.8%;
+}
+
+/* The "liquid": a gradient body whose top edge is a drifting wave. */
+.tile__liquid {
+  --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 24' preserveAspectRatio='none'%3E%3Cpath d='M0 12 Q25 0 50 12 T100 12 V24 H0Z' fill='%23000'/%3E%3C/svg%3E");
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: calc(var(--level, 0) * 1% * var(--grow, 1));
+  background: var(--grad-green);
+  -webkit-mask: linear-gradient(#000 0 0) 0 100% / 100% calc(100% - 18px) no-repeat, var(--wave) 0 0 / 130% 24px repeat-x;
+  mask: linear-gradient(#000 0 0) 0 100% / 100% calc(100% - 18px) no-repeat, var(--wave) 0 0 / 130% 24px repeat-x;
+  animation: liquid-drift 7s linear infinite;
+}
+
+@keyframes liquid-drift {
+  from {
+    -webkit-mask-position: 0 100%, 0 0;
+    mask-position: 0 100%, 0 0;
+  }
+  to {
+    -webkit-mask-position: 0 100%, -130% 0;
+    mask-position: 0 100%, -130% 0;
+  }
+}
+
+@media (min-width: 700px) {
+  .page--profile {
+    gap: 24px;
+  }
+
+  .page--profile .hero {
+    display: block;
+    min-height: 330px;
+    margin-top: 60px;
+    padding: 34px 40% 34px 34px;
+    border-radius: 44px;
+  }
+
+  .page--profile .hero__portrait {
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+    top: auto;
+    width: 36%;
+    margin: 0;
+  }
+
+  .hero__bio {
+    font-size: 16px;
+  }
+
+  .tray {
+    padding: 22px;
+    border-radius: 44px;
+  }
+
+  .tiles {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .tile__name,
+  .tile__pct {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 900px) {
+  .tiles {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .tile__name,
+  .tile__pct {
+    font-size: 16px;
+  }
+}
+
+/* ----- desktop artboard -------------------------------------------------------------- */
+@media (min-width: 1100px) {
+  .page--profile {
+    display: block;
+  }
+
+  .page--profile .hero {
+    display: block;
+    left: calc(94 * var(--u));
+    top: calc(118 * var(--u));
+    width: calc(1180 * var(--u));
+    height: calc(357 * var(--u));
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .page--profile .hero__text {
+    width: calc(701 * var(--u));
+  }
+
+  .page--profile .hero__first {
+    font-size: 1em;
+  }
+
+  .hero__last {
+    font-size: calc(36 * var(--u));
+    margin-left: calc(6 * var(--u));
+  }
+
+  .hero--profile .hero__role {
+    margin-top: calc(17.8 * var(--u));
+  }
+
+  .hero__bio {
+    width: calc(701 * var(--u));
+    margin-top: calc(14.2 * var(--u));
+    font-size: var(--fs-20);
+    line-height: 1.189;
+    letter-spacing: -0.02em;
+  }
+
+  .hero--profile .btn--md {
+    margin-top: calc(25.1 * var(--u));
+  }
+
+  .page--profile .hero__portrait {
+    left: calc(764 * var(--u));
+    right: auto;
+    top: calc(-49 * var(--u));
+    bottom: auto;
+    width: calc(356 * var(--u));
+    height: calc(406 * var(--u));
+  }
+
+  .label--skills {
+    left: calc(94 * var(--u));
+    top: calc(502 * var(--u));
+    margin: 0;
+  }
+
+  .tray {
+    position: absolute;
+    left: calc(94 * var(--u));
+    top: calc(546 * var(--u));
+    width: calc(1180 * var(--u));
+    height: calc(193 * var(--u));
+    padding: 0;
+    border-radius: calc(60 * var(--u));
+  }
+
+  .tiles {
+    position: absolute;
+    left: calc(29 * var(--u));
+    top: calc(19 * var(--u));
+    display: flex;
+    gap: calc(36 * var(--u));
+  }
+
+  .tile {
+    --tile-r: calc(50 * var(--u));
+    flex: none;
+    width: calc(156 * var(--u));
+    height: calc(154 * var(--u));
+    aspect-ratio: auto;
+  }
+
+  .tile__name,
+  .tile__pct {
+    font-size: calc(21.7332 * var(--u));
+  }
+
+  .tile__name {
+    top: calc(18 * var(--u));
+  }
+
+  .tile__pct {
+    top: calc(89 * var(--u));
+  }
+
+  .tile__liquid {
+    -webkit-mask-size: 100% calc(100% - 18 * var(--u)), 130% calc(24 * var(--u));
+    mask-size: 100% calc(100% - 18 * var(--u)), 130% calc(24 * var(--u));
+  }
+}

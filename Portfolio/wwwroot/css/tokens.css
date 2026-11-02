@@ -1,0 +1,97 @@
+/* ==========================================================================
+   Design tokens — every value below is read from the Figma file.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../assets/fonts/outfit-latin-wght-normal.woff2") format("woff2");
+}
+
+/* Animatable "appear" progress (0 → 1). Glass surfaces fade by animating their own
+   tint/blur with it, because opacity on an ancestor would break backdrop-filter. */
+@property --appear {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+
+:root {
+  color-scheme: dark;
+
+  /* animation progress; plain defaults so browsers without @property still render glass */
+  --appear: 1;
+  --grow: 1;
+  --bar-grow: 1;
+
+  /* One Figma pixel. The artboard is 1926 × 872; on desktop the whole stage scales
+     with the viewport so proportions never change. */
+  --u: clamp(0.58px, min(100vw / 1926, 100dvh / 872), 1.5px);
+
+  --font: "Outfit", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* ----- colour ---------------------------------------------------------- */
+  --white: #fff;
+  --text: #fff;
+  --text-dim: rgb(255 255 255 / 0.7);
+  --text-sub: #e2f0fa;      /* page subtitles, card leads */
+  --text-body: #dde7ee;     /* descriptions */
+  --text-ph: #ddd;          /* input placeholders */
+  --ink: #313f28;           /* dark green ink on green surfaces */
+  --ink-btn: #134931;       /* button labels */
+  --ink-tag: #595b66;
+  --ink-source: #515c57;
+  --green-1: #d6fcbb;
+  --green-2: #bdfcbb;
+  --green-tick: #bdfabb;
+  --green-dot: #ceedb4;
+  --grey-blue: #b4bbc5;
+
+  --grad-green: linear-gradient(90deg, #d6fcbb 2.65%, #bdfcbb 100%);
+  --grad-hire: linear-gradient(243.16deg, #b4bbc5 20.52%, #bdfcbb 73.58%);
+  --grad-bar: linear-gradient(90deg, #b4bbc5 2.65%, #bdfcbb 100%);
+
+  --pill-bg: rgb(215 223 216 / 0.32);     /* active nav item */
+  --field-bg: rgb(255 255 255 / 0.2);     /* inputs, info rows, social circles */
+  --track-bg: rgb(255 255 255 / 0.3);     /* skill tracks and tiles */
+
+  /* ----- shadows (scaled with the artboard) ------------------------------ */
+  --text-shadow: calc(-6.65434 * var(--u)) calc(3.32717 * var(--u)) calc(13.9741 * var(--u)) rgb(0 0 0 / 0.05);
+  --btn-shadow: 0 calc(16 * var(--u)) calc(16.8 * var(--u)) calc(-16 * var(--u)) #fff,
+                calc(-3 * var(--u)) calc(4 * var(--u)) calc(8.3 * var(--u)) rgb(0 0 0 / 0.1);
+  --soft-shadow: calc(-1.37066 * var(--u)) calc(1.82755 * var(--u)) calc(3.79217 * var(--u)) rgb(0 0 0 / 0.1);
+
+  /* ----- type scale: Figma size, with a floor so small text stays legible -- */
+  --fs-12: max(10px, calc(12 * var(--u)));
+  --fs-13: max(11px, calc(13 * var(--u)));
+  --fs-14: max(11.5px, calc(14.38 * var(--u)));
+  --fs-15: max(12px, calc(15 * var(--u)));
+  --fs-16: max(12.5px, calc(16 * var(--u)));
+  --fs-18: max(13.5px, calc(18 * var(--u)));
+  --fs-20: max(14px, calc(20 * var(--u)));
+  --fs-22: max(15px, calc(22 * var(--u)));
+  --fs-25: max(16.5px, calc(25 * var(--u)));
+  --fs-30: max(19px, calc(30 * var(--u)));
+  --fs-35: max(22px, calc(35 * var(--u)));
+  --fs-60: max(34px, calc(60 * var(--u)));
+
+  /* ----- motion ---------------------------------------------------------- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  /* damped springs (ζ = 0.62 and ζ = 0.8) sampled into linear() */
+  --spring-bouncy: linear(0, 0.073, 0.2409, 0.4429, 0.638, 0.8029, 0.9275, 1.0115, 1.06, 1.0808, 1.0824, 1.0722, 1.0565, 1.0395, 1.0241, 1.0117, 1.0027, 0.997, 0.994, 0.993, 0.9934, 0.9945, 0.9959, 0.9973, 0.9985, 0.9994, 1);
+  --spring-soft: linear(0, 0.0985, 0.2986, 0.5089, 0.6872, 0.8205, 0.9106, 0.9661, 0.9965, 1.0106, 1.015, 1.0143, 1.0116, 1.0083, 1.0054, 1.0032, 1.0017, 1.0007, 1);
+  --dur-fast: 0.18s;
+  --dur: 0.45s;
+  --dur-slow: 0.8s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0.01s;
+    --dur: 0.01s;
+    --dur-slow: 0.01s;
+  }
+}

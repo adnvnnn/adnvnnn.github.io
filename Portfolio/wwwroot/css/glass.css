@@ -1,0 +1,137 @@
+/* ==========================================================================
+   Glass material (Figma "Glass" effect: light, refraction, depth, dispersion, frost)
+
+   A glass *host* is any element carrying .glass-host[data-glass="…"].
+     ::before  the frosted surface — tint + backdrop blur (+ SVG refraction from glass.js)
+     ::after   the specular rim — a hairline whose brightness follows the light angle
+
+   The surface is a pseudo-element on purpose. A backdrop-filter turns its element into a
+   "backdrop root", so a glass child nested inside another glass element could no longer see
+   the room photo behind it. With the surface on the pseudo-element, every surface on the page
+   is effectively a sibling and stacks exactly like layers in Figma.
+
+   Consequences for the rest of the CSS:
+     • never put opacity / filter / mask / clip-path on an ancestor of a glass host;
+     • fade glass by animating --appear (see motion.css), not opacity.
+   ========================================================================== */
+
+@property --tint {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgb(82 82 82 / 0.25);
+}
+
+/* Tint of the big main panel; child surfaces that copy the photo add it underneath their own. */
+@property --main-tint {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgb(83 84 83 / 0.31);
+}
+
+.glass-host {
+  --tint: rgb(82 82 82 / 0.25);   /* Figma fill */
+  --blur: 7px;                    /* Figma "frost" / 2 */
+  --sat: 1.1;
+  --bright: 1;
+  --rim: 0.4;                     /* peak rim opacity */
+  --rim-w: 1px;
+  --rim-angle: 135deg;            /* light direction */
+  position: relative;
+  transition: --tint 0.6s var(--ease-out);
+}
+
+.glass-host > * {
+  position: relative;
+  z-index: 1;
+}
+
+.glass-host::before,
+.glass-host::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.glass-host::before {
+  background: color-mix(in srgb, var(--tint) calc(var(--appear) * 100%), transparent);
+  -webkit-backdrop-filter: blur(calc(var(--blur) * var(--appear))) saturate(var(--sat)) brightness(var(--bright));
+  backdrop-filter: blur(calc(var(--blur) * var(--appear))) var(--lens, ) saturate(var(--sat)) brightness(var(--bright));
+}
+
+.glass-host::after {
+  padding: var(--rim-w);
+  background: linear-gradient(
+    var(--rim-angle),
+    rgb(255 255 255 / var(--rim)) 0%,
+    rgb(255 255 255 / calc(var(--rim) * 0.22)) 36%,
+    rgb(255 255 255 / calc(var(--rim) * 0.14)) 64%,
+    rgb(255 255 255 / calc(var(--rim) * 0.7)) 100%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: var(--appear);
+}
+
+/* ----- presets: one per kind of glass used in the design ------------------ */
+
+/* room-sized panels */
+[data-glass="sidebar"] { --tint: rgb(74 76 85 / 0.4);    --blur: 15px; --sat: 1.05; --rim: 0;    --rim-angle: 250deg; }
+[data-glass="main"]    { --tint: var(--main-tint);       --blur: 23px; --sat: 1.05; --rim: 0.34; --rim-angle: 129deg; }
+
+/* cards sitting on the main panel */
+[data-glass="card"]    { --tint: rgb(82 82 82 / 0.25);   --blur: 7px;  --rim: 0.5;  --rim-angle: 180deg; }
+[data-glass="tray"]    { --tint: rgb(79 79 79 / 0.38);   --tray-tint: rgb(79 79 79 / 0.38); --blur: 7px;  --rim: 0.08; --rim-angle: 315deg; }
+[data-glass="pill"]    { --tint: rgb(79 79 79 / 0.38);   --blur: 6px;  --rim: 0.25; --rim-angle: 180deg; }
+[data-glass="button"]  { --tint: rgb(84 84 84 / 0.3);    --blur: 7px;  --rim: 0.5;  --rim-angle: 180deg; }
+
+/* clear lenses: no frost, the background is only bent */
+[data-glass="tile"]    { --tint: rgb(255 255 255 / 0.3); --under-tint: var(--tray-tint, transparent); --blur: 0px;  --rim: 0.65; --rim-angle: 315deg; }
+
+/* The main panel changes tint with the page (Home/Profile are warmer than Projects/Contact). */
+.app {
+  --main-tint: rgb(83 84 83 / 0.31);
+  transition: --main-tint 0.6s var(--ease-out);
+}
+
+.app[data-page="projects"],
+.app[data-page="contact"] {
+  --main-tint: rgb(115 124 130 / 0.31);
+}
+
+/* ----- fallback when backdrop-filter is unavailable ----------------------- */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass-host::before {
+    background: color-mix(in srgb, var(--tint), #2c2f36 55%);
+  }
+}
+
+/* ----- surfaces that copy the photo (set up by glass.js on the desktop stage) --------------
+   Figma's glass samples the room photo, not the panels under it; see js/glass.js.
+   --hx/--hy  position of the surface in the viewport     --pad  overscan so the blur has no soft edge
+   --r        corner radius                                --lens SVG filter that bends the rim     */
+.glass-host[data-replica]::before {
+  inset: calc(-1 * var(--pad));
+  background-color: transparent;
+  background-image:
+    linear-gradient(var(--tint), var(--tint)),
+    linear-gradient(var(--under-tint, transparent), var(--under-tint, transparent)),
+    linear-gradient(var(--main-tint), var(--main-tint)),
+    var(--bg-url);
+  background-repeat: no-repeat;
+  background-size: 100% 100%, 100% 100%, 100% 100%, var(--bg-w) var(--bg-h);
+  background-position:
+    0 0,
+    0 0,
+    0 0,
+    calc(var(--bg-ox) - var(--hx) + var(--pad)) calc(var(--bg-oy) - var(--hy) + var(--pad));
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  filter: blur(calc(var(--blur) * var(--appear))) saturate(var(--sat)) var(--lens, );
+  clip-path: inset(var(--pad) round var(--r));
+  opacity: var(--appear);
+}

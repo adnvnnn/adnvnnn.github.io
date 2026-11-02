@@ -1,0 +1,36 @@
+@page "/{section?}"
+@model IndexModel
+@{
+    ViewData["Title"] = Model.TitleFor(Model.ActivePage);
+    ViewData["Description"] = Model.Site.Owner.Pitch;
+}
+
+<partial name="_Icons" />
+
+<div class="bg" aria-hidden="true">
+    <img src="~/assets/img/bg.webp" asp-append-version="true" alt="" width="1926" height="872" decoding="async" fetchpriority="high" />
+</div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="stage">
+    <div class="canvas">
+        <div class="app" data-page="@Model.ActivePage">
+            <partial name="_Sidebar" model="Model" />
+
+            <main id="main" class="main glass-host" tabindex="-1" data-glass="main">
+                <button class="sound" type="button" aria-pressed="true" aria-label="Turn sound effects off">
+                    @Html.Icon("sound", "sound__on")
+                    @Html.Icon("sound-off", "sound__off")
+                </button>
+
+                <partial name="_PageHome" model="Model" />
+                <partial name="_PageProfile" model="Model" />
+                <partial name="_PageProjects" model="Model" />
+                <partial name="_PageContact" model="Model" />
+            </main>
+        </div>
+    </div>
+</div>
+
+<div class="toast" role="status" aria-live="polite"></div>

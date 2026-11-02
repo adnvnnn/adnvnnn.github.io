@@ -1,0 +1,97 @@
+@model IndexModel
+@{
+    var site = Model.Site;
+    var contact = site.Contact;
+    var socials = site.Social.Where(s => s.ShowsOn("contact")).ToList();
+    var active = Model.ActivePage == "contact";
+}
+<section class="page page--contact" id="page-contact" data-page="contact" aria-labelledby="contact-title"
+         hidden="@(active ? null : "hidden")" inert="@(active ? null : "inert")">
+
+    <h1 class="page__title" id="contact-title">Contact</h1>
+    <p class="page__sub">@contact.Subtitle</p>
+
+    <div class="card card--info glass-host" data-glass="card">
+        <h2 class="card__title">Let’s Connect</h2>
+        <p class="card__lead">@contact.Intro</p>
+
+        <ul class="info">
+            <li class="info__row">
+                <span class="info__badge">@Html.Icon("mail")</span>
+                <span class="info__text">
+                    <span class="info__label">E-Mail</span>
+                    <a class="info__value" href="mailto:@contact.Email">@contact.Email</a>
+                </span>
+                <button class="copy" type="button" data-copy="@contact.Email" aria-label="Copy e-mail address">@Html.Icon("copy")</button>
+            </li>
+            <li class="info__row">
+                <span class="info__badge">@Html.Icon("phone")</span>
+                <span class="info__text">
+                    <span class="info__label">Phone</span>
+                    <a class="info__value" href="tel:@contact.Phone">@contact.Phone</a>
+                </span>
+                <button class="copy" type="button" data-copy="@contact.Phone" aria-label="Copy phone number">@Html.Icon("copy")</button>
+            </li>
+            <li class="info__row">
+                <span class="info__badge">@Html.Icon("pin")</span>
+                <span class="info__text">
+                    <span class="info__label">Location</span>
+                    <span class="info__value">@contact.Location</span>
+                </span>
+                <button class="copy" type="button" data-copy="@contact.Location" aria-label="Copy location">@Html.Icon("copy")</button>
+            </li>
+            <li class="info__row">
+                <span class="info__badge">@Html.Icon("clock")</span>
+                <span class="info__text">
+                    <span class="info__label">Availability</span>
+                    <span class="info__value">@contact.Availability</span>
+                </span>
+                <span class="info__status"><span class="dot" aria-hidden="true"></span>@contact.AvailabilityBadge</span>
+            </li>
+        </ul>
+
+        <div class="follow">
+            <h3 class="follow__title">Follow Me On Socials</h3>
+            <ul class="socials socials--row" aria-label="Social links">
+                @foreach (var link in socials)
+                {
+                    <li>
+                        <a class="social social--glass" href="@link.Url" target="_blank" rel="noopener noreferrer" aria-label="@link.Name">
+                            @Html.Icon(link.Icon)
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    <form class="card card--form glass-host" data-glass="card" data-contact-form action="/api/contact" method="post" novalidate>
+        <h2 class="card__title">Send a Message</h2>
+
+        <div class="field">
+            <label class="field__label" for="cf-name">Your Name</label>
+            <input class="field__input" id="cf-name" name="name" type="text" placeholder="Write Your Name" autocomplete="name" maxlength="100" required />
+            <p class="field__error" id="cf-name-error" hidden></p>
+        </div>
+        <div class="field">
+            <label class="field__label" for="cf-email">Your E-Mail</label>
+            <input class="field__input" id="cf-email" name="email" type="email" placeholder="Write Your E-Mail" autocomplete="email" maxlength="200" required />
+            <p class="field__error" id="cf-email-error" hidden></p>
+        </div>
+        <div class="field">
+            <label class="field__label" for="cf-subject">Subject</label>
+            <input class="field__input" id="cf-subject" name="subject" type="text" placeholder="What’s This About" maxlength="150" required />
+            <p class="field__error" id="cf-subject-error" hidden></p>
+        </div>
+        <div class="field field--area">
+            <label class="field__label" for="cf-message">Message</label>
+            <textarea class="field__input field__input--area" id="cf-message" name="message" placeholder="Tell Me About Your Project" maxlength="5000" required></textarea>
+            <p class="field__error" id="cf-message-error" hidden></p>
+        </div>
+
+        <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+        <button class="btn btn--primary btn--send" type="submit"><span class="btn__label">Send Message</span></button>
+        <p class="form__status" role="status" aria-live="polite" hidden></p>
+    </form>
+</section>

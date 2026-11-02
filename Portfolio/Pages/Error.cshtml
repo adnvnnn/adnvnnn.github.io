@@ -1,0 +1,22 @@
+@page "/Error"
+@model ErrorModel
+@{
+    ViewData["Title"] = Model.Code == 404 ? "Page not found" : "Something went wrong";
+}
+
+<div class="bg" aria-hidden="true">
+    <img src="~/assets/img/bg.webp" asp-append-version="true" alt="" width="1926" height="872" decoding="async" />
+</div>
+
+<main class="error-page">
+    <div class="error-card glass-host" data-glass="card">
+        <p class="error-card__code">@Model.Code</p>
+        <h1 class="error-card__title">@(Model.Code == 404 ? "This page drifted away" : "Something went wrong")</h1>
+        <p class="error-card__text">
+            @(Model.Code == 404
+                ? "The page you were looking for doesn’t exist or has moved."
+                : "An unexpected error happened. Please try again in a moment.")
+        </p>
+        <a class="btn btn--primary btn--md" href="@Url.Content("~/")"><span>Back to Home</span></a>
+    </div>
+</main>

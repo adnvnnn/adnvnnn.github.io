@@ -1,0 +1,332 @@
+/* ==========================================================================
+   Contact page: "Let's Connect" card and the message form
+   ========================================================================== */
+
+.page--contact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+}
+
+.page--contact .page__sub {
+  margin-bottom: 2px;
+}
+
+.card {
+  position: relative;
+  padding: 24px 20px 26px;
+  border-radius: 30px;
+  --tint: rgb(75 80 89 / 0.43);
+}
+
+.card__title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+}
+
+.card__lead {
+  margin-top: 10px;
+  color: var(--text-sub);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.189;
+}
+
+/* ----- contact details ------------------------------------------------------------ */
+.info {
+  display: grid;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.info__row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 9px 14px 9px 9px;
+  border-radius: 30px;
+  background: var(--field-bg);
+}
+
+.info__badge {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: #0f1511;
+  background: var(--grad-green);
+  box-shadow: 0 8px 9px -9px #fff, -2px 2px 5px rgb(0 0 0 / 0.1);
+  font-size: 26px;
+}
+
+.info__badge .icon {
+  stroke-width: 1.5;
+}
+
+.info__text {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  letter-spacing: -0.01em;
+  text-shadow: calc(-5.98251 * var(--u)) calc(2.99126 * var(--u)) calc(12.5633 * var(--u)) rgb(0 0 0 / 0.05);
+}
+
+.info__label {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 0.92;
+}
+
+.info__value {
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+a.info__value:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.info__row > .copy,
+.info__status {
+  margin-left: auto;
+}
+
+.info__status {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.follow {
+  margin-top: 28px;
+  text-align: center;
+}
+
+.follow__title {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+}
+
+.follow .socials {
+  justify-content: center;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+/* ----- form ------------------------------------------------------------------------- */
+.card--form {
+  display: grid;
+  gap: 16px;
+}
+
+.card--form .card__title {
+  font-size: 22px;
+}
+
+.form__status {
+  color: var(--green-1);
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.form__status.is-error {
+  color: #ffc7bd;
+}
+
+.btn--send.is-sending .btn__label::after {
+  content: "…";
+}
+
+@media (min-width: 700px) {
+  .page--contact {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+    align-items: start;
+    gap: 24px;
+  }
+
+  .page--contact > .page__title,
+  .page--contact > .page__sub {
+    grid-column: 1 / -1;
+  }
+
+  .card {
+    padding: 32px 28px 34px;
+    border-radius: 40px;
+  }
+
+  .card__title {
+    font-size: 26px;
+  }
+
+  .card--form .card__title {
+    font-size: 24px;
+  }
+
+  .card--form {
+    gap: 18px;
+  }
+}
+
+/* ----- desktop artboard ---------------------------------------------------------------- */
+@media (min-width: 1100px) {
+  .page--contact {
+    display: block;
+  }
+
+  .page--contact .page__sub {
+    top: calc(81 * var(--u));
+    font-size: var(--fs-16);
+  }
+
+  .card {
+    position: absolute;
+    top: calc(137 * var(--u));
+    height: calc(605 * var(--u));
+    padding: 0;
+    border-radius: calc(57.0805 * var(--u));
+  }
+
+  .card--info {
+    left: calc(78 * var(--u));
+    width: calc(431 * var(--u));
+  }
+
+  .card--form {
+    display: block;
+    left: calc(557 * var(--u));
+    width: calc(682 * var(--u));
+  }
+
+  .card--info .card__title {
+    position: absolute;
+    left: calc(29 * var(--u));
+    top: calc(40 * var(--u));
+    font-size: var(--fs-25);
+    white-space: nowrap;
+  }
+
+  .card--info .card__lead {
+    position: absolute;
+    left: calc(29 * var(--u));
+    top: calc(74 * var(--u));
+    width: calc(380 * var(--u));
+    margin: 0;
+    font-size: var(--fs-16);
+  }
+
+  .info {
+    position: absolute;
+    left: calc(21 * var(--u));
+    top: calc(144 * var(--u));
+    width: calc(374 * var(--u));
+    gap: calc(22.52 * var(--u));
+    margin: 0;
+  }
+
+  .info__row {
+    gap: calc(17.98 * var(--u));
+    height: calc(52.1 * var(--u));
+    padding: 0 0 0 calc(8.09 * var(--u));
+    border-radius: calc(38.6587 * var(--u));
+  }
+
+  .info__badge {
+    width: calc(37.76 * var(--u));
+    height: calc(37.76 * var(--u));
+    box-shadow: 0 calc(9.96552 * var(--u)) calc(10.4638 * var(--u)) calc(-9.96552 * var(--u)) #fff,
+                calc(-1.86854 * var(--u)) calc(2.49138 * var(--u)) calc(5.16962 * var(--u)) rgb(0 0 0 / 0.1);
+    font-size: calc(25.17 * var(--u));
+  }
+
+  .info__text {
+    gap: calc(6.6 * var(--u));
+  }
+
+  .info__label {
+    font-size: var(--fs-14);
+  }
+
+  .info__value {
+    font-size: calc(12.5865 * var(--u));
+  }
+
+  .info__row > .copy {
+    margin-right: calc(23.4 * var(--u));
+  }
+
+  .info__status {
+    gap: calc(2.8 * var(--u));
+    margin-right: calc(13.2 * var(--u));
+    font-size: calc(12.5865 * var(--u));
+  }
+
+  .follow {
+    position: absolute;
+    left: calc(78 * var(--u));
+    top: calc(471 * var(--u));
+    width: calc(260 * var(--u));
+    margin: 0;
+  }
+
+  .follow__title {
+    font-size: var(--fs-20);
+  }
+
+  .follow .socials {
+    gap: calc(22.6 * var(--u));
+    margin-top: calc(31.6 * var(--u));
+  }
+
+  .card--form .card__title {
+    position: absolute;
+    left: calc(46 * var(--u));
+    top: calc(43 * var(--u));
+    font-size: var(--fs-22);
+    white-space: nowrap;
+  }
+
+  .card--form .field {
+    position: absolute;
+    left: calc(32 * var(--u));
+    width: calc(598 * var(--u));
+  }
+
+  .card--form .field:nth-of-type(1) { top: calc(91 * var(--u)); }
+  .card--form .field:nth-of-type(2) { top: calc(179 * var(--u)); }
+  .card--form .field:nth-of-type(3) { top: calc(263 * var(--u)); }
+  .card--form .field:nth-of-type(4) { top: calc(372 * var(--u)); }
+
+  .card--form .field__label {
+    height: calc(12 * var(--u));
+  }
+
+  .card--form .btn--send {
+    position: absolute;
+    left: calc(40 * var(--u));
+    top: calc(523 * var(--u));
+  }
+
+  .form__status {
+    position: absolute;
+    left: calc(40 * var(--u));
+    top: calc(574 * var(--u));
+    width: calc(598 * var(--u));
+    font-size: var(--fs-14);
+  }
+}

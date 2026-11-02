@@ -1,0 +1,610 @@
+/* ==========================================================================
+   Shared components: dot, buttons, chips, tags, socials, fields, carousel controls
+   Sizes are mobile-first; the @media (min-width: 1100px) blocks use design pixels (--u).
+   ========================================================================== */
+
+.dot {
+  display: inline-block;
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--green-dot);
+}
+
+/* ----- buttons ------------------------------------------------------------ */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 999px;
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-shadow: var(--text-shadow);
+  transition: transform 0.45s var(--spring-bouncy), box-shadow 0.3s var(--ease-out), filter 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px) scale(1.025);
+}
+
+.btn:active {
+  transform: scale(0.965);
+  transition-duration: 0.12s;
+}
+
+.btn:disabled {
+  cursor: progress;
+  filter: saturate(0.6) brightness(0.95);
+  transform: none;
+}
+
+.btn__icon {
+  font-size: 1.15em;
+}
+
+.btn--primary {
+  color: var(--ink);
+  background: var(--grad-green);
+  box-shadow: -2px 3px 8px rgb(0 0 0 / 0.1);
+}
+
+.btn--white {
+  color: var(--ink-source);
+  background: #fff;
+  box-shadow: -2px 3px 8px rgb(0 0 0 / 0.1);
+}
+
+.btn--glass {
+  color: #fefff9;
+  box-shadow: -3px 4px 8px rgb(0 0 0 / 0.1);
+}
+
+.btn--xl {
+  min-height: 62px;
+  padding-inline: 22px;
+  border-radius: 26px;
+  font-size: 22px;
+}
+
+.btn--xl.btn--primary {
+  background: var(--grad-hire);
+  box-shadow: 0 12px 14px -14px #fff, -3px 4px 8px rgb(0 0 0 / 0.1);
+}
+
+.btn--md {
+  min-height: 44px;
+  padding-inline: 26px;
+  font-size: 17px;
+  font-weight: 600;
+  border-radius: 24px;
+}
+
+.btn--sm {
+  min-height: 42px;
+  padding-inline: 22px;
+  font-size: 16px;
+}
+
+.btn--primary.btn--sm {
+  color: var(--ink-btn);
+}
+
+.btn--send {
+  width: 100%;
+  min-height: 50px;
+  font-size: 19px;
+  color: var(--ink-btn);
+}
+
+/* ----- chips (project filters) -------------------------------------------- */
+.chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 6px 2px 10px;
+  margin: -6px -2px -10px;
+  scrollbar-width: none;
+}
+
+.chips::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  flex: none;
+  min-width: 58px;
+  height: 34px;
+  padding-inline: 16px;
+  border-radius: 999px;
+  color: var(--ink-btn);
+  background: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  box-shadow: 0 8px 10px -8px #fff, -2px 3px 6px rgb(0 0 0 / 0.1);
+  transition: transform 0.45s var(--spring-bouncy), background-color 0.25s, box-shadow 0.25s;
+}
+
+.chip:hover {
+  transform: translateY(-1px) scale(1.04);
+}
+
+.chip:active {
+  transform: scale(0.95);
+}
+
+.chip.is-active {
+  background: var(--grad-green);
+}
+
+/* ----- tags ---------------------------------------------------------------- */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 7px 11px;
+  border-radius: 12px;
+  color: var(--ink-tag);
+  background: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+/* ----- social links -------------------------------------------------------- */
+.socials {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.social {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 52px;
+  transition: transform 0.5s var(--spring-bouncy), filter 0.2s;
+}
+
+.social:hover {
+  transform: translateY(-3px) scale(1.08);
+  filter: drop-shadow(0 8px 10px rgb(0 0 0 / 0.18));
+}
+
+.social:active {
+  transform: scale(0.92);
+}
+
+.social--glass {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  background: var(--field-bg);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.22);
+  font-size: 30px;
+}
+
+/* ----- form fields ---------------------------------------------------------- */
+.field {
+  position: relative;
+  display: grid;
+  gap: 8px;
+}
+
+.field__label {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  text-shadow: var(--text-shadow);
+}
+
+.field__input {
+  width: 100%;
+  height: 46px;
+  padding: 0 22px;
+  border: 0;
+  border-radius: 34px;
+  outline: 0;
+  color: #fff;
+  background: var(--field-bg);
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  transition: background-color 0.25s, box-shadow 0.25s;
+}
+
+.field__input::placeholder {
+  color: var(--text-ph);
+  opacity: 1;
+}
+
+.field__input:hover {
+  background: rgb(255 255 255 / 0.25);
+}
+
+.field__input:focus-visible {
+  background: rgb(255 255 255 / 0.28);
+  box-shadow: 0 0 0 2px rgb(214 252 187 / 0.75);
+}
+
+.field__input--area {
+  height: 120px;
+  padding: 14px 22px;
+  border-radius: 30px;
+  resize: none;
+  line-height: 1.3;
+}
+
+.field__input[aria-invalid="true"] {
+  box-shadow: 0 0 0 2px rgb(255 168 152 / 0.85);
+}
+
+.field__error {
+  color: #ffc7bd;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* ----- copy buttons ---------------------------------------------------------- */
+.copy {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  font-size: 24px;
+  transition: transform 0.45s var(--spring-bouncy), background-color 0.2s;
+}
+
+.copy .icon {
+  stroke-width: 1.2;
+}
+
+.copy:hover {
+  background: rgb(255 255 255 / 0.14);
+  transform: scale(1.08);
+}
+
+.copy:active {
+  transform: scale(0.9);
+}
+
+.copy.is-copied {
+  color: var(--green-1);
+}
+
+/* ----- carousel controls (featured project) ---------------------------------- */
+.carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  touch-action: pan-y;
+}
+
+.carousel__track {
+  display: flex;
+  height: 100%;
+  transform: translate3d(calc(var(--slide, 0) * -100% + var(--drag, 0px)), 0, 0);
+  transition: transform 0.7s var(--spring-soft);
+}
+
+.carousel.is-dragging .carousel__track {
+  transition: none;
+}
+
+.carousel__slide {
+  flex: none;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+}
+
+.carousel__nav {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  color: #fff;
+  font-size: 26px;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  filter: drop-shadow(0 1px 4px rgb(0 0 0 / 0.25));
+  transition: transform 0.45s var(--spring-bouncy), background-color 0.2s, opacity 0.2s;
+}
+
+.carousel__nav .icon {
+  stroke-width: 1.2;
+}
+
+.carousel__nav--prev {
+  left: 6px;
+}
+
+.carousel__nav--next {
+  right: 6px;
+}
+
+.carousel__nav:hover {
+  background: rgb(255 255 255 / 0.18);
+  transform: translateY(-50%) scale(1.12);
+}
+
+.carousel__nav:active {
+  transform: translateY(-50%) scale(0.92);
+}
+
+.carousel__dots {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transform: translateX(-50%);
+}
+
+.carousel__dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border-radius: 999px;
+  background: #fff;
+  transition: width 0.5s var(--spring-bouncy), opacity 0.25s;
+  opacity: 0.9;
+}
+
+.carousel__dot.is-active {
+  width: 18px;
+  opacity: 1;
+}
+
+.carousel[data-count="1"] .carousel__nav,
+.carousel[data-count="1"] .carousel__dots {
+  display: none;
+}
+
+/* ----- error page ------------------------------------------------------------ */
+.error-page {
+  display: grid;
+  place-items: center;
+  min-height: 100dvh;
+  padding: 24px;
+}
+
+.error-card {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  max-width: 460px;
+  padding: 44px 36px;
+  border-radius: 44px;
+  text-align: center;
+  --blur: 22px;
+  --tint: rgb(83 84 83 / 0.34);
+}
+
+.error-card__code {
+  font-size: 72px;
+  font-weight: 800;
+  line-height: 0.9;
+  background: var(--grad-green);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.error-card__title {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.error-card__text {
+  margin-bottom: 8px;
+  color: var(--text-sub);
+  font-size: 16px;
+}
+
+/* ===========================================================================
+   Desktop artboard sizes
+   =========================================================================== */
+@media (min-width: 1100px) {
+  .dot {
+    width: calc(9.78 * var(--u));
+    height: calc(9.78 * var(--u));
+  }
+
+  .btn {
+    gap: calc(8 * var(--u));
+  }
+
+  .btn--xl {
+    width: calc(196 * var(--u));
+    height: calc(87 * var(--u));
+    min-height: 0;
+    padding: 0;
+    border-radius: calc(35 * var(--u));
+    font-size: var(--fs-35);
+  }
+
+  .btn--xl.btn--primary {
+    box-shadow: var(--btn-shadow);
+  }
+
+  .btn--glass {
+    box-shadow: calc(-3 * var(--u)) calc(4 * var(--u)) calc(8.3 * var(--u)) rgb(0 0 0 / 0.1);
+  }
+
+  .btn--md {
+    width: calc(222 * var(--u));
+    height: calc(38 * var(--u));
+    min-height: 0;
+    padding: 0;
+    border-radius: calc(25 * var(--u));
+    font-size: var(--fs-18);
+    box-shadow: none;
+  }
+
+  .btn--sm {
+    width: calc(142.89 * var(--u));
+    height: calc(41.1 * var(--u));
+    min-height: 0;
+    padding: 0;
+    border-radius: calc(34.25 * var(--u));
+    font-size: calc(19.5734 * var(--u));
+    box-shadow: calc(-2.936 * var(--u)) calc(3.91467 * var(--u)) calc(8.12294 * var(--u)) rgb(0 0 0 / 0.1);
+  }
+
+  .btn--white.btn--sm {
+    font-size: calc(15.8762 * var(--u));
+    gap: calc(7 * var(--u));
+  }
+
+  .btn--send {
+    width: calc(598 * var(--u));
+    height: calc(45 * var(--u));
+    min-height: 0;
+    border-radius: calc(54.84 * var(--u));
+    font-size: calc(19.5734 * var(--u));
+    box-shadow: calc(-1.86854 * var(--u)) calc(2.49138 * var(--u)) calc(5.16962 * var(--u)) rgb(0 0 0 / 0.1);
+  }
+
+  .chips {
+    gap: calc(6.5 * var(--u));
+    overflow: visible;
+    padding: 0;
+    margin: 0;
+  }
+
+  .chip {
+    min-width: calc(58.39 * var(--u));
+    height: calc(29.19 * var(--u));
+    padding-inline: calc(14.9 * var(--u));
+    border-radius: calc(24.2477 * var(--u));
+    font-size: calc(13.8558 * var(--u));
+    box-shadow: 0 calc(11.0846 * var(--u)) calc(11.6389 * var(--u)) calc(-11.0846 * var(--u)) #fff,
+                calc(-2.07837 * var(--u)) calc(2.77116 * var(--u)) calc(5.75016 * var(--u)) rgb(0 0 0 / 0.1);
+  }
+
+  .tags {
+    gap: calc(11.7 * var(--u));
+  }
+
+  .tag {
+    padding: 0 calc(10.08 * var(--u));
+    height: calc(27.87 * var(--u));
+    display: grid;
+    place-items: center;
+    border-radius: calc(11.7365 * var(--u));
+    font-size: calc(13.2036 * var(--u));
+  }
+
+  .social {
+    width: calc(70 * var(--u));
+    height: calc(70 * var(--u));
+    font-size: calc(70 * var(--u));
+  }
+
+  .social--glass {
+    width: calc(47.98 * var(--u));
+    height: calc(47.98 * var(--u));
+    font-size: calc(35 * var(--u));
+    box-shadow: inset 0 0 0 calc(1 * var(--u)) rgb(255 255 255 / 0.22);
+  }
+
+  .field {
+    gap: calc(10 * var(--u));
+  }
+
+  .field__label {
+    font-size: var(--fs-13);
+  }
+
+  .field__input {
+    height: calc(45 * var(--u));
+    padding: 0 calc(24 * var(--u));
+    border-radius: calc(33.6661 * var(--u));
+    font-size: var(--fs-13);
+  }
+
+  .field__input--area {
+    height: calc(107 * var(--u));
+    padding: calc(14 * var(--u)) calc(24 * var(--u));
+  }
+
+  .field__error {
+    position: absolute;
+    left: calc(24 * var(--u));
+    top: calc(100% + 2 * var(--u));
+    font-size: var(--fs-12);
+    white-space: nowrap;
+  }
+
+  .copy {
+    width: calc(26.97 * var(--u));
+    height: calc(26.97 * var(--u));
+    border-radius: calc(8 * var(--u));
+    font-size: calc(26.97 * var(--u));
+  }
+
+  .carousel {
+    border-radius: 0 calc(60 * var(--u)) calc(60 * var(--u)) 0;
+  }
+
+  .carousel__nav {
+    width: calc(39 * var(--u));
+    height: calc(39 * var(--u));
+    font-size: calc(30 * var(--u));
+  }
+
+  .carousel__nav--prev {
+    left: 0;
+  }
+
+  .carousel__nav--next {
+    right: 0;
+  }
+
+  .carousel__dots {
+    bottom: calc(13 * var(--u));
+    gap: calc(7.2 * var(--u));
+  }
+
+  .carousel__dot {
+    width: calc(9.78 * var(--u));
+    height: calc(9.78 * var(--u));
+  }
+
+  .carousel__dot.is-active {
+    width: calc(21 * var(--u));
+    height: calc(10 * var(--u));
+  }
+}
