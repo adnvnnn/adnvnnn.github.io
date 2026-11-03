@@ -59,9 +59,16 @@ app.UseStaticFiles(new StaticFileOptions
         // that URL, so they can be cached for a year. Fonts are effectively immutable too.
         var versioned = context.Context.Request.Query.ContainsKey("v")
             || context.File.Name.EndsWith(".woff2", StringComparison.OrdinalIgnoreCase);
+
+        // The scripts import each other by plain path (./util.js), so those requests cannot carry a hash.
+        // A cached copy of one module next to a fresh copy of another breaks the whole module graph (a
+        // moved export is a SyntaxError and then no script runs, carousel included), so they are
+        // revalidated on every load; a 304 costs next to nothing.
+        var module = context.File.Name.EndsWith(".js", StringComparison.OrdinalIgnoreCase);
+
         context.Context.Response.Headers.CacheControl = versioned
             ? "public,max-age=31536000,immutable"
-            : "public,max-age=3600";
+            : module ? "no-cache" : "public,max-age=3600";
     }
 });
 

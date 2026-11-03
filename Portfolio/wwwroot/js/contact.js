@@ -144,7 +144,16 @@ function initForm() {
   });
 }
 
+/** On a narrow card the address wraps (see .info__value); offer a break after the "@" so it never splits mid-word. */
+function initWrapHints() {
+  for (const link of qsa('a.info__value[href^="mailto:"]')) {
+    const [local, domain] = link.textContent.trim().split('@');
+    if (domain) link.replaceChildren(`${local}@`, document.createElement('wbr'), domain);
+  }
+}
+
 export function initContact() {
   initCopy();
   initForm();
+  initWrapHints();
 }

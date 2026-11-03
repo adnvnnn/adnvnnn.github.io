@@ -67,10 +67,19 @@
   max-width: 54%;
 }
 
+/* minmax(0, …): a plain 1fr never shrinks below its content, so the nowrap buttons used to push
+   the row wider than the panel on the narrowest phones. */
 .home-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
+}
+
+@media (max-width: 359px) {
+  .home-row .btn--xl {
+    padding-inline: 12px;
+    font-size: 19px;
+  }
 }
 
 .pitch {
@@ -309,7 +318,7 @@
 }
 
 /* ----- desktop artboard -------------------------------------------------------- */
-@media (min-width: 1100px) {
+@media (min-width: 1100px) and (min-height: 480px) {
   .hero {
     position: absolute;
     border-radius: calc(60 * var(--u));
@@ -474,5 +483,13 @@
     top: calc(453 * var(--u));
     flex-direction: column;
     gap: calc(37 * var(--u));
+  }
+
+  /* Same selector as the tablet rule above (which fixes them at 60px) so the icons scale with
+     the artboard again; otherwise the column outgrows the panel whenever --u is small. */
+  .page--home .social {
+    width: calc(70 * var(--u));
+    height: calc(70 * var(--u));
+    font-size: calc(70 * var(--u));
   }
 }

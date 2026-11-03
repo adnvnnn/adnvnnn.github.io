@@ -124,7 +124,8 @@
   .page.is-entering,
   .page.is-leaving,
   .page.is-entering > *,
-  .tile__liquid,
+  .liquid__wave,
+  .liquid__fill,
   .featured.is-swapping .featured__info,
   .featured.is-swapping .carousel__track,
   .plist__item.is-entering {

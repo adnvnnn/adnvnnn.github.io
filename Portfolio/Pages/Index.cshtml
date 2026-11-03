@@ -19,9 +19,14 @@
             <partial name="_Sidebar" model="Model" />
 
             <main id="main" class="main glass-host" tabindex="-1" data-glass="main">
+                @* Inline rather than from the sprite so CSS can animate its parts (see .sound in shell.css). *@
                 <button class="sound" type="button" aria-pressed="true" aria-label="Turn sound effects off">
-                    @Html.Icon("sound", "sound__on")
-                    @Html.Icon("sound-off", "sound__off")
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M10.2 6a.7.7 0 0 1 1.1-.6l5.8 3.8H20a.8.8 0 0 1 .8.8v4a.8.8 0 0 1-.8.8h-2.9l-5.8 3.8a.7.7 0 0 1-1.1-.6z" />
+                        <path class="sound__wave" d="M7.6 9.2a4 4 0 0 0 0 5.6" />
+                        <path class="sound__wave sound__wave--far" d="M5 6.8a7.4 7.4 0 0 0 0 10.4" />
+                        <path class="sound__slash" d="M3.6 3.6l16.8 16.8" pathLength="1" />
+                    </svg>
                 </button>
 
                 <partial name="_PageHome" model="Model" />

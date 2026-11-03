@@ -1,6 +1,7 @@
 // Projects page: featured carousel, project switching, filters and the scrolling list.
 
-import { qs, qsa, el, clamp, prefersReducedMotion, debounce } from './util.js';
+import { qs, qsa, el, clamp, prefersReducedMotion, isStage } from './util.js';
+import { bindRowArrows } from './row-arrows.js';
 
 /* ==========================================================================================
    Carousel
@@ -62,30 +63,44 @@ export function createCarousel(root) {
     timer = setInterval(() => goTo(index + 1), 6000);
   }
 
-  /* swipe / drag */
-  let startX = 0;
-  let dragging = false;
+  /* swipe / drag: the strip only follows the pointer once it has moved a few pixels sideways, so a
+     click, or a vertical scroll that starts on the image, never nudges it */
+  const DRAG_START = 6;
+  let press = null;
   root.addEventListener('pointerdown', (event) => {
-    if (event.target.closest('button') || slides().length < 2) return;
-    dragging = true;
-    startX = event.clientX;
-    root.setPointerCapture(event.pointerId);
-    root.classList.add('is-dragging');
+    if (!event.isPrimary || event.button !== 0 || event.target.closest('button') || slides().length < 2) return;
+    press = { id: event.pointerId, startX: event.clientX, dragging: false };
+    try {
+      root.setPointerCapture(event.pointerId);
+    } catch {
+      // the pointer is already gone; the guard in pointermove ends the press
+    }
   });
   root.addEventListener('pointermove', (event) => {
-    if (!dragging) return;
-    root.style.setProperty('--drag', `${event.clientX - startX}px`);
+    if (!press || event.pointerId !== press.id) return;
+    if (event.buttons === 0) return endDrag(event, { cancelled: true });
+    const delta = event.clientX - press.startX;
+    if (!press.dragging) {
+      if (Math.abs(delta) < DRAG_START) return;
+      press.dragging = true;
+      root.classList.add('is-dragging');
+    }
+    root.style.setProperty('--drag', `${delta}px`);
   });
-  const endDrag = (event) => {
+  function endDrag(event, { cancelled = false } = {}) {
+    if (!press || event.pointerId !== press.id) return;
+    const { startX, dragging } = press;
+    press = null;
     if (!dragging) return;
-    dragging = false;
-    const delta = event.clientX - startX;
     root.classList.remove('is-dragging');
     root.style.removeProperty('--drag');
-    if (Math.abs(delta) > root.clientWidth * 0.12) goTo(index + (delta < 0 ? 1 : -1), { user: true });
-  };
-  root.addEventListener('pointerup', endDrag);
-  root.addEventListener('pointercancel', endDrag);
+    // pointercancel has no position (Chrome reports 0, 0), so it can only mean "snap back"
+    const delta = event.clientX - startX;
+    if (!cancelled && Math.abs(delta) > root.clientWidth * 0.12) goTo(index + (delta < 0 ? 1 : -1), { user: true });
+  }
+  root.addEventListener('pointerup', (event) => endDrag(event));
+  root.addEventListener('pointercancel', (event) => endDrag(event, { cancelled: true }));
+  root.addEventListener('lostpointercapture', (event) => endDrag(event, { cancelled: true }));
 
   prev.addEventListener('click', () => goTo(index - 1, { user: true }));
   next.addEventListener('click', () => goTo(index + 1, { user: true }));
@@ -98,8 +113,11 @@ export function createCarousel(root) {
   root.addEventListener('focusin', stop);
   root.addEventListener('focusout', restart);
 
-  new IntersectionObserver(([entry]) => {
-    visible = entry.isIntersecting;
+  new IntersectionObserver((entries) => {
+    visible = entries.at(-1).isIntersecting; // several can queue up: the last one is current
+    // Slides after the first are lazy in the markup, and one parked beside the clipped strip is never
+    // "near the viewport" for the browser, so fetch them as soon as the carousel is on screen.
+    if (visible) for (const image of qsa('img[loading="lazy"]', track)) image.loading = 'eager';
     restart();
   }).observe(root);
 
@@ -189,7 +207,7 @@ export function initProjects() {
     card.addEventListener('click', () => {
       select(card.dataset.project);
       // on narrow screens the featured card sits above the list: bring it into view
-      if (matchMedia('(max-width: 1099px)').matches) {
+      if (!isStage()) {
         featured.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'center' });
       }
     });
@@ -206,7 +224,7 @@ export function initProjects() {
       chip.setAttribute('aria-pressed', String(active));
     }
     for (const item of items) {
-      const show = all || item.dataset.category.toLowerCase() === filter.toLowerCase();
+      const show = all || item.dataset.category.toLowerCase().split('|').includes(filter.toLowerCase());
       const wasHidden = item.hidden;
       item.hidden = !show;
       if (show && wasHidden && !prefersReducedMotion()) {
@@ -223,22 +241,5 @@ export function initProjects() {
   for (const chip of chips) chip.addEventListener('click', () => applyFilter(chip.dataset.filter));
 
   /* ----- list arrows ------------------------------------------------------------------------- */
-  function syncArrows() {
-    if (!prevButton || !nextButton) return;
-    const max = track.scrollWidth - track.clientWidth - 2;
-    prevButton.disabled = track.scrollLeft <= 2;
-    nextButton.disabled = track.scrollLeft >= max;
-  }
-
-  function scrollList(direction) {
-    const step = items.find((item) => !item.hidden);
-    const distance = step ? (step.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || '0')) * direction : track.clientWidth * direction;
-    track.scrollBy({ left: distance, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
-  }
-
-  prevButton?.addEventListener('click', () => scrollList(-1));
-  nextButton?.addEventListener('click', () => scrollList(1));
-  track.addEventListener('scroll', debounce(syncArrows, 40), { passive: true });
-  new ResizeObserver(syncArrows).observe(track);
-  syncArrows();
+  const syncArrows = prevButton && nextButton ? bindRowArrows(track, prevButton, nextButton) : () => {};
 }

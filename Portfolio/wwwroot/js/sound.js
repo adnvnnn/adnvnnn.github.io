@@ -5,7 +5,7 @@
 // deliberately quiet, start only after the first user gesture (browser autoplay policy) and
 // the preference is remembered.
 
-import { qs, safeStorage, prefersReducedMotion } from './util.js';
+import { qs, safeStorage, prefersReducedMotion, nextFrame } from './util.js';
 
 const storage = safeStorage();
 const KEY = 'portfolio.sound';
@@ -70,6 +70,8 @@ export function initSound() {
     button.setAttribute('aria-label', enabled ? 'Turn sound effects off' : 'Turn sound effects on');
   };
   reflect();
+  // The saved state shows instantly; only later toggles animate the speaker (.sound.is-ready).
+  nextFrame().then(() => button.classList.add('is-ready'));
 
   button.addEventListener('click', () => {
     enabled = !enabled;

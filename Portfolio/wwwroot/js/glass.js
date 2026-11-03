@@ -15,7 +15,7 @@
 // the photo, so that is exactly what Figma does there too. Touch devices and narrow screens keep
 // the plain backdrop-filter version for everything (it scrolls and costs less).
 
-import { qs, qsa, debounce } from './util.js';
+import { qs, qsa, debounce, STAGE_QUERY } from './util.js';
 
 const SVG = 'http://www.w3.org/2000/svg';
 const PHOTO = { width: 1926, height: 872 };
@@ -31,7 +31,7 @@ const KINDS = {
 
 const MAX_BEVEL = 34; // px: stops large cards from warping far inwards
 
-const desktopStage = matchMedia('(min-width: 1100px) and (hover: hover) and (pointer: fine)');
+const desktopStage = matchMedia(`${STAGE_QUERY} and (hover: hover) and (pointer: fine)`);
 
 const supportsLens = () => {
   const gecko = /\bFirefox\//.test(navigator.userAgent);
@@ -150,15 +150,27 @@ export function initGlass() {
     if (source) root.style.setProperty('--bg-url', `url("${source}")`);
   }
 
-  /** Layout position of an element in the viewport, ignoring transforms (animations, hover). */
+  /** Layout position of an element in the viewport, ignoring transforms (animations, hover) but not scrolling. */
   function layoutPosition(node) {
     let x = 0;
     let y = 0;
     for (let current = node; current; current = current.offsetParent) {
       x += current.offsetLeft;
       y += current.offsetTop;
+      // offsetLeft/Top count from the start of the parent's scrollable content
+      if (current.offsetParent) {
+        x -= current.offsetParent.scrollLeft;
+        y -= current.offsetParent.scrollTop;
+      }
     }
     return { x, y };
+  }
+
+  /** Line the copy of the photo up with where the surface is now. */
+  function place(host) {
+    const { x, y } = layoutPosition(host);
+    host.style.setProperty('--hx', `${x}px`);
+    host.style.setProperty('--hy', `${y}px`);
   }
 
   function filterFor(host, settings, { width, height, radius, pad }) {
@@ -205,10 +217,8 @@ export function initGlass() {
     const radius = Math.round(parseFloat(style.borderTopLeftRadius) || 0);
     const blur = parseFloat(style.getPropertyValue('--blur')) || 0;
     const pad = Math.ceil(blur * 2 + 8);
-    const { x, y } = layoutPosition(host);
 
-    host.style.setProperty('--hx', `${x}px`);
-    host.style.setProperty('--hy', `${y}px`);
+    place(host);
     host.style.setProperty('--pad', `${pad}px`);
     host.style.setProperty('--r', `${radius}px`);
     if (lensAllowed) host.style.setProperty('--lens', `url(#${filterFor(host, settings, { width, height, radius, pad })})`);
@@ -236,6 +246,16 @@ export function initGlass() {
   for (const host of hosts) resize.observe(host);
   desktopStage.addEventListener('change', refresh);
   addEventListener('resize', refresh);
+
+  // a surface inside a row that scrolls (the skill tiles) slides across the photo: keep its copy in step
+  document.addEventListener(
+    'scroll',
+    ({ target }) => {
+      if (!active || !(target instanceof Element)) return;
+      for (const host of hosts) if (target.contains(host)) place(host);
+    },
+    { capture: true, passive: true },
+  );
 
   // pages are revealed by removing [hidden]; measure again once the new page has laid out
   document.addEventListener('portfolio:page-shown', () => requestAnimationFrame(refresh));

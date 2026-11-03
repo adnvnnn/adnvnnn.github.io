@@ -27,7 +27,9 @@
   --bar-grow: 1;
 
   /* One Figma pixel. The artboard is 1926 × 872; on desktop the whole stage scales
-     with the viewport so proportions never change. */
+     with the viewport so proportions never change. It is only used from 1100 × 480 up
+     (see shell.css), so this never drops below 0.58px and the 1643 × 781 glass window
+     always fits on screen. */
   --u: clamp(0.58px, min(100vw / 1926, 100dvh / 872), 1.5px);
 
   --font: "Outfit", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;

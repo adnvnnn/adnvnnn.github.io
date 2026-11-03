@@ -65,9 +65,10 @@
 /* ----- list head: label + filters ----------------------------------------------- */
 .plist-head {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 10px 12px;
   margin-top: 6px;
 }
 
@@ -283,14 +284,15 @@
     transform: translateY(-50%) scale(1.1);
   }
 
-  .plist__nav:disabled {
+  /* the extra selectors outrank motion.css, which fades every leaf button with the page */
+  .page--projects .plist .plist__nav:disabled {
     opacity: 0;
     pointer-events: none;
   }
 }
 
 /* ----- desktop artboard -------------------------------------------------------------- */
-@media (min-width: 1100px) {
+@media (min-width: 1100px) and (min-height: 480px) {
   .page--projects {
     display: block;
   }
@@ -361,6 +363,9 @@
     height: calc(297 * var(--u));
     min-height: 0;
     aspect-ratio: auto;
+    /* The card is overflow: visible here, so the media rounds its own right corners to match the card
+       (the base `border-radius: 0` above would otherwise win over the one in components.css). */
+    border-radius: 0 calc(60 * var(--u)) calc(60 * var(--u)) 0;
   }
 
   .plist-head {
@@ -450,5 +455,17 @@
 
   .plist__nav:hover {
     transform: scale(1.12);
+  }
+}
+
+/* See the note in profile.css: on a small artboard the type floor would make the featured
+   description taller than its card (a five-line summary overran it by ~13px), so the floor is
+   lowered a notch and the text gets the spare width beside the info column (the image starts
+   at 613 design px of the card, the text now ends at 343). */
+@media (min-width: 1100px) and (min-height: 480px) and (max-width: 1271px),
+       (min-width: 1100px) and (min-height: 480px) and (max-height: 575px) {
+  .featured__text {
+    width: calc(300 * var(--u));
+    font-size: max(11.5px, calc(16 * var(--u)));
   }
 }

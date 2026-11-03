@@ -69,6 +69,11 @@
   gap: 14px;
 }
 
+/* Only the desktop artboard scrolls its row (below it the tiles wrap into a grid), so only it has arrows. */
+.tray__nav {
+  display: none;
+}
+
 .tile {
   --tile-r: 32%;
   position: relative;
@@ -106,29 +111,54 @@
   top: 57.8%;
 }
 
-/* The "liquid": a gradient body whose top edge is a drifting wave. */
+/* The "liquid": an inline SVG whose top edge is a wave that drifts forever (markup: _PageProfile.cshtml).
+   It is drawn in Figma pixels (viewBox 156 × 154 = one tile), so it scales with the tile.
+
+     .liquid__level  rises to --level percent (--grow lifts it while the page enters)
+     .liquid__wave   clips everything inside it to the wave. It slides left by exactly one wave
+                     period per loop and the wave repeats every period, so the last frame is the
+                     first one again: no jump, however long it runs.
+     .liquid__fill   the green gradient. It is slid back by the same distance on the same clock,
+                     so the colours stay put while the wave moves across them. */
 .tile__liquid {
-  --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 24' preserveAspectRatio='none'%3E%3Cpath d='M0 12 Q25 0 50 12 T100 12 V24 H0Z' fill='%23000'/%3E%3C/svg%3E");
+  --wave-w: 202.8px;  /* one period of the wave path (130% of a tile) */
+  --wave-t: 7s;       /* time to drift one period */
   position: absolute;
   z-index: 2;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: calc(var(--level, 0) * 1% * var(--grow, 1));
-  background: var(--grad-green);
-  -webkit-mask: linear-gradient(#000 0 0) 0 100% / 100% calc(100% - 18px) no-repeat, var(--wave) 0 0 / 130% 24px repeat-x;
-  mask: linear-gradient(#000 0 0) 0 100% / 100% calc(100% - 18px) no-repeat, var(--wave) 0 0 / 130% 24px repeat-x;
-  animation: liquid-drift 7s linear infinite;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.liquid__level {
+  transform: translateY(calc((1 - var(--level, 0) / 100 * var(--grow, 1)) * 154px));
+}
+
+.liquid__wave {
+  animation: liquid-drift var(--wave-t) linear infinite;
+}
+
+.liquid__fill {
+  animation: liquid-hold var(--wave-t) linear infinite;
+}
+
+.liquid__from {
+  stop-color: var(--green-1);
+}
+
+.liquid__to {
+  stop-color: var(--green-2);
 }
 
 @keyframes liquid-drift {
-  from {
-    -webkit-mask-position: 0 100%, 0 0;
-    mask-position: 0 100%, 0 0;
-  }
   to {
-    -webkit-mask-position: 0 100%, -130% 0;
-    mask-position: 0 100%, -130% 0;
+    transform: translateX(calc(var(--wave-w) * -1));
+  }
+}
+
+@keyframes liquid-hold {
+  to {
+    transform: translateX(var(--wave-w));
   }
 }
 
@@ -187,7 +217,7 @@
 }
 
 /* ----- desktop artboard -------------------------------------------------------------- */
-@media (min-width: 1100px) {
+@media (min-width: 1100px) and (min-height: 480px) {
   .page--profile {
     display: block;
   }
@@ -257,12 +287,25 @@
     border-radius: calc(60 * var(--u));
   }
 
+  /* The Figma tray shows six tiles. With more, the row fills the tray and scrolls sideways under its
+     rounded edge, one tile per arrow click like the project list. Tiles snap to the left padding, so
+     none is left half cut off at rest. */
   .tiles {
     position: absolute;
-    left: calc(29 * var(--u));
-    top: calc(19 * var(--u));
+    inset: 0;
     display: flex;
     gap: calc(36 * var(--u));
+    padding: calc(19 * var(--u)) calc(29 * var(--u)) calc(20 * var(--u));
+    overflow-x: auto;
+    border-radius: inherit;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: calc(29 * var(--u));
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+
+  .tiles::-webkit-scrollbar {
+    display: none;
   }
 
   .tile {
@@ -271,6 +314,7 @@
     width: calc(156 * var(--u));
     height: calc(154 * var(--u));
     aspect-ratio: auto;
+    scroll-snap-align: start;
   }
 
   .tile__name,
@@ -286,8 +330,49 @@
     top: calc(89 * var(--u));
   }
 
-  .tile__liquid {
-    -webkit-mask-size: 100% calc(100% - 18 * var(--u)), 130% calc(24 * var(--u));
-    mask-size: 100% calc(100% - 18 * var(--u)), 130% calc(24 * var(--u));
+  /* Same arrows as the project list, in the margins beside the tray. */
+  .tray__nav {
+    position: absolute;
+    top: calc(77 * var(--u));
+    display: grid;
+    place-items: center;
+    width: calc(39 * var(--u));
+    height: calc(39 * var(--u));
+    border-radius: 50%;
+    color: #fff;
+    font-size: calc(47 * var(--u));
+    transition: transform 0.45s var(--spring-bouncy), opacity 0.2s;
+  }
+
+  .tray__nav .icon {
+    stroke-width: 1.4;
+  }
+
+  .tray__nav--prev {
+    left: calc(-52 * var(--u));
+  }
+
+  .tray__nav--next {
+    right: calc(-52 * var(--u));
+  }
+
+  .tray__nav:hover {
+    transform: scale(1.12);
+  }
+
+  /* the extra selectors outrank motion.css, which fades every leaf button with the page */
+  .page--profile .tray .tray__nav:disabled {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+/* The type floors (tokens.css) keep text up to ~1.2x its design size on a small artboard, but the
+   hero card keeps its design height. Below ~0.66px per design px (a window narrower than 1272px or
+   shorter than 576px) the bio would run out of the card, so there it follows the artboard closer. */
+@media (min-width: 1100px) and (min-height: 480px) and (max-width: 1271px),
+       (min-width: 1100px) and (min-height: 480px) and (max-height: 575px) {
+  .hero__bio {
+    font-size: max(12px, calc(20 * var(--u)));
   }
 }

@@ -12,21 +12,16 @@ public sealed class SiteOptions
     public ContactOptions Contact { get; set; } = new();
     public List<SocialLink> Social { get; set; } = [];
 
-    /// <summary>The three skill bars shown on the Home page.</summary>
-    public List<SkillItem> HomeSkills { get; set; } = [];
-
-    /// <summary>The liquid skill tiles shown on the Profile page.</summary>
+    /// <summary>The liquid skill tiles on the Profile page; the top three by level also feed the Home page bars.</summary>
     public List<SkillItem> Skills { get; set; } = [];
 
     // No defaults on collections: the configuration binder appends to them instead of replacing.
     public List<string> ProjectFilters { get; set; } = [];
 
-    /// <summary>Id of the project shown in the "Featured Project" card on first paint.</summary>
-    public string FeaturedProject { get; set; } = string.Empty;
-
-    /// <summary>Id of the project teased by the "My Latest Project" card on the Home page.</summary>
-    public string LatestProject { get; set; } = string.Empty;
-
+    /// <summary>
+    /// Listed newest first. The first one is the "Featured Project" on first paint and the
+    /// "My Latest Project" teaser on the Home page.
+    /// </summary>
     public List<ProjectItem> Projects { get; set; } = [];
 
     public ProjectItem? FindProject(string? id) =>
@@ -42,7 +37,8 @@ public sealed class OwnerOptions
     public string Pitch { get; set; } = string.Empty;
     public string Bio { get; set; } = string.Empty;
     public string ResumeUrl { get; set; } = string.Empty;
-    public int CopyrightYear { get; set; } = DateTime.UtcNow.Year;
+
+    public int CopyrightYear => DateTime.UtcNow.Year;
 
     public string FullName => $"{FirstName} {LastName}".Trim();
 }
@@ -91,8 +87,8 @@ public sealed class ProjectItem
     public string Title { get; set; } = string.Empty;
     public string Summary { get; set; } = string.Empty;
 
-    /// <summary>One of <see cref="SiteOptions.ProjectFilters"/> (other than "All").</summary>
-    public string Category { get; set; } = string.Empty;
+    /// <summary>Any of <see cref="SiteOptions.ProjectFilters"/> (other than "All"); the project shows under each.</summary>
+    public List<string> Categories { get; set; } = [];
 
     public List<string> Tags { get; set; } = [];
 

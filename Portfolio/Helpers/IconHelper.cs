@@ -13,7 +13,7 @@ public static class IconHelper
 
     private static readonly HashSet<string> Known = new(StringComparer.OrdinalIgnoreCase)
     {
-        "home", "user", "grid", "call", "sound", "sound-off", "chevron-left", "chevron-right",
+        "home", "user", "grid", "call", "chevron-left", "chevron-right",
         "arrow-up-right", "check", "mail", "phone", "pin", "clock", "copy", "download", "send",
         "python", "css3", "java", "code", "github", "telegram", "linkedin", "instagram", "fire"
     };

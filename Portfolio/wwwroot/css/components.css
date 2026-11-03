@@ -1,6 +1,6 @@
 /* ==========================================================================
    Shared components: dot, buttons, chips, tags, socials, fields, carousel controls
-   Sizes are mobile-first; the @media (min-width: 1100px) blocks use design pixels (--u).
+   Sizes are mobile-first; the @media (min-width: 1100px) and (min-height: 480px) blocks use design pixels (--u).
    ========================================================================== */
 
 .dot {
@@ -102,17 +102,11 @@
 }
 
 /* ----- chips (project filters) -------------------------------------------- */
+/* Wraps instead of scrolling: a half-hidden chip at the edge reads as content spilling out. */
 .chips {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
-  overflow-x: auto;
-  padding: 6px 2px 10px;
-  margin: -6px -2px -10px;
-  scrollbar-width: none;
-}
-
-.chips::-webkit-scrollbar {
-  display: none;
 }
 
 .chip {
@@ -143,6 +137,13 @@
   background: var(--grad-green);
 }
 
+/* a touch tighter so all four fit one row on common phone widths */
+@media (max-width: 399px) {
+  .chip {
+    padding-inline: 12px;
+  }
+}
+
 /* ----- tags ---------------------------------------------------------------- */
 .tags {
   display: flex;
@@ -165,6 +166,7 @@
 /* ----- social links -------------------------------------------------------- */
 .socials {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 14px;
 }
@@ -297,13 +299,17 @@
   overflow: hidden;
   border-radius: 22px;
   touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
+/* An ease-out, not a spring: a spring overshoots, and at the first and last slide that pulls the
+   strip past its end and shows the card behind it as a blank sliver. */
 .carousel__track {
   display: flex;
   height: 100%;
   transform: translate3d(calc(var(--slide, 0) * -100% + var(--drag, 0px)), 0, 0);
-  transition: transform 0.7s var(--spring-soft);
+  transition: transform 0.7s var(--ease-out);
 }
 
 .carousel.is-dragging .carousel__track {
@@ -436,7 +442,7 @@
 /* ===========================================================================
    Desktop artboard sizes
    =========================================================================== */
-@media (min-width: 1100px) {
+@media (min-width: 1100px) and (min-height: 480px) {
   .dot {
     width: calc(9.78 * var(--u));
     height: calc(9.78 * var(--u));
@@ -498,10 +504,8 @@
   }
 
   .chips {
+    flex-wrap: nowrap;
     gap: calc(6.5 * var(--u));
-    overflow: visible;
-    padding: 0;
-    margin: 0;
   }
 
   .chip {
@@ -525,6 +529,10 @@
     place-items: center;
     border-radius: calc(11.7365 * var(--u));
     font-size: calc(13.2036 * var(--u));
+  }
+
+  .socials {
+    flex-wrap: nowrap;
   }
 
   .social {
@@ -560,12 +568,16 @@
     padding: calc(14 * var(--u)) calc(24 * var(--u));
   }
 
+  /* The fields sit at fixed offsets and the gap under an input is only 17-22 design px, which is
+     less than one line of error text once the type floor applies (it ran into the next label).
+     So the message shares the label's row instead, right-aligned. */
   .field__error {
     position: absolute;
-    left: calc(24 * var(--u));
-    top: calc(100% + 2 * var(--u));
+    top: 0;
+    right: calc(24 * var(--u));
+    max-width: calc(100% - 130 * var(--u));
     font-size: var(--fs-12);
-    white-space: nowrap;
+    text-align: right;
   }
 
   .copy {

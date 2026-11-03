@@ -36,15 +36,36 @@
     <h2 class="label label--skills">Skills</h2>
 
     <div class="tray glass-host" data-glass="tray">
+        @* Only the desktop artboard scrolls its row (a tray holds six tiles at design size). profile.js enables the arrows when it overflows. *@
+        <button class="tray__nav tray__nav--prev" type="button" aria-label="Scroll skills left" disabled>@Html.Icon("chevron-left")</button>
         <ul class="tiles">
-            @foreach (var skill in site.Skills)
+            @for (var i = 0; i < site.Skills.Count; i++)
             {
+                var skill = site.Skills[i];
                 <li class="tile glass-host" data-glass="tile" style="--level:@skill.Level">
-                    <span class="tile__liquid" aria-hidden="true"></span>
+                    @* The liquid is inline SVG (one tile = the 156 × 154 viewBox) so CSS can animate its parts: see .liquid__* in profile.css.
+                       The wave period below (202.8) must match --wave-w there. *@
+                    <svg class="tile__liquid" viewBox="0 0 156 154" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                        <defs>
+                            <linearGradient id="liquid-fill-@i" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="156" y2="0">
+                                <stop class="liquid__from" offset="0.0265" />
+                                <stop class="liquid__to" offset="1" />
+                            </linearGradient>
+                            <clipPath id="liquid-wave-@i">
+                                <path d="M0 12Q50.7 0 101.4 12T202.8 12T304.2 12T405.6 12V200H0Z" />
+                            </clipPath>
+                        </defs>
+                        <g class="liquid__level">
+                            <g class="liquid__wave" clip-path="url(#liquid-wave-@i)">
+                                <rect class="liquid__fill" width="156" height="200" fill="url(#liquid-fill-@i)" />
+                            </g>
+                        </g>
+                    </svg>
                     <span class="tile__name">@skill.Name</span>
                     <span class="tile__pct">@skill.Level %</span>
                 </li>
             }
         </ul>
+        <button class="tray__nav tray__nav--next" type="button" aria-label="Scroll skills right" disabled>@Html.Icon("chevron-right")</button>
     </div>
 </section>

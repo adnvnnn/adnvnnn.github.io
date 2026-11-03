@@ -1,17 +1,23 @@
 @using System.Text.Json
+@using Microsoft.AspNetCore.Mvc.ViewFeatures
 @model IndexModel
+@inject IFileVersionProvider FileVersions
 @{
     var site = Model.Site;
-    var featured = site.FindProject(site.FeaturedProject) ?? site.Projects.FirstOrDefault();
+    var featured = site.Projects.FirstOrDefault();
     var active = Model.ActivePage == "projects";
+    // The carousel script builds its slides from this data, so it gets the same content-hashed URLs the
+    // tag helper puts on the markup: an image the page already loaded is reused, and a replaced file is
+    // never served stale from the one-hour cache of the plain URL.
+    string Versioned(string path) => path.StartsWith('/') ? FileVersions.AddFileVersionToPath(Context.Request.PathBase, path) : path;
     var json = JsonSerializer.Serialize(site.Projects.Select(p => new
     {
         id = p.Id,
         title = p.Title,
         summary = p.Summary,
-        category = p.Category,
+        categories = p.Categories,
         tags = p.Tags,
-        images = p.Slides,
+        images = p.Slides.Select(Versioned),
         liveUrl = p.LiveUrl,
         sourceUrl = p.SourceUrl
     }), new JsonSerializerOptions(JsonSerializerDefaults.Web));
@@ -80,7 +86,7 @@
             @foreach (var project in site.Projects)
             {
                 var isFeatured = featured is not null && project.Id == featured.Id;
-                <li class="plist__item" data-category="@project.Category">
+                <li class="plist__item" data-category="@string.Join('|', project.Categories)">
                     <button class="pcard@(isFeatured ? " is-selected" : "")" type="button" data-project="@project.Id"
                             aria-pressed="@(isFeatured ? "true" : "false")">
                         <img class="pcard__img" src="@project.Cover" asp-append-version="true" alt="" width="763" height="580"

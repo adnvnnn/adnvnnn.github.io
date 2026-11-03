@@ -10,6 +10,14 @@ export const prefersReducedMotion = () => matchMedia('(prefers-reduced-motion: r
 /** True when the primary input is a finger: no hover, no refraction, lighter effects. */
 export const isCoarsePointer = () => matchMedia('(hover: none), (pointer: coarse)').matches;
 
+/**
+ * The Figma artboard is used from this size up and the page flows below it. It also needs height:
+ * the artboard cannot scroll, so in a shorter window it would be cut off. Keep in step with the
+ * `@media (min-width: 1100px) and (min-height: 480px)` blocks in the CSS.
+ */
+export const STAGE_QUERY = '(min-width: 1100px) and (min-height: 480px)';
+export const isStage = () => matchMedia(STAGE_QUERY).matches;
+
 /** Create an element: el('a', { class: 'x', href: '/' }, 'text', childNode). */
 export function el(tag, attrs = {}, ...children) {
   const node = document.createElement(tag);

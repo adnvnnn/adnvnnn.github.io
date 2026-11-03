@@ -2,6 +2,7 @@
 // without any of this, and each module only touches markup that the server rendered.
 
 import { initRouter } from './router.js';
+import { initProfile } from './profile.js';
 import { initProjects } from './projects.js';
 import { initContact } from './contact.js';
 import { initSound, playSound } from './sound.js';
@@ -16,6 +17,7 @@ function boot() {
 
   initGlass();
   initSound();
+  initProfile();
   initProjects();
   initContact();
   initRouter({ onNavigate: () => playSound('page') });

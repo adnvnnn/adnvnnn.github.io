@@ -140,6 +140,8 @@ svg {
   z-index: 300;
   left: 50%;
   bottom: calc(110px + env(safe-area-inset-bottom));
+  /* max-content: with left:50% the box would otherwise shrink-wrap into the right half of the screen */
+  width: max-content;
   max-width: calc(100% - 32px);
   padding: 12px 20px;
   border-radius: 999px;
@@ -147,6 +149,7 @@ svg {
   background: var(--green-1);
   font-size: 15px;
   font-weight: 600;
+  text-align: center;
   box-shadow: 0 10px 30px rgb(0 0 0 / 0.25);
   opacity: 0;
   transform: translate(-50%, 16px) scale(0.96);
@@ -164,7 +167,7 @@ svg {
   background: #b4473a;
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 1100px) and (min-height: 480px) {
   .toast {
     bottom: calc(36 * var(--u));
   }
