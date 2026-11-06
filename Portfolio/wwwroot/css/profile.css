@@ -439,3 +439,28 @@
     font-size: max(12px, calc(20 * var(--u)));
   }
 }
+
+/* ----- no portrait (Site:Owner:ShowPhoto = false) --------------------------------------- */
+/* The card only needed its top margin and the side padding to make room for the portrait. */
+.page--profile .hero--no-photo {
+  margin-top: 0;
+  padding-top: 24px;
+}
+
+@media (min-width: 700px) {
+  .page--profile .hero--no-photo {
+    margin-top: 0;
+    padding: 34px;
+  }
+}
+
+@media (min-width: 1100px) and (min-height: 480px) {
+  .page--profile .hero--no-photo {
+    padding: 0;
+  }
+
+  .page--profile .hero--no-photo .hero__text,
+  .page--profile .hero--no-photo .hero__bio {
+    width: calc(1000 * var(--u));
+  }
+}

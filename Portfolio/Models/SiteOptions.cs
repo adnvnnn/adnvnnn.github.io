@@ -38,6 +38,9 @@ public sealed class OwnerOptions
     public string Bio { get; set; } = string.Empty;
     public string ResumeUrl { get; set; } = string.Empty;
 
+    /// <summary>False hides the portrait on the Home and Profile pages; the text takes the room.</summary>
+    public bool ShowPhoto { get; set; } = true;
+
     public int CopyrightYear => DateTime.UtcNow.Year;
 
     public string FullName => $"{FirstName} {LastName}".Trim();

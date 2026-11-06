@@ -499,3 +499,8 @@
     font-size: calc(70 * var(--u));
   }
 }
+
+/* ----- no portrait (Site:Owner:ShowPhoto = false) --------------------------------------- */
+.page--home .hero--no-photo .hero__text {
+  max-width: none;
+}

@@ -11,14 +11,17 @@
 
     <h1 class="page__title" id="home-title">Home</h1>
 
-    <div class="hero hero--home glass-host" data-glass="card">
+    <div class="hero hero--home glass-host@(owner.ShowPhoto ? "" : " hero--no-photo")" data-glass="card">
         <div class="hero__text">
             <h2 class="hero__name">@owner.FirstName</h2>
             <p class="hero__role">@owner.Role</p>
             <p class="hero__status"><span class="dot" aria-hidden="true"></span>@owner.Status</p>
         </div>
-        <img class="hero__portrait" src="~/assets/img/portrait-side.webp" asp-append-version="true"
-             alt="Portrait of @owner.FullName" width="187" height="217" decoding="async" />
+        @if (owner.ShowPhoto)
+        {
+            <img class="hero__portrait" src="~/assets/img/portrait-side.webp" asp-append-version="true"
+                 alt="Portrait of @owner.FullName" width="187" height="217" decoding="async" />
+        }
     </div>
 
     <div class="home-row">
