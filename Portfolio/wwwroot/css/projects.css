@@ -373,9 +373,11 @@
     margin: 0;
   }
 
+  /* Anchored by its right edge (the Figma row of five chips ends at 1290 of the 1336-wide page): chips with no
+     project are not rendered, and a shorter row would otherwise leave a gap at its right. */
   .plist-head .chips {
     position: absolute;
-    left: calc(930 * var(--u));
+    right: calc(46 * var(--u));
     top: calc(510 * var(--u));
   }
 
