@@ -46,6 +46,8 @@ dist/                the built site
 2. Settings → Pages → Build and deployment → Source: **GitHub Actions**.
 3. Push to `master`. The workflow builds the pages and publishes them.
 
+A second workflow (`uptime.yml`) loads the live site every 30 minutes and fails when it is down; GitHub emails the owner about a failed run, which makes it a free uptime alert. GitHub pauses scheduled workflows after 60 days without any push, so the check needs an occasional commit.
+
 The contact form has no server: it opens the visitor's mail app with the message filled in.
 
 ## History

@@ -1,0 +1,31 @@
+name: Uptime check
+
+# Every 30 minutes: load the live site and fail if it does not answer or the page is empty.
+# A failed run is emailed to the repository owner by GitHub, so this is the alert.
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Load the site
+        run: |
+          url="https://${GITHUB_REPOSITORY_OWNER}.github.io/"
+          code=000
+          for attempt in 1 2 3; do
+            code=$(curl -s -o page.html -w '%{http_code}' --max-time 20 "$url" || true)
+            if [ "$code" = "200" ] && grep -q 'id="page-home"' page.html; then
+              echo "$url is up"
+              exit 0
+            fi
+            echo "Attempt $attempt: status $code"
+            sleep 20
+          done
+          echo "::error::$url is down (last status $code)"
+          exit 1
