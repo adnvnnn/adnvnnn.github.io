@@ -46,6 +46,18 @@ dist/                the built site
 2. Settings → Pages → Build and deployment → Source: **GitHub Actions**.
 3. Push to `master`. The workflow builds the pages and publishes them.
 
+### Visitor stats
+
+To see whether the site is visited, sign up for a free account at [goatcounter.com](https://www.goatcounter.com) (no cookies, so no banner is needed), pick a site code and put it in `site.json`:
+
+```json
+"Analytics": { "GoatCounter": "your-code" }
+```
+
+The next build adds the counter to every page and counts each page change. With an empty value nothing is added.
+
+### Uptime
+
 A second workflow (`uptime.yml`) loads the live site every 30 minutes and fails when it is down; GitHub emails the owner about a failed run, which makes it a free uptime alert. GitHub pauses scheduled workflows after 60 days without any push, so the check needs an occasional commit.
 
 The contact form has no server: it opens the visitor's mail app with the message filled in.

@@ -32,6 +32,9 @@ const projects = (site.Projects ?? []).map((project) => ({
   Id: '', Title: '', Summary: '', Categories: [], Tags: [], Cover: '', Images: [], LiveUrl: '', SourceUrl: '', ...project,
 }));
 
+// Visitor stats (GoatCounter, free, no cookies): the site code is the first part of <code>.goatcounter.com. Empty means off.
+const goatCounter = (site.Analytics?.GoatCounter ?? '').trim();
+
 const fullName = `${owner.FirstName} ${owner.LastName}`.trim();
 const slides = (project) => (project.Images.length > 0 ? project.Images : [project.Cover]);
 const showsOn = (link, page) => link.Show.length === 0 || link.Show.some((p) => p.toLowerCase() === page);
@@ -449,6 +452,17 @@ function pageContact(active) {
 /* ----- documents ------------------------------------------------------------------------------------------------ */
 const sprite = readFileSync(resolve(root, 'build/icons.html'), 'utf8').trimEnd();
 
+/**
+ * GoatCounter counts the page that was loaded. The site swaps pages without a reload, so every swap is counted here
+ * too (the router announces it with "portfolio:page-shown"), with the same trailing-slash path a direct visit has.
+ */
+function analyticsSnippet() {
+  if (!goatCounter) return '';
+  return `
+    <script data-goatcounter="https://${esc(goatCounter)}.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <script>document.addEventListener('portfolio:page-shown', function () { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: location.pathname.endsWith('/') ? location.pathname : location.pathname + '/' }); });</script>`;
+}
+
 function document_(title, description, body) {
   const css = ['tokens', 'base', 'glass', 'shell', 'components', 'home', 'profile', 'projects', 'contact', 'motion']
     .map((name) => `    <link rel="stylesheet" href="${v(`/css/${name}.css`)}" />`)
@@ -471,7 +485,7 @@ function document_(title, description, body) {
 ${css}
 
     <script>document.documentElement.className = 'js';</script>
-    <script type="module" src="${v('/js/main.js')}"></script>
+    <script type="module" src="${v('/js/main.js')}"></script>${analyticsSnippet()}
 </head>
 <body>
     ${body}
