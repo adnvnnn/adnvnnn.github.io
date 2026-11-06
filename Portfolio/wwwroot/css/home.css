@@ -141,7 +141,7 @@
 .bar__name {
   flex: 1 1 0;
   min-width: 0;
-  margin-left: 16px;
+  margin: 0 12px 0 16px;
   white-space: nowrap;
   font-size: 17px;
   text-shadow: calc(-4.82066 * var(--u)) calc(2.41033 * var(--u)) calc(10.1234 * var(--u)) rgb(0 0 0 / 0.05);
@@ -448,13 +448,15 @@
     font-size: calc(39.4 * var(--u));
   }
 
+  /* A little less margin than the Figma row (34 and 57), and a gap before the percentage, so a longer name
+     gets room before fit-text.js has to shrink it. */
   .bar__name {
-    margin-left: calc(34 * var(--u));
+    margin: 0 calc(14 * var(--u)) 0 calc(26 * var(--u));
     font-size: calc(21.7332 * var(--u));
   }
 
   .bar__pct {
-    margin-right: calc(57 * var(--u));
+    margin-right: calc(40 * var(--u));
     font-size: calc(19.8 * var(--u));
   }
 
