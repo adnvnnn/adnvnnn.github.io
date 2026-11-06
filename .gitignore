@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+# Not part of the site source: image tooling, editor/assistant config and notes
+tools/
+.claude/
+*.md
+!README.md
