@@ -6,6 +6,7 @@
     var site = Model.Site;
     var featured = site.Projects.FirstOrDefault();
     var active = Model.ActivePage == "projects";
+    var usedCategories = site.Projects.SelectMany(p => p.Categories).ToHashSet(StringComparer.OrdinalIgnoreCase);
     // The carousel script builds its slides from this data, so it gets the same content-hashed URLs the
     // tag helper puts on the markup: an image the page already loaded is reused, and a replaced file is
     // never served stale from the one-hour cache of the plain URL.
@@ -75,6 +76,7 @@
             @foreach (var filter in site.ProjectFilters)
             {
                 var isAll = string.Equals(filter, "All", StringComparison.OrdinalIgnoreCase);
+                if (!isAll && !usedCategories.Contains(filter)) continue; // no project under it: no chip
                 <button class="chip@(isAll ? " is-active" : "")" type="button" data-filter="@filter" aria-pressed="@(isAll ? "true" : "false")">@filter</button>
             }
         </div>
