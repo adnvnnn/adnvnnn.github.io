@@ -48,7 +48,7 @@
                     @* A link that is empty (or "#") in appsettings.json shows as a disabled button. *@
                     <a class="btn btn--primary btn--sm" data-role="live" href="@(HasLink(featured.LiveUrl) ? featured.LiveUrl : null)"
                        aria-disabled="@(HasLink(featured.LiveUrl) ? null : "true")" tabindex="@(HasLink(featured.LiveUrl) ? null : "-1")"
-                       target="_blank" rel="noopener noreferrer">Live Demo</a>
+                       target="_blank" rel="noopener noreferrer">Visit Website</a>
                     <a class="btn btn--white btn--sm" data-role="source" href="@(HasLink(featured.SourceUrl) ? featured.SourceUrl : null)"
                        aria-disabled="@(HasLink(featured.SourceUrl) ? null : "true")" tabindex="@(HasLink(featured.SourceUrl) ? null : "-1")"
                        target="_blank" rel="noopener noreferrer">
