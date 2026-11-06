@@ -167,6 +167,7 @@
 
 .tile__name {
   top: 12%;
+  padding-inline: 8%; /* a long name wraps before it touches the rim of the tile */
 }
 
 .tile__pct {
