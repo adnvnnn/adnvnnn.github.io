@@ -125,8 +125,9 @@ function initForm() {
         say('Please check the highlighted fields.', { error: true });
       } else if (response.status === 429) {
         say('Too many attempts — please try again in a minute.', { error: true });
-      } else if (response.status === 501) {
-        // The server has no mail account configured: hand the message to the visitor's mail app instead.
+      } else if ([404, 405, 501].includes(response.status)) {
+        // No server to deliver the message (a static host answers 404 or 405, an app without a mail account 501):
+        // hand it to the visitor's mail app instead.
         const mailto = `mailto:${qs('.info__value[href^="mailto:"]')?.textContent.trim() ?? ''}` +
           `?subject=${encodeURIComponent(payload.subject)}` +
           `&body=${encodeURIComponent(`${payload.message}\n\n— ${payload.name} (${payload.email})`)}`;

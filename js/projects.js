@@ -233,13 +233,19 @@ export function initProjects() {
       chip.classList.toggle('is-active', active);
       chip.setAttribute('aria-pressed', String(active));
     }
+    const entering = [];
     for (const item of items) {
       const show = all || item.dataset.category.toLowerCase().split('|').includes(filter.toLowerCase());
       const wasHidden = item.hidden;
       item.hidden = !show;
       if (show && wasHidden && !prefersReducedMotion()) {
         item.classList.remove('is-entering');
-        void item.offsetWidth;
+        entering.push(item);
+      }
+    }
+    if (entering.length) {
+      void track.offsetWidth; // one reflow restarts every entrance together, instead of one per card
+      for (const item of entering) {
         item.classList.add('is-entering');
         item.addEventListener('animationend', () => item.classList.remove('is-entering'), { once: true });
       }

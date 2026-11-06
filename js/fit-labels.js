@@ -43,13 +43,28 @@ function fit(label, tries) {
 }
 
 export function initFitLabels() {
-  const items = LABELS.flatMap(([selector, tries]) => qsa(selector).map((label) => ({ label, tries })));
+  const items = LABELS.flatMap(([selector, tries]) => qsa(selector).map((label) => ({ label, tries, width: -1 })));
   if (!items.length) return;
 
-  const fitAll = () => items.forEach(({ label, tries }) => fit(label, tries));
+  // Each label is only measured again when its box changed width (or the font arrived). A label on a page that
+  // is not shown has no width yet and waits for its box to open. The observer already batches a frame's changes
+  // and runs before paint, so fitting right inside it never shows an unfitted frame.
+  const byBox = new Map(items.map((item) => [item.label.parentElement, item]));
+
+  function fitChanged(list) {
+    for (const item of list) {
+      const width = item.label.parentElement.clientWidth;
+      if (width === item.width) continue;
+      fit(item.label, item.tries);
+      item.width = width;
+    }
+  }
+
   // the box changes size with the window (and from hidden to shown when its page opens)
-  const observer = new ResizeObserver(fitAll);
+  const observer = new ResizeObserver((entries) => fitChanged(entries.map(({ target }) => byBox.get(target))));
   for (const { label } of items) observer.observe(label.parentElement);
-  document.fonts?.ready.then(fitAll);
-  fitAll();
+  document.fonts?.ready.then(() => {
+    for (const item of items) item.width = -1;
+    fitChanged(items);
+  });
 }
