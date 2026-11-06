@@ -1,0 +1,172 @@
+{
+  "Owner": {
+    "FirstName": "Adnan",
+    "LastName": "Abdolahzadeh",
+    "Role": "Full-Stack Developer",
+    "Status": "Ready for freelancing",
+    "Pitch": "I look for problems and build solutions for them.",
+    "Bio": "I look for problems and build solutions for them. I mostly work on web development and software architecture, and I care about clean code and a good user experience.",
+    "ResumeUrl": "/assets/resume.pdf",
+    "ShowPhoto": false
+  },
+  "Contact": {
+    "Subtitle": "work with me to reach beyond a solution for your problem",
+    "Intro": "Have a project in mind? I'd love to hear from you.",
+    "Email": "Adnan.abdollahzadeh@gmail.com",
+    "Phone": "",
+    "Location": "",
+    "Availability": "Ready for freelancing",
+    "AvailabilityBadge": "Available"
+  },
+  "Social": [
+    {
+      "Name": "GitHub",
+      "Icon": "github",
+      "Url": "https://github.com/adnvnnn",
+      "Show": [
+        "home",
+        "contact"
+      ]
+    },
+    {
+      "Name": "LinkedIn",
+      "Icon": "linkedin",
+      "Url": "https://www.linkedin.com/in/adnan-abdollahzade-266463347/",
+      "Show": [
+        "home",
+        "contact"
+      ]
+    },
+    {
+      "Name": "Telegram",
+      "Icon": "telegram",
+      "Url": "https://t.me/Adnvnnn",
+      "Show": [
+        "home",
+        "contact"
+      ]
+    },
+    {
+      "Name": "Instagram",
+      "Icon": "instagram",
+      "Url": "https://www.instagram.com/Adnvnnn",
+      "Show": [
+        "contact"
+      ]
+    }
+  ],
+  "Skills": [
+    {
+      "Name": ".NET",
+      "Level": 90,
+      "Icon": "code",
+      "Description": "My main framework: ASP.NET Core, Razor Pages, Blazor and Entity Framework."
+    },
+    {
+      "Name": "Coding",
+      "Level": 90,
+      "Icon": "terminal",
+      "Description": "I write code that solves the problem in the simplest way, and I keep it easy to change."
+    },
+    {
+      "Name": "Source Control",
+      "Level": 85,
+      "Icon": "git-branch",
+      "Description": "Git every day: branches, small commits and pull requests that are easy to review."
+    },
+    {
+      "Name": "Architecture",
+      "Level": 80,
+      "Icon": "layers",
+      "Description": "Clean architecture and DDD, so each part of the app has one job and stays easy to test."
+    },
+    {
+      "Name": "Self-Documenting Code",
+      "Level": 80,
+      "Icon": "code",
+      "Description": "Clear names and small methods, so the code explains itself without extra comments."
+    },
+    {
+      "Name": "Databases",
+      "Level": 80,
+      "Icon": "database",
+      "Description": "SQL Server and SQLite with Entity Framework: schema design, queries and migrations."
+    },
+    {
+      "Name": "AI Tools",
+      "Level": 75,
+      "Icon": "sparkles",
+      "Description": "I use AI in my daily work to move faster, then review everything it writes."
+    },
+    {
+      "Name": "Agile",
+      "Level": 75,
+      "Icon": "",
+      "Description": "Short iterations, regular feedback and small steps that always ship something working."
+    },
+    {
+      "Name": "Security",
+      "Level": 70,
+      "Icon": "shield",
+      "Description": "Validation, authentication and safe handling of secrets and user data."
+    },
+    {
+      "Name": "CI/CD",
+      "Level": 70,
+      "Icon": "",
+      "Description": "Automated builds and deployments, so a release is one push instead of manual steps."
+    },
+    {
+      "Name": "Windows Server",
+      "Level": 70,
+      "Icon": "server",
+      "Description": "Hosting and running ASP.NET apps on IIS and Plesk."
+    },
+    {
+      "Name": "Linux Server",
+      "Level": 60,
+      "Icon": "terminal",
+      "Description": "Running apps on Linux servers and in Docker containers."
+    }
+  ],
+  "ProjectFilters": [
+    "All",
+    "Web",
+    "Mobile",
+    "Windows",
+    "API"
+  ],
+  "Projects": [
+    {
+      "Id": "tsma",
+      "Title": "TSMA",
+      "Categories": [
+        "Web"
+      ],
+      "Summary": "The company website for TSMA, a toy manufacturer, with a product catalog, a blog, news and a language switcher.",
+      "Tags": [
+        ".Net 8",
+        "Razor Pages",
+        "CSS",
+        "JS",
+        "Clean architecture",
+        "EF",
+        "SQL Server"
+      ],
+      "Cover": "/assets/img/projects/tsma/cover.webp",
+      "Images": [
+        "/assets/img/projects/tsma/01.webp",
+        "/assets/img/projects/tsma/02.webp",
+        "/assets/img/projects/tsma/03.webp",
+        "/assets/img/projects/tsma/04.webp",
+        "/assets/img/projects/tsma/05.webp",
+        "/assets/img/projects/tsma/06.webp",
+        "/assets/img/projects/tsma/07.webp",
+        "/assets/img/projects/tsma/08.webp",
+        "/assets/img/projects/tsma/09.webp"
+      ],
+      "LiveUrl": "https://tsma-co.ir/",
+      "SourceUrl": ""
+    }
+  ]
+}

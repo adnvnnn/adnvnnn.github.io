@@ -1,44 +1,53 @@
 ﻿# Adnan's portfolio
 
-A static portfolio site: Home, Profile, Projects and Contact pages, plain HTML, CSS and JavaScript. No build step and no server code.
+A static portfolio site: Home, Profile, Projects and Contact pages. The content lives in one file, `site.json`, and a small script turns it into plain HTML pages. No framework, no server.
 
 Design: a glass window floating over a photo of a quiet room, rebuilt from a Figma file.
 
-## Run it locally
+## Edit the content
 
-Any static file server works, for example:
+Everything you read on the site is in [`site.json`](site.json):
+
+| Section | What it holds |
+| --- | --- |
+| `Owner` | name, role, status, pitch, bio, resume path, `ShowPhoto` (false hides the portrait) |
+| `Contact` | subtitle, intro, e-mail, phone, location, availability. A detail left empty shows as a dimmed "Not available yet" row |
+| `Social` | links and the pages that show them (`Show`: `home`, `contact`; empty means all) |
+| `Skills` | name, level (0-100), icon, description (shown when the tile is hovered or focused). The top three by level appear on Home |
+| `ProjectFilters`, `Projects` | the filter chips (a chip with no project is not shown) and the project list. The first project is the featured one. An empty `SourceUrl` shows a disabled "source code" button |
+
+Images are WebP under `public/assets/img/`, one folder per project (`public/assets/img/projects/<id>/`).
+
+## Build and preview
+
+Needs Node 18 or newer (no packages to install):
 
 ```bash
-python -m http.server 8000
+node build/build.mjs
+python -m http.server 8000 --directory dist
 ```
 
-Then open http://localhost:8000.
+Then open http://localhost:8000. The pages are written to `dist/` (not committed).
 
 ## Structure
 
 ```
-index.html            Home       (/)
-profile/index.html    Profile    (/profile)
-projects/index.html   Projects   (/projects)
-contact/index.html    Contact    (/contact)
-404.html              Not-found page
-css/                  one file per area (tokens, base, glass, shell, components, pages, motion)
-js/                   router, glass effect, carousel, contact form, small helpers
-assets/               fonts and images (project images live in assets/img/projects/<project>/)
+site.json            content
+build/build.mjs      turns site.json into the pages (markup lives here)
+build/icons.html     the SVG icon sprite
+public/              copied as is: css/, js/, assets/, favicon.svg
+dist/                the built site
+.github/workflows/   deploys dist/ to GitHub Pages on every push to master
 ```
-
-Every page contains the full site (all four sections) and shows the one that matches its address, so deep links and reloads work and the pages open without JavaScript. The sidebar, the section markup and the project data are repeated in each of the four files: a change to shared content has to be made in all of them.
-
-## Editing content
-
-* Text, links, skills and projects are plain HTML inside the four page files.
-* The contact form has no server: it opens the visitor's mail app with the message filled in.
-* Images are WebP, one folder per project under `assets/img/projects/`.
 
 ## Deploy (GitHub Pages)
 
-Name the repository `adnvnnn.github.io`, then in Settings → Pages choose **Deploy from a branch**, branch `master`, folder `/ (root)`. The site is served from the root of the repository, which the absolute paths (`/css/...`, `/assets/...`) rely on.
+1. Name the repository `adnvnnn.github.io` (the site is served from the root of the domain, which the absolute paths rely on).
+2. Settings → Pages → Build and deployment → Source: **GitHub Actions**.
+3. Push to `master`. The workflow builds the pages and publishes them.
+
+The contact form has no server: it opens the visitor's mail app with the message filled in.
 
 ## History
 
-The site started as an ASP.NET Core (Razor Pages) app that rendered these pages from `appsettings.json`. That version is kept in the git history under the tag `aspnet-version`.
+The site started as an ASP.NET Core (Razor Pages) app that rendered the same pages from `appsettings.json`. That version is kept in the git history under the tag `aspnet-version`.
