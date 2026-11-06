@@ -9,6 +9,7 @@ import { initSound, playSound } from './sound.js';
 import { initGlass } from './glass.js';
 import { initHireSpin } from './hire-spin.js';
 import { bindRowDrag } from './row-drag.js';
+import { initFitText } from './fit-text.js';
 import { prefersReducedMotion, qs, qsa, toast } from './util.js';
 
 function boot() {
@@ -24,6 +25,7 @@ function boot() {
   initProjects();
   initContact();
   qsa('.page--profile .tiles, .plist__track').forEach(bindRowDrag);
+  initFitText();
   initRouter({ onNavigate: () => playSound('page') });
 
   // Entrance of the first page (the server renders it fully visible, so this only adds motion).
