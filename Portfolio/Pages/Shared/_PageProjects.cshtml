@@ -6,6 +6,7 @@
     var site = Model.Site;
     var featured = site.Projects.FirstOrDefault();
     var active = Model.ActivePage == "projects";
+    static bool HasLink(string? url) => !string.IsNullOrWhiteSpace(url) && url != "#";
     var usedCategories = site.Projects.SelectMany(p => p.Categories).ToHashSet(StringComparer.OrdinalIgnoreCase);
     // The carousel script builds its slides from this data, so it gets the same content-hashed URLs the
     // tag helper puts on the markup: an image the page already loaded is reused, and a replaced file is
@@ -44,8 +45,13 @@
                     }
                 </ul>
                 <div class="featured__actions">
-                    <a class="btn btn--primary btn--sm" data-role="live" href="@featured.LiveUrl" target="_blank" rel="noopener noreferrer">Live Demo</a>
-                    <a class="btn btn--white btn--sm" data-role="source" href="@featured.SourceUrl" target="_blank" rel="noopener noreferrer">
+                    @* A link that is empty (or "#") in appsettings.json shows as a disabled button. *@
+                    <a class="btn btn--primary btn--sm" data-role="live" href="@(HasLink(featured.LiveUrl) ? featured.LiveUrl : null)"
+                       aria-disabled="@(HasLink(featured.LiveUrl) ? null : "true")" tabindex="@(HasLink(featured.LiveUrl) ? null : "-1")"
+                       target="_blank" rel="noopener noreferrer">Live Demo</a>
+                    <a class="btn btn--white btn--sm" data-role="source" href="@(HasLink(featured.SourceUrl) ? featured.SourceUrl : null)"
+                       aria-disabled="@(HasLink(featured.SourceUrl) ? null : "true")" tabindex="@(HasLink(featured.SourceUrl) ? null : "-1")"
+                       target="_blank" rel="noopener noreferrer">
                         source code @Html.Icon("github", "btn__icon")
                     </a>
                 </div>

@@ -4,6 +4,11 @@
     var contact = site.Contact;
     var socials = site.Social.Where(s => s.ShowsOn("contact")).ToList();
     var active = Model.ActivePage == "contact";
+    var details = new (string Icon, string Label, string Value, string? LinkPrefix, string CopyLabel)[]
+    {
+        ("mail", "E-Mail", contact.Email, "mailto:", "Copy e-mail address"),
+        ("phone", "Phone", contact.Phone, "tel:", "Copy phone number"),
+    };
 }
 <section class="page page--contact" id="page-contact" data-page="contact" aria-labelledby="contact-title"
          hidden="@(active ? null : "hidden")" inert="@(active ? null : "inert")">
@@ -16,30 +21,37 @@
         <p class="card__lead">@contact.Intro</p>
 
         <ul class="info">
-            <li class="info__row">
-                <span class="info__badge">@Html.Icon("mail")</span>
-                <span class="info__text">
-                    <span class="info__label">E-Mail</span>
-                    <a class="info__value" href="mailto:@contact.Email">@contact.Email</a>
-                </span>
-                <button class="copy" type="button" data-copy="@contact.Email" aria-label="Copy e-mail address">@Html.Icon("copy")</button>
-            </li>
-            <li class="info__row">
-                <span class="info__badge">@Html.Icon("phone")</span>
-                <span class="info__text">
-                    <span class="info__label">Phone</span>
-                    <a class="info__value" href="tel:@contact.Phone">@contact.Phone</a>
-                </span>
-                <button class="copy" type="button" data-copy="@contact.Phone" aria-label="Copy phone number">@Html.Icon("copy")</button>
-            </li>
-            <li class="info__row">
-                <span class="info__badge">@Html.Icon("pin")</span>
-                <span class="info__text">
-                    <span class="info__label">Location</span>
-                    <span class="info__value">@contact.Location</span>
-                </span>
-                <button class="copy" type="button" data-copy="@contact.Location" aria-label="Copy location">@Html.Icon("copy")</button>
-            </li>
+            @* A detail left empty in appsettings.json shows as a dimmed "Not available yet" row, with its copy button off. *@
+            @foreach (var (icon, label, value, linkPrefix, copyLabel) in details)
+            {
+                var filled = !string.IsNullOrWhiteSpace(value);
+                <li class="info__row@(filled ? "" : " info__row--off")">
+                    <span class="info__badge">@Html.Icon(icon)</span>
+                    <span class="info__text">
+                        <span class="info__label">@label</span>
+                        @if (!filled)
+                        {
+                            <span class="info__value">Not available yet</span>
+                        }
+                        else if (linkPrefix is not null)
+                        {
+                            <a class="info__value" href="@linkPrefix@value">@value</a>
+                        }
+                        else
+                        {
+                            <span class="info__value">@value</span>
+                        }
+                    </span>
+                    @if (filled)
+                    {
+                        <button class="copy" type="button" data-copy="@value" aria-label="@copyLabel">@Html.Icon("copy")</button>
+                    }
+                    else
+                    {
+                        <button class="copy" type="button" disabled aria-label="@copyLabel (not available yet)">@Html.Icon("copy")</button>
+                    }
+                </li>
+            }
             <li class="info__row">
                 <span class="info__badge">@Html.Icon("clock")</span>
                 <span class="info__text">

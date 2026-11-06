@@ -3,6 +3,16 @@
 import { qs, qsa, el, clamp, prefersReducedMotion, isStage } from './util.js';
 import { bindRowArrows } from './row-arrows.js';
 
+/** A link with a destination, or a disabled one (no href, aria-disabled) when the project has none. */
+function setLink(link, url) {
+  const ok = Boolean(url) && url !== '#';
+  if (ok) link.setAttribute('href', url);
+  else link.removeAttribute('href');
+  if (ok) link.removeAttribute('aria-disabled');
+  else link.setAttribute('aria-disabled', 'true');
+  link.tabIndex = ok ? 0 : -1;
+}
+
 /* ==========================================================================================
    Carousel
    ========================================================================================== */
@@ -184,8 +194,8 @@ export function initProjects() {
 
     const live = qs('[data-role="live"]', featured);
     const source = qs('[data-role="source"]', featured);
-    live.href = project.liveUrl || '#';
-    source.href = project.sourceUrl || '#';
+    setLink(live, project.liveUrl);
+    setLink(source, project.sourceUrl);
     carousel?.setImages(project.images, project.title);
 
     for (const card of cards) {

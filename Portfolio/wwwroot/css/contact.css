@@ -107,6 +107,30 @@ a.info__value:hover {
   margin-left: auto;
 }
 
+/* A detail that is not filled in yet: dashed outline instead of the fill, grey badge, muted text, copy button off.
+   Colours only, no opacity: motion.css fades every list item with the page and would override it. */
+.info__row--off {
+  background: transparent;
+  outline: 1px dashed rgb(255 255 255 / 0.28);
+  outline-offset: -1px;
+  cursor: not-allowed;
+}
+
+.info__row--off .info__badge {
+  color: rgb(255 255 255 / 0.5);
+  background: rgb(255 255 255 / 0.1);
+  box-shadow: none;
+}
+
+.info__row--off .info__label,
+.info__row--off .info__value {
+  color: var(--text-dim);
+}
+
+.info__row--off .info__value {
+  font-style: italic;
+}
+
 .info__status {
   display: flex;
   align-items: center;

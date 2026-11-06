@@ -15,7 +15,8 @@ public static class IconHelper
     {
         "home", "user", "grid", "call", "chevron-left", "chevron-right",
         "arrow-up-right", "check", "mail", "phone", "pin", "clock", "copy", "download", "send",
-        "python", "css3", "java", "code", "github", "telegram", "linkedin", "instagram", "fire"
+        "python", "css3", "java", "code", "github", "telegram", "linkedin", "instagram", "fire",
+        "terminal", "git-branch", "layers", "database", "sparkles", "shield", "server"
     };
 
     /// <summary>Renders an inline SVG that references a symbol of the page's icon sprite.</summary>

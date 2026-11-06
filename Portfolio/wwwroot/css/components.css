@@ -3,13 +3,37 @@
    Sizes are mobile-first; the @media (min-width: 1100px) and (min-height: 480px) blocks use design pixels (--u).
    ========================================================================== */
 
+/* The status dot (Home, Contact): a ring grows out of it and fades, over and over. */
 .dot {
+  position: relative;
   display: inline-block;
   flex: none;
   width: 9px;
   height: 9px;
   border-radius: 50%;
   background: var(--green-dot);
+}
+
+.dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  animation: dot-pulse 2s var(--ease-out) infinite;
+  pointer-events: none;
+}
+
+@keyframes dot-pulse {
+  from {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(3);
+  }
 }
 
 /* ----- buttons ------------------------------------------------------------ */
@@ -40,6 +64,23 @@
 .btn:disabled {
   cursor: progress;
   filter: saturate(0.6) brightness(0.95);
+  transform: none;
+}
+
+/* A link button without a destination (see _PageProjects.cshtml): same dashed, dimmed look as an empty contact row.
+   Colours only: motion.css fades every link with the page through opacity and would override it. */
+.btn[aria-disabled="true"] {
+  color: var(--text-dim);
+  background: transparent;
+  box-shadow: none;
+  outline: 1px dashed rgb(255 255 255 / 0.3);
+  outline-offset: -1px;
+  filter: none;
+  cursor: not-allowed;
+}
+
+.btn[aria-disabled="true"]:hover,
+.btn[aria-disabled="true"]:active {
   transform: none;
 }
 
@@ -312,6 +353,13 @@
 
 .copy.is-copied {
   color: var(--green-1);
+}
+
+.copy:disabled {
+  color: rgb(255 255 255 / 0.3);
+  background: none;
+  transform: none;
+  cursor: not-allowed;
 }
 
 /* ----- rows dragged with the mouse (row-drag.js) ---------------------------------- */
