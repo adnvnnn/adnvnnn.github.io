@@ -42,7 +42,10 @@
             @for (var i = 0; i < site.Skills.Count; i++)
             {
                 var skill = site.Skills[i];
-                <li class="tile glass-host" data-glass="tile" style="--level:@skill.Level">
+                var hasTip = !string.IsNullOrWhiteSpace(skill.Description);
+                @* With a description the tile swaps its face on hover/focus (see .tile--info in profile.css); tabindex lets a keyboard or a tap reach it. *@
+                <li class="@(hasTip ? "tile tile--info glass-host" : "tile glass-host")" data-glass="tile" style="--level:@skill.Level"
+                    tabindex="@(hasTip ? "0" : null)">
                     @* The liquid is inline SVG (one tile = the 156 × 154 viewBox) so CSS can animate its parts: see .liquid__* in profile.css.
                        The wave period below (202.8) must match --wave-w there. *@
                     <svg class="tile__liquid" viewBox="0 0 156 154" preserveAspectRatio="none" aria-hidden="true" focusable="false">
@@ -63,6 +66,10 @@
                     </svg>
                     <span class="tile__name">@skill.Name</span>
                     <span class="tile__pct">@skill.Level %</span>
+                    @if (hasTip)
+                    {
+                        <span class="tile__desc">@skill.Description</span>
+                    }
                 </li>
             }
         </ul>

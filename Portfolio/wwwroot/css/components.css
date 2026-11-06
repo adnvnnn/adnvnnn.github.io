@@ -71,9 +71,30 @@
   font-size: 22px;
 }
 
+/* Hire Me: the gradient turns in a full circle, forever. hire-spin.js raises the playback rate of
+   this animation on hover (it never restarts it, so the turn carries on from where it is). */
+@property --hire-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 243.16deg;
+}
+
+@keyframes hire-spin {
+  to {
+    --hire-angle: 603.16deg;
+  }
+}
+
 .btn--xl.btn--primary {
-  background: var(--grad-hire);
+  background: linear-gradient(var(--hire-angle), var(--grad-hire-stops));
   box-shadow: 0 12px 14px -14px #fff, -3px 4px 8px rgb(0 0 0 / 0.1);
+  animation: hire-spin 3.6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn--xl.btn--primary {
+    animation: none;
+  }
 }
 
 .btn--md {
@@ -293,6 +314,29 @@
   color: var(--green-1);
 }
 
+/* ----- rows dragged with the mouse (row-drag.js) ---------------------------------- */
+.row--draggable {
+  cursor: grab;
+}
+
+/* their text is a label to read, not to copy, and selecting it fights the drag */
+.plist__track,
+.page--profile .tiles {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* snapping is off while the row follows the pointer and while it glides to an item on release */
+.is-dragging-row,
+.is-settling-row {
+  scroll-snap-type: none !important;
+}
+
+.is-dragging-row,
+.is-dragging-row * {
+  cursor: grabbing !important;
+}
+
 /* ----- carousel controls (featured project) ---------------------------------- */
 .carousel {
   position: relative;
@@ -320,6 +364,7 @@
   flex: none;
   width: 100%;
   height: 100%;
+  background: var(--media-bg);
 }
 
 .carousel__slide img {

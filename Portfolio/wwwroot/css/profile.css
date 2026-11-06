@@ -92,6 +92,68 @@
   transform: translateY(-3px) scale(1.03);
 }
 
+.tile:focus-visible {
+  outline: 2px solid var(--green-1);
+  outline-offset: -2px;
+}
+
+/* A tile with a description swaps its face on hover (or keyboard focus, or a tap on a touch screen): the name and
+   the percentage fade out, the liquid behind blurs, and the description fades in over it. --reveal drives all three. */
+.tile {
+  container-type: inline-size;
+}
+
+@media (hover: hover) {
+  .tile--info:hover {
+    --reveal: 1;
+  }
+}
+
+.tile--info:focus-visible {
+  --reveal: 1;
+}
+
+@media (hover: none) {
+  .tile--info:focus {
+    --reveal: 1;
+  }
+}
+
+/* motion.css fades every leaf span with the page (opacity: var(--appear)) and outranks a plain selector, so these
+   repeat the classes and fold --appear into the value. */
+.page--profile .tile.tile--info span.tile__name,
+.page--profile .tile.tile--info span.tile__pct {
+  opacity: calc(var(--appear) * (1 - var(--reveal, 0)));
+  transition: opacity var(--dur) var(--ease-out);
+}
+
+.tile--info .tile__liquid {
+  /* scaled a little so the blurred edge does not fade out at the rim of the tile */
+  filter: blur(calc(var(--reveal, 0) * 6px));
+  transform: scale(calc(1 + var(--reveal, 0) * 0.12));
+  transition: filter var(--dur) var(--ease-out), transform var(--dur) var(--ease-out);
+}
+
+.page--profile .tile.tile--info span.tile__desc {
+  opacity: calc(var(--appear) * var(--reveal, 0));
+  transition: opacity var(--dur) var(--ease-out);
+}
+
+.tile__desc {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  padding: 8cqw 7cqw;
+  font-size: max(9px, 8.2cqw);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-wrap: balance;
+  pointer-events: none;
+}
+
 .tile__name,
 .tile__pct {
   position: absolute;

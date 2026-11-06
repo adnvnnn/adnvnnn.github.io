@@ -79,6 +79,9 @@ public sealed class SkillItem
 
     /// <summary>Icon id from the sprite: python, css3, java, …</summary>
     public string Icon { get; set; } = string.Empty;
+
+    /// <summary>Shown in a tooltip when the Profile tile is hovered or focused. Empty means no tooltip.</summary>
+    public string Description { get; set; } = string.Empty;
 }
 
 public sealed class ProjectItem

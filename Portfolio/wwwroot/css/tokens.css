@@ -52,12 +52,23 @@
   --grey-blue: #b4bbc5;
 
   --grad-green: linear-gradient(90deg, #d6fcbb 2.65%, #bdfcbb 100%);
-  --grad-hire: linear-gradient(243.16deg, #b4bbc5 20.52%, #bdfcbb 73.58%);
+  /* Colour stops only: the angle is animated per button (--hire-angle in components.css) */
+  --grad-hire-stops: #b4bbc5 20.52%, #bdfcbb 73.58%;
   --grad-bar: linear-gradient(90deg, #b4bbc5 2.65%, #bdfcbb 100%);
 
   --pill-bg: rgb(215 223 216 / 0.32);     /* active nav item */
   --field-bg: rgb(255 255 255 / 0.2);     /* inputs, info rows, social circles */
   --track-bg: rgb(255 255 255 / 0.3);     /* skill tracks and tiles */
+  /* Backdrop behind project images; the device banners are transparent WebP, so this is their background.
+     Only soft gradients, no photo: overlapping out-of-focus blobs on a blue-grey base, monochromatic with the glass
+     (hue ~218deg, measured 217-223deg) but lighter (L ~62-90% vs 48%), so the media reads as a lit window and the
+     devices get depth of field. The mint accent stays reserved for actions. */
+  --media-bg:
+    radial-gradient(circle at 16% 18%, hsl(216 22% 90% / 0.9), hsl(216 22% 90% / 0) 38%),
+    radial-gradient(circle at 88% 26%, hsl(226 16% 70% / 0.85), hsl(226 16% 70% / 0) 42%),
+    radial-gradient(circle at 70% 96%, hsl(210 18% 84% / 0.9), hsl(210 18% 84% / 0) 48%),
+    radial-gradient(circle at 34% 78%, hsl(222 14% 62% / 0.55), hsl(222 14% 62% / 0) 36%),
+    linear-gradient(160deg, hsl(216 14% 78%), hsl(222 12% 62%));
 
   /* ----- shadows (scaled with the artboard) ------------------------------ */
   --text-shadow: calc(-6.65434 * var(--u)) calc(3.32717 * var(--u)) calc(13.9741 * var(--u)) rgb(0 0 0 / 0.05);

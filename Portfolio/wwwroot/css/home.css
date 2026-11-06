@@ -157,7 +157,7 @@
   overflow: hidden;
   aspect-ratio: 613 / 284;
   border-radius: 28px;
-  background: #5c6068;
+  background: var(--media-bg);
   isolation: isolate;
 }
 

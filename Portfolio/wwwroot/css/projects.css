@@ -121,7 +121,7 @@
   aspect-ratio: 254.09 / 193.24;
   overflow: hidden;
   border-radius: 8.4% / 11%;
-  background: #5c6068;
+  background: var(--media-bg);
   color: #fff;
   text-align: left;
   isolation: isolate;

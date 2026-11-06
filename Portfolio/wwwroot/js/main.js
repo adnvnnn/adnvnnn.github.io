@@ -7,7 +7,9 @@ import { initProjects } from './projects.js';
 import { initContact } from './contact.js';
 import { initSound, playSound } from './sound.js';
 import { initGlass } from './glass.js';
-import { prefersReducedMotion, qs, toast } from './util.js';
+import { initHireSpin } from './hire-spin.js';
+import { bindRowDrag } from './row-drag.js';
+import { prefersReducedMotion, qs, qsa, toast } from './util.js';
 
 function boot() {
   document.addEventListener('click', (event) => {
@@ -16,10 +18,12 @@ function boot() {
   });
 
   initGlass();
+  initHireSpin();
   initSound();
   initProfile();
   initProjects();
   initContact();
+  qsa('.page--profile .tiles, .plist__track').forEach(bindRowDrag);
   initRouter({ onNavigate: () => playSound('page') });
 
   // Entrance of the first page (the server renders it fully visible, so this only adds motion).
