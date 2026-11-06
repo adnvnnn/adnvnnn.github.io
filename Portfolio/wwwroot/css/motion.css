@@ -120,6 +120,19 @@
   }
 }
 
+/* Touch screens and narrow windows (the page flows as one column there): the blocks no longer rise one after the other
+   with a little scale. In a stacked column that reads as jitter, and on a phone it costs frames, so the page just fades in
+   (a bit quicker) and the liquid and the bars still fill. */
+@media (hover: none), (max-width: 1099px) {
+  .page.is-entering {
+    animation: page-in 0.4s var(--ease-out) both, grow-in 1s var(--spring-soft) 0.1s both;
+  }
+
+  .page.is-entering > :not(.page__title):not(.page__sub) {
+    animation: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .page.is-entering,
   .page.is-leaving,
