@@ -137,7 +137,7 @@
   stroke-width: 1.3;
 }
 
-/* One line that takes the room left of the percentage; fit-text.js shrinks the font when a name needs more. */
+/* One line that takes the room left of the percentage; fit-labels.js shrinks the font when a name needs more. */
 .bar__name {
   flex: 1 1 0;
   min-width: 0;
@@ -449,7 +449,7 @@
   }
 
   /* A little less margin than the Figma row (34 and 57), and a gap before the percentage, so a longer name
-     gets room before fit-text.js has to shrink it. */
+     gets room before fit-labels.js has to shrink it. */
   .bar__name {
     margin: 0 calc(14 * var(--u)) 0 calc(26 * var(--u));
     font-size: calc(21.7332 * var(--u));
