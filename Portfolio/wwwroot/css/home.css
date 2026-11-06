@@ -202,8 +202,10 @@
   height: 24px;
 }
 
-.latest:hover .latest__img {
-  transform: scale(1.05);
+@media (hover: hover) {
+  .latest:hover .latest__img {
+    transform: scale(1.05);
+  }
 }
 
 .page--home .socials {

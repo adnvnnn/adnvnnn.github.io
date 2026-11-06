@@ -52,8 +52,10 @@
   transition: transform 0.45s var(--spring-bouncy), box-shadow 0.3s var(--ease-out), filter 0.2s;
 }
 
-.btn:hover {
-  transform: translateY(-2px) scale(1.025);
+@media (hover: hover) {
+  .btn:hover {
+    transform: translateY(-2px) scale(1.025);
+  }
 }
 
 .btn:active {
@@ -187,8 +189,10 @@
   transition: transform 0.45s var(--spring-bouncy), background-color 0.25s, box-shadow 0.25s;
 }
 
-.chip:hover {
-  transform: translateY(-1px) scale(1.04);
+@media (hover: hover) {
+  .chip:hover {
+    transform: translateY(-1px) scale(1.04);
+  }
 }
 
 .chip:active {
@@ -245,9 +249,11 @@
   transition: transform 0.5s var(--spring-bouncy), filter 0.2s;
 }
 
-.social:hover {
-  transform: translateY(-3px) scale(1.08);
-  filter: drop-shadow(0 8px 10px rgb(0 0 0 / 0.18));
+@media (hover: hover) {
+  .social:hover {
+    transform: translateY(-3px) scale(1.08);
+    filter: drop-shadow(0 8px 10px rgb(0 0 0 / 0.18));
+  }
 }
 
 .social:active {
@@ -298,8 +304,10 @@
   opacity: 1;
 }
 
-.field__input:hover {
-  background: rgb(255 255 255 / 0.25);
+@media (hover: hover) {
+  .field__input:hover {
+    background: rgb(255 255 255 / 0.25);
+  }
 }
 
 .field__input:focus-visible {
@@ -342,9 +350,11 @@
   stroke-width: 1.2;
 }
 
-.copy:hover {
-  background: rgb(255 255 255 / 0.14);
-  transform: scale(1.08);
+@media (hover: hover) {
+  .copy:hover {
+    background: rgb(255 255 255 / 0.14);
+    transform: scale(1.08);
+  }
 }
 
 .copy:active {
@@ -450,9 +460,11 @@
   right: 6px;
 }
 
-.carousel__nav:hover {
-  background: rgb(255 255 255 / 0.18);
-  transform: translateY(-50%) scale(1.12);
+@media (hover: hover) {
+  .carousel__nav:hover {
+    background: rgb(255 255 255 / 0.18);
+    transform: translateY(-50%) scale(1.12);
+  }
 }
 
 .carousel__nav:active {

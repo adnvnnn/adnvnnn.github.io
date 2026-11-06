@@ -88,8 +88,10 @@
   transition: transform 0.6s var(--spring-bouncy);
 }
 
-.tile:hover {
-  transform: translateY(-3px) scale(1.03);
+@media (hover: hover) {
+  .tile:hover {
+    transform: translateY(-3px) scale(1.03);
+  }
 }
 
 .tile:focus-visible {
@@ -420,8 +422,10 @@
     right: calc(-52 * var(--u));
   }
 
-  .tray__nav:hover {
-    transform: scale(1.12);
+  @media (hover: hover) {
+    .tray__nav:hover {
+      transform: scale(1.12);
+    }
   }
 
   /* the extra selectors outrank motion.css, which fades every leaf button with the page */

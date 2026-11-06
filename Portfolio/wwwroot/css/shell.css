@@ -103,8 +103,10 @@
   background: var(--pill-bg);
 }
 
-.nav__link:hover:not(.is-active) {
-  background: rgb(215 223 216 / 0.14);
+@media (hover: hover) {
+  .nav__link:hover:not(.is-active) {
+    background: rgb(215 223 216 / 0.14);
+  }
 }
 
 /* ----- main panel ---------------------------------------------------------- */
@@ -170,8 +172,10 @@
   stroke-width: 1.3;
 }
 
-.sound:hover {
-  background: rgb(255 255 255 / 0.1);
+@media (hover: hover) {
+  .sound:hover {
+    background: rgb(255 255 255 / 0.1);
+  }
 }
 
 .sound:active {
