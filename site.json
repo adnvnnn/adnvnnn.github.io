@@ -121,12 +121,6 @@
       "Level": 70,
       "Icon": "server",
       "Description": "Hosting and running ASP.NET apps on IIS and Plesk."
-    },
-    {
-      "Name": "Linux Server",
-      "Level": 60,
-      "Icon": "terminal",
-      "Description": "Running apps on Linux servers and in Docker containers."
     }
   ],
   "ProjectFilters": [
