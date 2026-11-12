@@ -135,7 +135,8 @@
       "Id": "toysino",
       "Title": "Toysino",
       "Categories": [
-        "Web"
+        "Web",
+        "Mobile"
       ],
       "Summary": "An online toy store with a product catalog, category, price and brand filters, product galleries, a cart, favourites, order tracking and light and dark themes, in Persian.",
       "Tags": [
