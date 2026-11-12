@@ -132,6 +132,36 @@
   ],
   "Projects": [
     {
+      "Id": "toysino",
+      "Title": "Toysino",
+      "Categories": [
+        "Web"
+      ],
+      "Summary": "An online toy store with a product catalog, category, price and brand filters, product galleries, a cart, favourites, order tracking and light and dark themes, in Persian.",
+      "Tags": [
+        "React",
+        "React Router",
+        "Framer Motion",
+        "REST API",
+        "RTL"
+      ],
+      "Cover": "/assets/img/projects/toysino/cover.webp",
+      "Images": [
+        "/assets/img/projects/toysino/01.webp",
+        "/assets/img/projects/toysino/02.webp",
+        "/assets/img/projects/toysino/03.webp",
+        "/assets/img/projects/toysino/04.webp",
+        "/assets/img/projects/toysino/05.webp",
+        "/assets/img/projects/toysino/06.webp",
+        "/assets/img/projects/toysino/07.webp",
+        "/assets/img/projects/toysino/08.webp",
+        "/assets/img/projects/toysino/09.webp"
+      ],
+      "Period": "",
+      "LiveUrl": "https://toysino.ir/",
+      "SourceUrl": ""
+    },
+    {
       "Id": "aae",
       "Title": "AAE",
       "Categories": [
