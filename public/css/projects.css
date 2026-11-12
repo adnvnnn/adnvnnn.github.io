@@ -48,7 +48,6 @@
 }
 
 .featured__text {
-  max-width: 46ch;
   color: var(--text-body);
   font-size: 15px;
   font-weight: 500;
@@ -334,18 +333,30 @@
     position: absolute;
     left: calc(43 * var(--u));
     top: calc(40 * var(--u));
-    display: block;
+    bottom: calc(34 * var(--u));
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
     width: calc(560 * var(--u));
     padding: 0;
+  }
+
+  /* The card has a fixed height: a long summary is cut to three lines with an ellipsis, so the
+     tags and the buttons below it always stay inside the card. */
+  .featured__info > * {
+    flex: none;
   }
 
   .featured__title {
     font-size: var(--fs-30);
   }
 
-  .featured__text {
-    width: calc(231 * var(--u));
-    max-width: none;
+  .featured__info > .featured__text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
     margin-top: calc(17.4 * var(--u));
     font-size: var(--fs-16);
     line-height: 1.189;
@@ -475,7 +486,6 @@
 @media (min-width: 1100px) and (min-height: 480px) and (max-width: 1271px),
        (min-width: 1100px) and (min-height: 480px) and (max-height: 575px) {
   .featured__text {
-    width: calc(300 * var(--u));
     font-size: max(11.5px, calc(16 * var(--u)));
   }
 }
