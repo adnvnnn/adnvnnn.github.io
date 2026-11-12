@@ -47,6 +47,20 @@
   text-shadow: var(--text-shadow);
 }
 
+.featured__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+}
+
+.featured__period {
+  color: var(--text-dim);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
 .featured__text {
   color: var(--text-body);
   font-size: 15px;
@@ -350,6 +364,10 @@
 
   .featured__title {
     font-size: var(--fs-30);
+  }
+
+  .featured__period {
+    font-size: var(--fs-16);
   }
 
   .featured__info > .featured__text {

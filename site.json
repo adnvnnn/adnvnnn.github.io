@@ -157,6 +157,7 @@
         "/assets/img/projects/aae/08.webp",
         "/assets/img/projects/aae/09.webp"
       ],
+      "Period": "Mar 2025 – Jun 2025",
       "LiveUrl": "https://aaelectronic.ir/",
       "SourceUrl": ""
     },
@@ -188,7 +189,32 @@
         "/assets/img/projects/tsma/08.webp",
         "/assets/img/projects/tsma/09.webp"
       ],
+      "Period": "Jun 2024 – Dec 2025",
       "LiveUrl": "https://tsma-co.ir/",
+      "SourceUrl": ""
+    },
+    {
+      "Id": "vms",
+      "Title": "VMS",
+      "Categories": [
+        "Windows"
+      ],
+      "Summary": "A Windows desktop app for managing a camera-based parking system, with cameras and gates, car plates, tariffs, users and roles, and event reports.",
+      "Tags": [
+        ".NET Framework",
+        "WinForms",
+        "DevExpress",
+        "EF",
+        "SQL Server"
+      ],
+      "Cover": "/assets/img/projects/vms/cover.webp",
+      "Images": [
+        "/assets/img/projects/vms/01.webp",
+        "/assets/img/projects/vms/02.webp",
+        "/assets/img/projects/vms/03.webp"
+      ],
+      "Period": "Aug 2023 – Nov 2023",
+      "LiveUrl": "",
       "SourceUrl": ""
     }
   ],

@@ -189,12 +189,16 @@ export function initProjects() {
 
     featured.dataset.featured = id;
     qs('.featured__title', featured).textContent = project.title;
+    const period = qs('.featured__period', featured);
+    period.textContent = project.period;
+    period.hidden = !project.period;
     qs('.featured__text', featured).textContent = project.summary;
     qs('.tags', featured).replaceChildren(...project.tags.map((tag) => el('li', { class: 'tag' }, tag)));
 
     const live = qs('[data-role="live"]', featured);
     const source = qs('[data-role="source"]', featured);
     setLink(live, project.liveUrl);
+    live.hidden = !project.liveUrl;
     setLink(source, project.sourceUrl);
     carousel?.setImages(project.images, project.title);
 

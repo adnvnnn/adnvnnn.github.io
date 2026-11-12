@@ -29,7 +29,7 @@ const socials = (site.Social ?? []).map((link) => ({ Name: '', Icon: '', Url: '#
 const skills = (site.Skills ?? []).map((skill) => ({ Name: '', Level: 0, Icon: '', Description: '', ...skill }));
 const filters = site.ProjectFilters ?? [];
 const projects = (site.Projects ?? []).map((project) => ({
-  Id: '', Title: '', Summary: '', Categories: [], Tags: [], Cover: '', Images: [], LiveUrl: '', SourceUrl: '', ...project,
+  Id: '', Title: '', Summary: '', Categories: [], Tags: [], Cover: '', Images: [], Period: '', LiveUrl: '', SourceUrl: '', ...project,
 }));
 
 // Visitor stats (GoatCounter, free, no cookies): the site code is the first part of <code>.goatcounter.com. Empty means off.
@@ -269,6 +269,7 @@ function pageProjects(active) {
     categories: p.Categories,
     tags: p.Tags,
     images: slides(p).map(v),
+    period: p.Period,
     liveUrl: p.LiveUrl,
     sourceUrl: p.SourceUrl,
   }));
@@ -283,13 +284,16 @@ function pageProjects(active) {
 
     <article class="featured glass-host" data-glass="card" data-featured="${esc(featured.Id)}">
         <div class="featured__info">
-            <h3 class="featured__title">${esc(featured.Title)}</h3>
+            <div class="featured__head">
+                <h3 class="featured__title">${esc(featured.Title)}</h3>
+                <span class="featured__period"${featured.Period ? '' : ' hidden'}>${esc(featured.Period)}</span>
+            </div>
             <p class="featured__text">${esc(featured.Summary)}</p>
             <ul class="tags">${featured.Tags.map((tag) => `
                 <li class="tag">${esc(tag)}</li>`).join('')}
             </ul>
             <div class="featured__actions">
-                <a class="btn btn--primary btn--sm" data-role="live"${link(featured.LiveUrl)}
+                <a class="btn btn--primary btn--sm" data-role="live"${hasLink(featured.LiveUrl) ? '' : ' hidden'}${link(featured.LiveUrl)}
                    target="_blank" rel="noopener noreferrer">Visit Website</a>
                 <a class="btn btn--white btn--sm" data-role="source"${link(featured.SourceUrl)}
                    target="_blank" rel="noopener noreferrer">
